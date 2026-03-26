@@ -42,141 +42,139 @@
       display: inline-block;
       margin-bottom: 10px;
     }
-.customer-form {
-  background: #fff0f5;
-  border-radius: 15px;
-  padding: 15px;
-  margin: 15px 0;
-  text-align: left;
-}
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.form-field {
-  background: white;
-  border-radius: 12px;
-  padding: 10px 12px;
-}
-.form-field label {
-  font-size: 11px;
-  font-weight: bold;
-  color: #ff69b4;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: block;
-  margin-bottom: 6px;
-}
-.input-wrap {
-  display: flex;
-  gap: 6px;
-}
-.input-wrap input {
-  flex: 1;
-  padding: 8px 10px;
-  border: 2px solid #ffb6d9;
-  border-radius: 8px;
-  font-size: 13px;
-  outline: none;
-  transition: all 0.2s;
-}
-.input-wrap input:focus {
-  border-color: #ff69b4;
-}
-.input-wrap input.correct {
-  border-color: #28a745;
-  background: #d4edda;
-  color: #155724;
-}
-.input-wrap input.wrong {
-  border-color: #dc3545;
-  background: #f8d7da;
-  color: #721c24;
-}
-.input-wrap input.locked {
-  border-color: #28a745;
-  background: #d4edda;
-  color: #155724;
-  pointer-events: none;
-}
-.check-btn {
-  background: #ff69b4;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s;
-}
-.check-btn:hover { background: #ff1493; }
-.check-btn.locked {
-  background: #28a745;
-  cursor: default;
-}
-.field-feedback {
-  font-size: 11px;
-  margin-top: 4px;
-  min-height: 16px;
-  font-weight: bold;
-}
-.field-feedback.correct { color: #28a745; }
-.field-feedback.wrong { color: #dc3545; }
-.field-feedback.revealed { color: #4a90d9; }
-.form-score {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #ff69b4;
-  padding: 10px;
-  background: white;
-  border-radius: 10px;
-}
+    .customer-form {
+      background: #fff0f5;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px 0;
+      text-align: left;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .form-field {
+      background: white;
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .form-field label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #ff69b4;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .input-wrap {
+      display: flex;
+      gap: 6px;
+    }
+    .input-wrap input {
+      flex: 1;
+      padding: 8px 10px;
+      border: 2px solid #ffb6d9;
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .input-wrap input:focus { border-color: #ff69b4; }
+    .input-wrap input.correct {
+      border-color: #28a745;
+      background: #d4edda;
+      color: #155724;
+    }
+    .input-wrap input.wrong {
+      border-color: #dc3545;
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .input-wrap input.locked {
+      border-color: #28a745;
+      background: #d4edda;
+      color: #155724;
+      pointer-events: none;
+    }
+    .check-btn {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+    .check-btn:hover { background: #ff1493; }
+    .check-btn.locked {
+      background: #28a745;
+      cursor: default;
+    }
+    .field-feedback {
+      font-size: 11px;
+      margin-top: 4px;
+      min-height: 16px;
+      font-weight: bold;
+    }
+    .field-feedback.correct { color: #28a745; }
+    .field-feedback.wrong { color: #dc3545; }
+    .field-feedback.revealed { color: #4a90d9; }
+    .form-score {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ff69b4;
+      padding: 10px;
+      background: white;
+      border-radius: 10px;
+    }
     .hint-section {
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-.hint-section h3 {
-  color: #ff69b4;
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-.hint-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-.hint-box {
-  background: #fff0f5;
-  border: 1px solid #ffb6d9;
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.hint-box:hover {
-  background: #ffe0f0;
-  border-color: #ff69b4;
-}
-.hint-box strong {
-  color: #ff69b4;
-  display: block;
-  font-size: 11px;
-  margin-bottom: 3px;
-}
-.hint-box .vn {
-  color: #999;
-  font-size: 11px;
-  display: block;
-  margin-top: 2px;
-}
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .hint-section h3 {
+      color: #ff69b4;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    .hint-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .hint-box {
+      background: #fff0f5;
+      border: 1px solid #ffb6d9;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .hint-box:hover {
+      background: #ffe0f0;
+      border-color: #ff69b4;
+    }
+    .hint-box strong {
+      color: #ff69b4;
+      display: block;
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+    .hint-box .vn {
+      color: #999;
+      font-size: 11px;
+      display: block;
+      margin-top: 2px;
+    }
     .revealed-info {
       background: #fff0f5;
       border-radius: 15px;
@@ -344,93 +342,85 @@
     <div class="customer-number" id="customerNumber">Customer 1 of 5</div>
     <h2 id="customerName" style="color:#ff69b4; margin-bottom:5px;">New Customer!</h2>
     <p style="color:#999; font-size:14px;">Ask your teacher questions in English!</p>
- <div class="customer-form" id="customerForm">
-  <div class="form-row">
-    <div class="form-field">
-      <label>👤 Name</label>
-      <div class="input-wrap">
-        <input type="text" id="field-name" placeholder="Ask: What is your name?" />
-        <button onclick="checkField('name')" class="check-btn">✓</button>
+
+    <div class="customer-form" id="customerForm">
+      <div class="form-row">
+        <div class="form-field">
+          <label>👤 Name</label>
+          <div class="input-wrap">
+            <input type="text" id="field-name" placeholder="Ask: What is your name?" />
+            <button onclick="checkField('name')" class="check-btn">✓</button>
+          </div>
+          <div class="field-feedback" id="fb-name"></div>
+        </div>
+        <div class="form-field">
+          <label>📍 From (City)</label>
+          <div class="input-wrap">
+            <input type="text" id="field-from" placeholder="Ask: Where are you from?" />
+            <button onclick="checkField('from')" class="check-btn">✓</button>
+          </div>
+          <div class="field-feedback" id="fb-from"></div>
+        </div>
+        <div class="form-field">
+          <label>🗺️ Area</label>
+          <div class="input-wrap">
+            <input type="text" id="field-area" placeholder="Ask: What area are you from?" />
+            <button onclick="checkField('area')" class="check-btn">✓</button>
+          </div>
+          <div class="field-feedback" id="fb-area"></div>
+        </div>
+        <div class="form-field">
+          <label>💼 Occupation</label>
+          <div class="input-wrap">
+            <input type="text" id="field-occupation" placeholder="Ask: What do you do for work?" />
+            <button onclick="checkField('occupation')" class="check-btn">✓</button>
+          </div>
+          <div class="field-feedback" id="fb-occupation"></div>
+        </div>
+        <div class="form-field">
+          <label>💅 Service</label>
+          <div class="input-wrap">
+            <input type="text" id="field-service" placeholder="Ask: What service would you like?" />
+            <button onclick="checkField('service')" class="check-btn">✓</button>
+          </div>
+          <div class="field-feedback" id="fb-service"></div>
+        </div>
+        <div class="form-field">
+          <label>🎨 Color</label>
+          <div class="input-wrap">
+            <input type="text" id="field-color" placeholder="Ask: What color do you want?" />
+            <button onclick="checkField('color')" class="check-btn">✓</button>
+          </div>
+          <div class="field-feedback" id="fb-color"></div>
+        </div>
+        <div class="form-field">
+          <label>💎 Nail Shape</label>
+          <div class="input-wrap">
+            <input type="text" id="field-shape" placeholder="Ask: What nail shape do you want?" />
+            <button onclick="checkField('shape')" class="check-btn">✓</button>
+          </div>
+          <div class="field-feedback" id="fb-shape"></div>
+        </div>
+        <div class="form-field">
+          <label>🥤 Drink</label>
+          <div class="input-wrap">
+            <input type="text" id="field-drink" placeholder="Ask: Would you like a drink?" />
+            <button onclick="checkField('drink')" class="check-btn">✓</button>
+          </div>
+          <div class="field-feedback" id="fb-drink"></div>
+        </div>
       </div>
-      <div class="field-feedback" id="fb-name"></div>
-    </div>
-    <div class="form-field">
-      <label>📍 From (City)</label>
-      <div class="input-wrap">
-        <input type="text" id="field-from" placeholder="Ask: Where are you from?" />
-        <button onclick="checkField('from')" class="check-btn">✓</button>
+      <div class="form-score">
+        ⭐ Fields Correct: <span id="fieldScore">0</span> / 8
       </div>
-      <div class="field-feedback" id="fb-from"></div>
     </div>
-    <div class="form-field">
-      <label>🗺️ Area</label>
-      <div class="input-wrap">
-        <input type="text" id="field-area" placeholder="Ask: What area are you from?" />
-        <button onclick="checkField('area')" class="check-btn">✓</button>
-      </div>
-      <div class="field-feedback" id="fb-area"></div>
-    </div>
-    <div class="form-field">
-      <label>💼 Occupation</label>
-      <div class="input-wrap">
-        <input type="text" id="field-occupation" placeholder="Ask: What do you do for work?" />
-        <button onclick="checkField('occupation')" class="check-btn">✓</button>
-      </div>
-      <div class="field-feedback" id="fb-occupation"></div>
-    </div>
-    <div class="form-field">
-      <label>🐾 Pet</label>
-      <div class="input-wrap">
-        <input type="text" id="field-pet" placeholder="Ask: Do you have any pets?" />
-        <button onclick="checkField('pet')" class="check-btn">✓</button>
-      </div>
-      <div class="field-feedback" id="fb-pet"></div>
-    </div>
-    <div class="form-field">
-      <label>💅 Service</label>
-      <div class="input-wrap">
-        <input type="text" id="field-service" placeholder="Ask: What service would you like?" />
-        <button onclick="checkField('service')" class="check-btn">✓</button>
-      </div>
-      <div class="field-feedback" id="fb-service"></div>
-    </div>
-    <div class="form-field">
-      <label>🎨 Color</label>
-      <div class="input-wrap">
-        <input type="text" id="field-color" placeholder="Ask: What color do you want?" />
-        <button onclick="checkField('color')" class="check-btn">✓</button>
-      </div>
-      <div class="field-feedback" id="fb-color"></div>
-    </div>
-    <div class="form-field">
-      <label>💎 Nail Shape</label>
-      <div class="input-wrap">
-        <input type="text" id="field-shape" placeholder="Ask: What nail shape do you want?" />
-        <button onclick="checkField('shape')" class="check-btn">✓</button>
-      </div>
-      <div class="field-feedback" id="fb-shape"></div>
-    </div>
-    <div class="form-field">
-      <label>🥤 Drink</label>
-      <div class="input-wrap">
-        <input type="text" id="field-drink" placeholder="Ask: Would you like a drink?" />
-        <button onclick="checkField('drink')" class="check-btn">✓</button>
-      </div>
-      <div class="field-feedback" id="fb-drink"></div>
-    </div>
-  </div>
-  <div class="form-score">
-    ⭐ Fields Correct: <span id="fieldScore">0</span> / 9
-  </div>
-</div>
-      <div class="waiting-message">⏳ Waiting for teacher to reveal information...</div>
-    </div>
+    <div class="waiting-message">⏳ Waiting for teacher to reveal information...</div>
   </div>
 
   <div class="hint-section">
-  <h3>💡 Ask Your Teacher These Questions!</h3>
-  <div class="hint-grid" id="hintGrid"></div>
-</div>
+    <h3>💡 Ask Your Teacher These Questions!</h3>
+    <div class="hint-grid" id="hintGrid"></div>
+  </div>
 
   <div class="waiting-for-teacher" id="waitingBox">
     <div class="lock-icon">🔒</div>
@@ -444,7 +434,7 @@
       <button class="mode-btn active" id="multipleChoiceBtn" onclick="setMode('multiple')">Multiple Choice</button>
       <button class="mode-btn" id="typeAnswerBtn" onclick="setMode('type')">Type Answer</button>
     </div>
-    <div class="question-counter" id="questionCounter">Question 1 of 9</div>
+    <div class="question-counter" id="questionCounter">Question 1 of 8</div>
     <div class="question-box">
       <div class="question-text" id="questionText"></div>
       <div class="question-vietnamese" id="questionVietnamese"></div>
@@ -481,7 +471,6 @@ const customers = [
     area: "South Jersey, near Philadelphia",
     occupation: "Elementary School Teacher",
     family: "Married with 2 kids",
-    pet: "A golden retriever named Buddy",
     service: "Spa Pedicure", color: "Light Pink", shape: "Oval", drink: "Tea",
     image: "👩",
     facts: [
@@ -489,7 +478,6 @@ const customers = [
       { question: "Where is she from?", answer: "Pennsauken, New Jersey", choices: ["Pennsauken, New Jersey","Camden, New Jersey","Cherry Hill, New Jersey","Trenton, New Jersey"] },
       { question: "What area is she from?", answer: "South Jersey, near Philadelphia", choices: ["South Jersey, near Philadelphia","North Jersey, near New York","Central Jersey, near Princeton","Shore area, near Atlantic City"] },
       { question: "What does she do for work?", answer: "Elementary School Teacher", choices: ["Elementary School Teacher","Nurse","Office Worker","Chef"] },
-      { question: "Does she have any pets?", answer: "A golden retriever named Buddy", choices: ["A golden retriever named Buddy","A cat named Mimi","No pets","Two dogs named Coco and Milo"] },
       { question: "What service does she want?", answer: "Spa Pedicure", choices: ["Spa Pedicure","Basic Manicure","Gel Manicure","Deluxe Pedicure"] },
       { question: "What color does she want?", answer: "Light Pink", choices: ["Light Pink","Dark Red","Nude","Purple"] },
       { question: "What nail shape does she want?", answer: "Oval", choices: ["Oval","Square","Round","Stiletto"] },
@@ -502,7 +490,6 @@ const customers = [
     area: "South Jersey, near Philadelphia",
     occupation: "Nurse at Cooper Hospital",
     family: "Single, lives with her sister",
-    pet: "Two cats named Luna and Star",
     service: "Gel Manicure", color: "Dark Red", shape: "Square", drink: "Water",
     image: "👩‍⚕️",
     facts: [
@@ -510,7 +497,6 @@ const customers = [
       { question: "Where is she from?", answer: "Camden, New Jersey", choices: ["Camden, New Jersey","Pennsauken, New Jersey","Moorestown, New Jersey","Haddon Township, New Jersey"] },
       { question: "What area is she from?", answer: "South Jersey, near Philadelphia", choices: ["South Jersey, near Philadelphia","North Jersey, near New York","Central Jersey, near Princeton","Shore area, near Atlantic City"] },
       { question: "What does she do for work?", answer: "Nurse at Cooper Hospital", choices: ["Nurse at Cooper Hospital","Doctor at Jefferson Hospital","Teacher at Camden School","Manager at a restaurant"] },
-      { question: "Does she have any pets?", answer: "Two cats named Luna and Star", choices: ["Two cats named Luna and Star","A dog named Max","No pets","A bird named Tweety"] },
       { question: "What service does she want?", answer: "Gel Manicure", choices: ["Gel Manicure","Spa Pedicure","Acrylic Nails","Basic Pedicure"] },
       { question: "What color does she want?", answer: "Dark Red", choices: ["Dark Red","Light Pink","Black","Coral"] },
       { question: "What nail shape does she want?", answer: "Square", choices: ["Square","Oval","Almond","Coffin"] },
@@ -523,7 +509,6 @@ const customers = [
     area: "South Jersey, near Philadelphia",
     occupation: "Small Business Owner",
     family: "Married with 3 kids and a grandchild",
-    pet: "A small poodle named Coco",
     service: "Deluxe Pedicure", color: "Nude / Beige", shape: "Round", drink: "Wine",
     image: "👩‍💼",
     facts: [
@@ -531,7 +516,6 @@ const customers = [
       { question: "Where is she from?", answer: "Cherry Hill, New Jersey", choices: ["Cherry Hill, New Jersey","Voorhees, New Jersey","Marlton, New Jersey","Medford, New Jersey"] },
       { question: "What area is she from?", answer: "South Jersey, near Philadelphia", choices: ["South Jersey, near Philadelphia","North Jersey, near New York","Central Jersey, near Princeton","Shore area, near Atlantic City"] },
       { question: "What does she do for work?", answer: "Small Business Owner", choices: ["Small Business Owner","Lawyer","Doctor","Real Estate Agent"] },
-      { question: "Does she have any pets?", answer: "A small poodle named Coco", choices: ["A small poodle named Coco","Two golden retrievers","No pets","A cat named Princess"] },
       { question: "What service does she want?", answer: "Deluxe Pedicure", choices: ["Deluxe Pedicure","Gel Manicure","Spa Pedicure","Acrylic Nails"] },
       { question: "What color does she want?", answer: "Nude / Beige", choices: ["Nude / Beige","Hot Pink","Dark Purple","Glitter"] },
       { question: "What nail shape does she want?", answer: "Round", choices: ["Round","Stiletto","Coffin","Square"] },
@@ -544,7 +528,6 @@ const customers = [
     area: "South Jersey, near Philadelphia",
     occupation: "College Student at Rutgers",
     family: "Single, lives with parents",
-    pet: "No pets",
     service: "Acrylic Nails with Nail Art", color: "Purple with Glitter", shape: "Coffin / Ballerina", drink: "Juice",
     image: "👩‍🎓",
     facts: [
@@ -552,7 +535,6 @@ const customers = [
       { question: "Where is she from?", answer: "Merchantville, New Jersey", choices: ["Merchantville, New Jersey","Collingswood, New Jersey","Bellmawr, New Jersey","Runnemede, New Jersey"] },
       { question: "What area is she from?", answer: "South Jersey, near Philadelphia", choices: ["South Jersey, near Philadelphia","North Jersey, near New York","Central Jersey, near Princeton","Shore area, near Atlantic City"] },
       { question: "What does she do?", answer: "College Student at Rutgers", choices: ["College Student at Rutgers","High School Student","Works at a mall","Graphic Designer"] },
-      { question: "Does she have any pets?", answer: "No pets", choices: ["No pets","A hamster named Peanut","Two cats","A dog named Rex"] },
       { question: "What service does she want?", answer: "Acrylic Nails with Nail Art", choices: ["Acrylic Nails with Nail Art","Basic Manicure","Gel Manicure","Spa Pedicure"] },
       { question: "What color does she want?", answer: "Purple with Glitter", choices: ["Purple with Glitter","Plain White","Nude Pink","Dark Blue"] },
       { question: "What nail shape does she want?", answer: "Coffin / Ballerina", choices: ["Coffin / Ballerina","Round","Square","Oval"] },
@@ -565,7 +547,6 @@ const customers = [
     area: "South Jersey, near Philadelphia",
     occupation: "Retired School Principal",
     family: "Widowed, 2 adult children and 4 grandchildren",
-    pet: "A bird named Sunny",
     service: "Basic Manicure and Pedicure", color: "Classic Red", shape: "Short and Round", drink: "Tea with honey",
     image: "👵",
     facts: [
@@ -573,7 +554,6 @@ const customers = [
       { question: "Where is she from?", answer: "Haddon Township, New Jersey", choices: ["Haddon Township, New Jersey","Haddonfield, New Jersey","Audubon, New Jersey","Oaklyn, New Jersey"] },
       { question: "What area is she from?", answer: "South Jersey, near Philadelphia", choices: ["South Jersey, near Philadelphia","North Jersey, near New York","Central Jersey, near Princeton","Shore area, near Atlantic City"] },
       { question: "What did she do for work?", answer: "Retired School Principal", choices: ["Retired School Principal","Retired Nurse","Retired Police Officer","Retired Librarian"] },
-      { question: "Does she have any pets?", answer: "A bird named Sunny", choices: ["A bird named Sunny","No pets","Three cats","A dog named Charlie"] },
       { question: "What service does she want?", answer: "Basic Manicure and Pedicure", choices: ["Basic Manicure and Pedicure","Deluxe Pedicure","Gel Manicure","Acrylic Nails"] },
       { question: "What color does she want?", answer: "Classic Red", choices: ["Classic Red","Nude","Light Pink","Orange"] },
       { question: "What nail shape does she want?", answer: "Short and Round", choices: ["Short and Round","Long Coffin","Oval","Square"] },
@@ -581,8 +561,9 @@ const customers = [
     ]
   }
 ];
-// Field names and correct answers
-const fieldKeys = ['name','from','area','occupation','pet','service','color','shape','drink'];
+
+// ===== FIELD KEYS (pet removed) =====
+const fieldKeys = ['name','from','area','occupation','service','color','shape','drink'];
 let fieldCorrect = 0;
 let lockedFields = [];
 
@@ -595,7 +576,6 @@ function checkField(key) {
     from: c.from,
     area: c.area,
     occupation: c.occupation,
-    pet: c.pet,
     service: c.service,
     color: c.color,
     shape: c.shape,
@@ -618,9 +598,6 @@ function checkField(key) {
     input.value = answers[key];
     feedback.textContent = '✅ Correct!';
     feedback.className = 'field-feedback correct';
-    document.querySelector(`#field-${key} ~ button`) && 
-      (document.querySelector(`#field-${key}`).nextElementSibling.className = 'check-btn locked');
-    
     if (!lockedFields.includes(key)) {
       lockedFields.push(key);
       fieldCorrect++;
@@ -670,10 +647,11 @@ function resetFields() {
     }
   });
 }
+
 // ===== FIREBASE =====
 const firebaseConfig = {
   apiKey: "AIzaSyBLI9wCnIQg4Pkdftll0ErZAPryS_-8P28",
-  authDomain: "nail-shop-game.firebaseapp.com",
+  authDomain: "nail-salon-duolingo.firebaseapp.com",
   databaseURL: "https://nail-shop-game-default-rtdb.firebaseio.com",
   projectId: "nail-shop-game",
   storageBucket: "nail-shop-game.firebasestorage.app",
@@ -701,7 +679,6 @@ const questionTranslations = {
   "What does she do for work?": "Cô ấy làm nghề gì?",
   "What did she do for work?": "Trước đây cô ấy làm nghề gì?",
   "What does she do?": "Cô ấy làm gì?",
-  "Does she have any pets?": "Cô ấy có thú cưng không?",
   "What service does she want?": "Cô ấy muốn dịch vụ gì?",
   "What color does she want?": "Cô ấy muốn màu gì?",
   "What nail shape does she want?": "Cô ấy muốn hình dạng móng gì?",
@@ -748,8 +725,7 @@ function loadCustomer(index) {
   currentQuestion = 0;
   answeredQuestions = [];
   lastRevealedCount = 0;
-
-  resetFields(); // ← ADD THIS LINE
+  resetFields();
 
   const c = customers[index];
   document.getElementById('customerAvatar').textContent = c.image;
@@ -762,32 +738,17 @@ function loadCustomer(index) {
   document.getElementById('customerDisplay').textContent = index + 1;
   document.getElementById('progressFill').style.width = (index / 5 * 100) + '%';
 }
+
 function updateRevealedInfo(count) {
   const c = customers[currentCustomer];
-  const values = [c.name, c.from, c.area, c.occupation, c.pet, c.service, c.color, c.shape, c.drink];
+  const values = [c.name, c.from, c.area, c.occupation, c.service, c.color, c.shape, c.drink];
 
-  // Auto fill revealed fields
   for (let i = 0; i < count; i++) {
     autoFillField(i, values[i]);
   }
 
-  // Show customer name when first fact revealed
   document.getElementById('customerName').textContent = count > 0 ? c.name : '???';
 }
-  const c = customers[currentCustomer];
-  const labels = ['Name','From','Area','Occupation','Pet','Service','Color','Shape','Drink'];
-  const values = [c.name, c.from, c.area, c.occupation, c.pet, c.service, c.color, c.shape, c.drink];
-
-  let html = '';
-  for (let i = 0; i < count; i++) {
-    html += `<div class="info-item">
-      <span class="info-label">${labels[i]}:</span>
-      <span class="info-value">${values[i]}</span>
-    </div>`;
-  }
-  document.getElementById('revealedInfo').innerHTML = html || '<div class="waiting-message">⏳ Waiting for teacher...</div>';
-  document.getElementById('customerName').textContent = count > 0 ? c.name : '???';
-
 
 function showQuestion(questionIndex) {
   if (answeredQuestions.includes(questionIndex)) return;
@@ -908,12 +869,13 @@ function endGame() {
     pct >= 70 ? '👍 Good job! Keep practicing!' :
     pct >= 50 ? '😊 Nice try! Practice more!' : '💪 Keep learning!';
 }
+
+// ===== HINTS (pet removed) =====
 const hints = [
   { en: "What is your name?", vn: "Tên bạn là gì?" },
   { en: "Where are you from?", vn: "Bạn đến từ đâu?" },
   { en: "What area are you from?", vn: "Bạn đến từ khu vực nào?" },
   { en: "What do you do for work?", vn: "Bạn làm nghề gì?" },
-  { en: "Do you have any pets?", vn: "Bạn có thú cưng không?" },
   { en: "What service would you like?", vn: "Bạn muốn dịch vụ gì?" },
   { en: "What color do you want?", vn: "Bạn muốn màu gì?" },
   { en: "What nail shape do you want?", vn: "Bạn muốn hình dạng móng gì?" },
@@ -930,7 +892,7 @@ function buildHints() {
   `).join('');
 }
 
-window.onload = () => { loadCustomer(0); startListening(); buildHints()};
+window.onload = () => { loadCustomer(0); startListening(); buildHints(); };
 </script>
 </body>
 </html>
