@@ -81,6 +81,30 @@
         .info-card-header .info h2 { font-size: 1.1rem; color: #333; }
         .info-card-header .info p { font-size: 0.8rem; color: #999; }
 
+        /* Hint Link & Content */
+        .hint-link {
+            color: #e91e93;
+            cursor: pointer;
+            font-size: 0.82rem;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px 0;
+            font-weight: bold;
+            user-select: none;
+            transition: all 0.2s;
+        }
+        .hint-link:hover {
+            text-decoration: underline;
+            color: #c4157b;
+        }
+        .hint-content {
+            display: none;
+            margin-top: 4px;
+        }
+        .hint-content.show {
+            display: block;
+        }
+
         /* Field Row */
         .field-row {
             margin-bottom: 14px; padding: 14px;
@@ -351,6 +375,17 @@ function switchCustomer(idx) {
     render();
 }
 
+function toggleHint(link) {
+    const hintContent = link.nextElementSibling;
+    if (hintContent.classList.contains('show')) {
+        hintContent.classList.remove('show');
+        link.innerHTML = '💡 Show Hint';
+    } else {
+        hintContent.classList.add('show');
+        link.innerHTML = '💡 Hide Hint';
+    }
+}
+
 function render() {
     const st = states[active];
     const c = customers[active];
@@ -400,13 +435,26 @@ function render() {
             `;
         }
 
+        // Build hint section (only for unanswered fields)
+        let hintSection = '';
+        if (!st.answered[i]) {
+            hintSection = `
+                <div class="hint-container">
+                    <a class="hint-link" onclick="toggleHint(this)">💡 Show Hint</a>
+                    <div class="hint-content">
+                        <div class="field-question">🗣️ ${f.question}</div>
+                    </div>
+                </div>
+            `;
+        }
+
         row.innerHTML = `
             <div class="field-label">
                 <span class="icon">${f.icon}</span>
                 <span class="text">${f.label}</span>
                 <span class="vn">${f.vn}</span>
             </div>
-            ${!st.answered[i] ? `<div class="field-question">🗣️ ${f.question}</div>` : ''}
+            ${hintSection}
             <div class="field-input-row">${inputArea}</div>
             <div class="field-feedback" id="fb-${i}"></div>
         `;
