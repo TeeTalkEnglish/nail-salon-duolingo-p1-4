@@ -3,46 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👩 Customer — Cửa 3 Teacher</title>
+    <title>👩 Customer Script — Cửa 3 Teacher</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #e8e0ff, #f3e8ff);
-            min-height: 100vh;
-            padding: 15px;
-            max-width: 700px;
-            margin: 0 auto;
+            min-height: 100vh; padding: 15px;
+            max-width: 700px; margin: 0 auto;
         }
-
+        .back-link { display: inline-block; margin-bottom: 10px; color: #6f42c1; text-decoration: none; font-size: 0.9rem; font-weight: bold; }
         .header {
             text-align: center; padding: 18px;
             background: linear-gradient(135deg, #6f42c1, #5a32a3);
             color: white; border-radius: 20px; margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(111,66,193,0.3);
         }
         .header h1 { font-size: 1.3rem; margin-bottom: 4px; }
         .header p { font-size: 0.85rem; opacity: 0.9; }
 
-        .back-link {
-            display: inline-block; margin-bottom: 15px;
-            color: #6f42c1; text-decoration: none; font-size: 0.9rem; font-weight: bold;
+        .instructions {
+            background: #fff3e0; border-left: 4px solid #ff9800;
+            border-radius: 12px; padding: 15px; margin-bottom: 15px;
+            font-size: 0.9rem; color: #e65100; line-height: 1.5;
         }
-        .back-link:hover { text-decoration: underline; }
 
-        /* Scene Cards */
-        .scene-selector {
-            display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto;
+        /* Customer Tabs */
+        .customer-tabs {
+            display: flex; gap: 6px; margin-bottom: 15px; overflow-x: auto;
             padding-bottom: 5px;
         }
-        .scene-tab {
-            padding: 8px 16px; border-radius: 20px; font-size: 0.8rem;
-            font-weight: bold; cursor: pointer; white-space: nowrap;
-            border: 2px solid #e0e0e0; background: white; color: #888;
-            transition: all 0.3s;
+        .c-tab {
+            display: flex; flex-direction: column; align-items: center;
+            background: white; border: 3px solid #e0e0e0; border-radius: 15px;
+            padding: 10px 8px; cursor: pointer; transition: all 0.3s;
+            min-width: 60px; flex: 1; max-width: 80px;
         }
-        .scene-tab:hover { border-color: #6f42c1; }
-        .scene-tab.active { background: #6f42c1; color: white; border-color: #6f42c1; }
+        .c-tab:hover { border-color: #6f42c1; }
+        .c-tab.active { border-color: #6f42c1; background: #f3e8ff; }
+        .c-tab .av { font-size: 1.6rem; }
+        .c-tab .lb { font-size: 0.6rem; font-weight: bold; color: #888; margin-top: 2px; }
+        .c-tab.active .lb { color: #6f42c1; }
 
         /* Script Card */
         .card {
@@ -50,103 +50,57 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 15px;
         }
         .card h2 { font-size: 1.2rem; color: #6f42c1; margin-bottom: 5px; }
-        .card .card-desc { font-size: 0.85rem; color: #999; margin-bottom: 20px; }
+        .card .desc { font-size: 0.85rem; color: #999; margin-bottom: 20px; }
 
-        /* Script Steps */
-        .script-step {
-            display: flex; gap: 12px; margin-bottom: 15px;
-            padding: 15px; border-radius: 15px; transition: all 0.3s;
+        /* Step */
+        .step {
+            margin-bottom: 18px; padding: 15px; border-radius: 15px;
+            border: 2px solid #f0f0f0; transition: all 0.3s;
         }
-        .script-step:hover { background: #f8f0ff; }
+        .step:hover { border-color: #ddd; background: #fafafa; }
 
-        .step-number {
-            width: 32px; height: 32px; border-radius: 50%;
+        .step-header {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+        }
+        .step-num {
+            width: 30px; height: 30px; border-radius: 50%;
             background: #6f42c1; color: white; display: flex;
             align-items: center; justify-content: center;
             font-size: 0.85rem; font-weight: bold; flex-shrink: 0;
         }
+        .step-role { font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .step-role.you { color: #6f42c1; }
+        .step-role.student { color: #d63384; }
 
-        .step-content { flex: 1; }
-
-        .step-role {
-            font-size: 0.7rem; font-weight: bold; text-transform: uppercase;
-            letter-spacing: 1px; margin-bottom: 4px;
+        .say-box {
+            background: #f0e6ff; border-left: 4px solid #6f42c1;
+            border-radius: 10px; padding: 12px 15px; margin-bottom: 8px;
         }
-        .step-role.customer { color: #6f42c1; }
-        .step-role.tech { color: #d63384; }
+        .say-text { font-size: 1.05rem; color: #333; font-weight: 500; line-height: 1.4; }
+        .say-vn { font-size: 0.85rem; color: #888; font-style: italic; margin-top: 4px; }
 
-        .step-text {
-            font-size: 1rem; color: #333; margin-bottom: 4px;
-            line-height: 1.4;
+        .expect-box {
+            background: #fff0f5; border-left: 4px solid #ff69b4;
+            border-radius: 10px; padding: 12px 15px; margin-bottom: 8px;
         }
-        .step-text.say-this {
-            background: #f0e6ff; padding: 10px 14px; border-radius: 10px;
-            border-left: 3px solid #6f42c1; font-weight: 500;
-        }
-        .step-text.expect {
-            background: #fff0f5; padding: 10px 14px; border-radius: 10px;
-            border-left: 3px solid #ff69b4; font-style: italic; color: #888;
-        }
+        .expect-text { font-size: 0.95rem; color: #888; font-style: italic; line-height: 1.4; }
+        .expect-answer { font-size: 0.9rem; color: #d63384; margin-top: 5px; font-weight: bold; }
 
-        .step-vn { font-size: 0.8rem; color: #999; font-style: italic; margin-top: 3px; }
-
-        .step-speak {
+        .btn-speak {
             background: #6f42c1; color: white; border: none;
-            padding: 5px 12px; border-radius: 15px; font-size: 0.75rem;
+            padding: 8px 16px; border-radius: 20px; font-size: 0.8rem;
             cursor: pointer; margin-top: 6px; transition: all 0.2s;
         }
-        .step-speak:hover { background: #5a32a3; }
+        .btn-speak:hover { background: #5a32a3; transform: scale(1.05); }
 
-        .step-tip {
+        .tip {
             background: #fff3e0; border-radius: 8px; padding: 8px 12px;
             margin-top: 6px; font-size: 0.8rem; color: #e65100;
         }
 
-        /* Divider */
-        .divider {
-            border: none; border-top: 2px dashed #e0e0e0;
-            margin: 20px 0;
-        }
-
-        /* Vocab Quick Ref */
-        .vocab-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-            margin-bottom: 15px;
-        }
-        .vocab-item {
-            background: #f8f0ff; border-radius: 10px; padding: 10px;
-            cursor: pointer; transition: all 0.2s;
-        }
-        .vocab-item:hover { background: #efe0ff; }
-        .vocab-item .en { font-weight: bold; color: #333; font-size: 0.9rem; }
-        .vocab-item .vn { font-size: 0.8rem; color: #888; }
-
-        /* Assessment Checklist */
-        .checklist { margin-top: 15px; }
-        .check-item {
-            display: flex; align-items: center; gap: 10px;
-            padding: 10px; border-radius: 10px; margin-bottom: 6px;
-            background: #fafafa; cursor: pointer; transition: all 0.2s;
-        }
-        .check-item:hover { background: #f0f0f0; }
-        .check-item.checked { background: #d4edda; }
-        .check-box {
-            width: 24px; height: 24px; border: 2px solid #ccc;
-            border-radius: 6px; display: flex; align-items: center;
-            justify-content: center; font-size: 0.9rem; flex-shrink: 0;
-            transition: all 0.3s;
-        }
-        .check-item.checked .check-box { background: #28a745; border-color: #28a745; color: white; }
-        .check-label { font-size: 0.9rem; color: #555; }
-
-        .score-display {
-            text-align: center; padding: 15px;
-            font-size: 1.5rem; font-weight: bold; color: #6f42c1;
-        }
-
-        @media (max-width: 400px) {
-            .vocab-grid { grid-template-columns: 1fr; }
-        }
+        /* Script Content (one per customer) */
+        .script-content { display: none; }
+        .script-content.active { display: block; }
     </style>
 </head>
 <body>
@@ -154,287 +108,32 @@
 <a href="index.html" class="back-link">← Back to Menu</a>
 
 <div class="header">
-    <h1>👩 You Are the Customer</h1>
-    <p>Cửa 3 — Use these scripts to role-play with your student!</p>
+    <h1>👩 Teacher — Customer Script</h1>
+    <p>Cửa 3 — Read these lines to your student!</p>
 </div>
 
-<!-- Scene Selector -->
-<div class="scene-selector">
-    <div class="scene-tab active" onclick="showScene(0)">🆕 Scene 1: New Client</div>
-    <div class="scene-tab" onclick="showScene(1)">🔄 Scene 2: Returning Client</div>
-    <div class="scene-tab" onclick="showScene(2)">👨‍👩‍👧 Scene 3: Family Talk</div>
+<div class="instructions">
+    <strong>📋 How to play:</strong><br>
+    1. Pick a customer (same one the student picks)<br>
+    2. Read the <strong style="color:#6f42c1;">purple boxes</strong> out loud to the student<br>
+    3. The student types their response on their device<br>
+    4. Check if their answer matches the <strong style="color:#d63384;">pink expected answer</strong><br>
+    5. Move to the next step!
 </div>
 
-<!-- ====== SCENE 1: New Client ====== -->
-<div class="card scene-card" id="scene0">
-    <h2>🆕 Scene 1: New Client Arrives</h2>
-    <p class="card-desc">You're a first-time customer. See if the student can greet you properly!</p>
-
-    <div class="script-step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-            <div class="step-role customer">👩 YOU SAY (Customer):</div>
-            <div class="step-text say-this">"Hi! I'm new here."</div>
-            <div class="step-vn">Xin chào! Tôi mới đến đây.</div>
-            <button class="step-speak" onclick="speak('Hi! I\'m new here.')">🔊 Say it</button>
-            <div class="step-tip">💡 Wait for the student to greet you and introduce themselves.</div>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-            <div class="step-role tech">💁‍♀️ STUDENT SHOULD SAY:</div>
-            <div class="step-text expect">"Hello! My name is ___. Nice to meet you!"</div>
-            <div class="step-tip">✅ Check: Did they say their name? Did they say "nice to meet you"?</div>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-            <div class="step-role customer">👩 YOU SAY:</div>
-            <div class="step-text say-this">"Nice to meet you too! My name is Sarah."</div>
-            <div class="step-vn">Tôi cũng rất vui! Tên tôi là Sarah.</div>
-            <button class="step-speak" onclick="speak('Nice to meet you too! My name is Sarah.')">🔊 Say it</button>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-            <div class="step-role tech">💁‍♀️ STUDENT SHOULD ASK:</div>
-            <div class="step-text expect">"Is this your first time here?" or "Do you have an appointment?"</div>
-            <div class="step-tip">✅ Check: Did they ask a relevant question?</div>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">5</div>
-        <div class="step-content">
-            <div class="step-role customer">👩 YOU SAY:</div>
-            <div class="step-text say-this">"Yes, it's my first time! I don't have an appointment. Is that okay?"</div>
-            <div class="step-vn">Vâng, lần đầu tiên! Tôi không có lịch hẹn. Được không?</div>
-            <button class="step-speak" onclick="speak('Yes, it\'s my first time! I don\'t have an appointment. Is that okay?')">🔊 Say it</button>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">6</div>
-        <div class="step-content">
-            <div class="step-role tech">💁‍♀️ STUDENT SHOULD RESPOND:</div>
-            <div class="step-text expect">Welcome them! "Of course! Welcome!" / "No problem!"</div>
-        </div>
-    </div>
-
-    <hr class="divider">
-
-    <h3 style="color:#6f42c1;margin-bottom:10px;">✅ Assessment Checklist</h3>
-    <div class="checklist" id="checklist0">
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Said "Hello" or greeted the customer</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Introduced themselves ("My name is...")</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Said "Nice to meet you"</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Asked "Is this your first time?"</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Asked about appointment</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Welcomed the customer warmly</div>
-        </div>
-    </div>
-    <div class="score-display" id="score0">0 / 6 ✅</div>
+<!-- Customer Tabs -->
+<div class="customer-tabs" id="teacherTabs">
+    <div class="c-tab active" onclick="showScript(0)"><div class="av">👩</div><div class="lb">Customer 1</div></div>
+    <div class="c-tab" onclick="showScript(1)"><div class="av">👩‍🦰</div><div class="lb">Customer 2</div></div>
+    <div class="c-tab" onclick="showScript(2)"><div class="av">👱‍♀️</div><div class="lb">Customer 3</div></div>
+    <div class="c-tab" onclick="showScript(3)"><div class="av">👩‍🦱</div><div class="lb">Customer 4</div></div>
+    <div class="c-tab" onclick="showScript(4)"><div class="av">🧑‍🦳</div><div class="lb">Customer 5</div></div>
 </div>
 
-<!-- ====== SCENE 2: Returning Client ====== -->
-<div class="card scene-card" id="scene1" style="display:none;">
-    <h2>🔄 Scene 2: Returning Client</h2>
-    <p class="card-desc">You're a regular customer. See if the student remembers "Welcome back!"</p>
-
-    <div class="script-step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-            <div class="step-role customer">👩 YOU SAY:</div>
-            <div class="step-text say-this">"Hi! I'm back again!"</div>
-            <div class="step-vn">Xin chào! Tôi trở lại rồi!</div>
-            <button class="step-speak" onclick="speak('Hi! I\'m back again!')">🔊 Say it</button>
-            <div class="step-tip">💡 See if the student says "Welcome back!"</div>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-            <div class="step-role tech">💁‍♀️ STUDENT SHOULD SAY:</div>
-            <div class="step-text expect">"Welcome back!" / "Good to see you again!"</div>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-            <div class="step-role customer">👩 YOU SAY:</div>
-            <div class="step-text say-this">"Yes, I have an appointment at 2 o'clock. I also brought my sister today!"</div>
-            <div class="step-vn">Vâng, tôi có lịch hẹn lúc 2 giờ. Hôm nay tôi cũng mang theo chị gái!</div>
-            <button class="step-speak" onclick="speak('Yes, I have an appointment at 2 o\'clock. I also brought my sister today!')">🔊 Say it</button>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-            <div class="step-role tech">💁‍♀️ STUDENT SHOULD:</div>
-            <div class="step-text expect">Welcome the sister too! "Nice to meet you!" / "Welcome!"</div>
-        </div>
-    </div>
-
-    <hr class="divider">
-
-    <h3 style="color:#6f42c1;margin-bottom:10px;">✅ Assessment Checklist</h3>
-    <div class="checklist" id="checklist1">
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Said "Welcome back!"</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Asked about appointment</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Acknowledged the sister</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Said "Nice to meet you" to sister</div>
-        </div>
-    </div>
-    <div class="score-display" id="score1">0 / 4 ✅</div>
-</div>
-
-<!-- ====== SCENE 3: Family Small Talk ====== -->
-<div class="card scene-card" id="scene2" style="display:none;">
-    <h2>👨‍👩‍👧 Scene 3: Family Small Talk</h2>
-    <p class="card-desc">During the appointment, see if the student can make family small talk!</p>
-
-    <div class="script-step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-            <div class="step-role tech">💁‍♀️ STUDENT SHOULD ASK:</div>
-            <div class="step-text expect">A family question: "Do you have children?" / "Are you married?"</div>
-            <div class="step-tip">💡 If the student doesn't ask, you can start by mentioning your family.</div>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-            <div class="step-role customer">👩 YOU SAY:</div>
-            <div class="step-text say-this">"Yes! I have 3 kids. This is my husband waiting outside."</div>
-            <div class="step-vn">Vâng! Tôi có 3 người con. Đây là chồng tôi đang đợi bên ngoài.</div>
-            <button class="step-speak" onclick="speak('Yes! I have 3 kids. This is my husband waiting outside.')">🔊 Say it</button>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-            <div class="step-role tech">💁‍♀️ STUDENT SHOULD RESPOND:</div>
-            <div class="step-text expect">"Oh nice!" + follow-up question: "Are they going to school?"</div>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-            <div class="step-role customer">👩 YOU SAY:</div>
-            <div class="step-text say-this">"Yes, one is going to primary school and the other two go to college."</div>
-            <div class="step-vn">Vâng, một đứa đang học tiểu học và hai đứa kia học đại học.</div>
-            <button class="step-speak" onclick="speak('Yes, one is going to primary school and the other two go to college.')">🔊 Say it</button>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">5</div>
-        <div class="step-content">
-            <div class="step-role customer">👩 YOU ASK BACK:</div>
-            <div class="step-text say-this">"What about you? Do you have kids?"</div>
-            <div class="step-vn">Còn bạn thì sao? Bạn có con không?</div>
-            <button class="step-speak" onclick="speak('What about you? Do you have kids?')">🔊 Say it</button>
-            <div class="step-tip">💡 The student should answer about their own family!</div>
-        </div>
-    </div>
-
-    <div class="script-step">
-        <div class="step-number">6</div>
-        <div class="step-content">
-            <div class="step-role tech">💁‍♀️ STUDENT SHOULD:</div>
-            <div class="step-text expect">Answer about their family: "Yes, I have..." or "No, I don't have..."</div>
-        </div>
-    </div>
-
-    <hr class="divider">
-
-    <h3 style="color:#6f42c1;margin-bottom:10px;">✅ Assessment Checklist</h3>
-    <div class="checklist" id="checklist2">
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Asked "Do you have children/kids?"</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Responded to family info naturally</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Asked follow-up question (school, age, etc.)</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Answered about their own family</div>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-            <div class="check-box"></div>
-            <div class="check-label">Used family vocabulary correctly</div>
-        </div>
-    </div>
-    <div class="score-display" id="score2">0 / 5 ✅</div>
-</div>
-
-<!-- Vocab Reference -->
-<div class="card">
-    <h2>📚 Quick Vocabulary Reference</h2>
-    <div class="vocab-grid">
-        <div class="vocab-item" onclick="speak('name')"><div class="en">name</div><div class="vn">tên</div></div>
-        <div class="vocab-item" onclick="speak('nice to meet you')"><div class="en">nice to meet you</div><div class="vn">rất vui được gặp bạn</div></div>
-        <div class="vocab-item" onclick="speak('appointment')"><div class="en">appointment</div><div class="vn">lịch hẹn</div></div>
-        <div class="vocab-item" onclick="speak('first time')"><div class="en">first time</div><div class="vn">lần đầu tiên</div></div>
-        <div class="vocab-item" onclick="speak('welcome back')"><div class="en">welcome back</div><div class="vn">chào mừng trở lại</div></div>
-        <div class="vocab-item" onclick="speak('mother')"><div class="en">mother</div><div class="vn">mẹ</div></div>
-        <div class="vocab-item" onclick="speak('father')"><div class="en">father</div><div class="vn">bố / ba</div></div>
-        <div class="vocab-item" onclick="speak('sister')"><div class="en">sister</div><div class="vn">chị / em gái</div></div>
-        <div class="vocab-item" onclick="speak('brother')"><div class="en">brother</div><div class="vn">anh / em trai</div></div>
-        <div class="vocab-item" onclick="speak('husband')"><div class="en">husband</div><div class="vn">chồng</div></div>
-        <div class="vocab-item" onclick="speak('wife')"><div class="en">wife</div><div class="vn">vợ</div></div>
-        <div class="vocab-item" onclick="speak('children')"><div class="en">children / kids</div><div class="vn">con cái</div></div>
-    </div>
-</div>
+<!-- Scripts generated by JS -->
+<div id="scriptsContainer"></div>
 
 <script>
-// ============ SPEECH ============
 function speak(text) {
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
@@ -442,37 +141,100 @@ function speak(text) {
     speechSynthesis.speak(u);
 }
 
-// ============ SCENE SWITCHING ============
-function showScene(index) {
-    document.querySelectorAll('.scene-card').forEach((card, i) => {
-        card.style.display = i === index ? 'block' : 'none';
-    });
-    document.querySelectorAll('.scene-tab').forEach((tab, i) => {
-        tab.classList.toggle('active', i === index);
-    });
-}
-
-// ============ CHECKLIST ============
-function toggleCheck(item) {
-    item.classList.toggle('checked');
-    const box = item.querySelector('.check-box');
-    box.textContent = item.classList.contains('checked') ? '✓' : '';
-
-    // Update scores
-    updateScores();
-}
-
-function updateScores() {
-    for (let i = 0; i < 3; i++) {
-        const checklist = document.getElementById('checklist' + i);
-        if (!checklist) continue;
-        const items = checklist.querySelectorAll('.check-item');
-        const checked = checklist.querySelectorAll('.check-item.checked');
-        document.getElementById('score' + i).textContent =
-            checked.length + ' / ' + items.length + ' ✅';
+const customers = [
+    {
+        name: "Customer 1 — New Client", avatar: "👩",
+        desc: "You are a brand new customer who has never been to this salon before.",
+        steps: [
+            { role: "you", say: "Hi there! I'm new here.", vn: "Xin chào! Tôi mới đến đây.", tip: "Wait for the student to greet you and say their name." },
+            { role: "student", expect: "The student should greet you and introduce themselves.", answer: "Hello! My name is ___. Nice to meet you!" },
+            { role: "you", say: "Nice to meet you too! My name is Sarah.", vn: "Tôi cũng rất vui! Tên tôi là Sarah.", tip: "Wait for the student to ask if it's your first time." },
+            { role: "student", expect: "The student should ask about first time.", answer: "Is this your first time here?" },
+            { role: "you", say: "Yes, it's my first time!", vn: "Vâng, lần đầu tiên!", tip: "Wait for the student to welcome you and ask about appointment." },
+            { role: "student", expect: "The student should welcome you and ask about appointment.", answer: "Welcome! Do you have an appointment?" },
+            { role: "you", say: "No, I don't have an appointment. Is that okay?", vn: "Không, tôi không có lịch hẹn. Được không?", tip: "Wait for the student to say it's okay." },
+            { role: "student", expect: "The student should tell you it's no problem.", answer: "No problem! Please have a seat." }
+        ]
+    },
+    {
+        name: "Customer 2 — Returning Client", avatar: "👩‍🦰",
+        desc: "You are a regular customer who comes every month. You brought your sister today!",
+        steps: [
+            { role: "you", say: "Hi! I'm back again!", vn: "Xin chào! Tôi trở lại rồi!", tip: "Wait for 'Welcome back!'" },
+            { role: "student", expect: "The student should say 'Welcome back!'", answer: "Welcome back! Good to see you again!" },
+            { role: "you", say: "I have an appointment at 2 o'clock.", vn: "Tôi có lịch hẹn lúc 2 giờ.", tip: "Wait for confirmation." },
+            { role: "student", expect: "Should confirm and offer a seat.", answer: "Great! Please have a seat." },
+            { role: "you", say: "I also brought my sister today!", vn: "Hôm nay tôi cũng mang theo chị gái!", tip: "Wait for the student to welcome the sister." },
+            { role: "student", expect: "Should welcome the sister.", answer: "Nice to meet you! Welcome!" }
+        ]
+    },
+    {
+        name: "Customer 3 — Family Talk", avatar: "👱‍♀️",
+        desc: "You are a chatty customer who loves talking about family!",
+        steps: [
+            { role: "you", say: "Hi! Nice salon you have here!", vn: "Xin chào! Tiệm nail đẹp quá!", tip: "Wait for thanks and introduction." },
+            { role: "student", expect: "Should say thank you and introduce themselves.", answer: "Thank you! My name is ___. Nice to meet you!" },
+            { role: "you", say: "Do you have children?", vn: "Bạn có con không?", tip: "Wait for the student to answer about their family." },
+            { role: "student", expect: "Should answer about their children.", answer: "Yes, I have ___ kids! / No, I don't." },
+            { role: "you", say: "Are they going to school?", vn: "Họ có đang đi học không?", tip: "Wait for the student to answer about school." },
+            { role: "student", expect: "Should answer about school.", answer: "Yes, one goes to primary school and one goes to college." },
+            { role: "you", say: "That's wonderful! This is my husband waiting outside.", vn: "Tuyệt! Đây là chồng tôi đang đợi bên ngoài.", tip: "Wait for a nice response." },
+            { role: "student", expect: "Should respond nicely.", answer: "Oh nice! Hello to your husband!" }
+        ]
+    },
+    {
+        name: "Customer 4 — Shy New Client", avatar: "👩‍🦱",
+        desc: "You are a shy customer whose mother recommended this salon.",
+        steps: [
+            { role: "you", say: "Um... hello...", vn: "Ừm... xin chào...", tip: "Be shy! Wait for a warm greeting." },
+            { role: "student", expect: "Should give a warm greeting and introduction.", answer: "Hello! Welcome! My name is ___." },
+            { role: "you", say: "My name is Lisa. It's my first time getting my nails done.", vn: "Tên tôi là Lisa. Đây là lần đầu tiên tôi làm nail.", tip: "Wait for 'Nice to meet you' and comfort." },
+            { role: "student", expect: "Should say nice to meet you and comfort.", answer: "Nice to meet you Lisa! Don't worry, I'll take care of you!" },
+            { role: "you", say: "My mother told me to come here. She's your regular customer!", vn: "Mẹ tôi bảo tôi đến đây. Bà ấy là khách quen của bạn!", tip: "Wait for reaction about the mother." },
+            { role: "student", expect: "Should react positively about the mother.", answer: "Oh your mother! That's wonderful! Welcome!" },
+            { role: "you", say: "Do you have an appointment available?", vn: "Bạn còn lịch hẹn trống không?", tip: "Wait for confirmation." },
+            { role: "student", expect: "Should say yes and offer a seat.", answer: "Yes, of course! Please have a seat." }
+        ]
+    },
+    {
+        name: "Customer 5 — Chatty Grandma", avatar: "🧑‍🦳",
+        desc: "You are a chatty older customer who LOVES talking about your big family!",
+        steps: [
+            { role: "you", say: "Hello darling! I'm back for my nails!", vn: "Xin chào cưng! Tôi trở lại làm nail!", tip: "Be enthusiastic! Wait for welcome back." },
+            { role: "student", expect: "Should say welcome back.", answer: "Welcome back! So nice to see you!" },
+            { role: "you", say: "I just came from my daughter's wedding!", vn: "Tôi vừa đi đám cưới con gái xong!", tip: "Wait for excitement/congratulations." },
+            { role: "student", expect: "Should react with excitement.", answer: "Wow, congratulations! That's wonderful!" },
+            { role: "you", say: "Yes! Now I have 3 children — 2 daughters and 1 son. All married!", vn: "Vâng! Giờ tôi có 3 con — 2 con gái và 1 con trai. Đều đã kết hôn!", tip: "Wait for a follow-up question about grandchildren." },
+            { role: "student", expect: "Should ask about grandchildren or family.", answer: "That's so nice! Do you have grandchildren?" },
+            { role: "you", say: "Oh yes! I have 5 grandchildren! They're my whole world!", vn: "Ồ có! Tôi có 5 cháu! Các cháu là cả thế giới của tôi!", tip: "Wait for a warm response." },
+            { role: "student", expect: "Should respond warmly.", answer: "That's so sweet! You have a beautiful family!" },
+            { role: "you", say: "What about you? Do you have kids?", vn: "Còn bạn thì sao? Bạn có con không?", tip: "Wait for the student to talk about their own family." },
+            { role: "student", expect: "Should answer about their own family.", answer: "Yes, I have ___ kids! / No, not yet." }
+        ]
     }
-}
-</script>
+];
 
-</body>
-</html>
+// Build all scripts
+function buildScripts() {
+    const container = document.getElementById('scriptsContainer');
+    customers.forEach((c, ci) => {
+        let html = `<div class="card script-content${ci===0?' active':''}" id="script${ci}">`;
+        html += `<h2>${c.avatar} ${c.name}</h2>`;
+        html += `<p class="desc">${c.desc}</p>`;
+
+        c.steps.forEach((s, si) => {
+            html += `<div class="step">`;
+            html += `<div class="step-header">`;
+            html += `<div class="step-num">${si + 1}</div>`;
+
+            if (s.role === 'you') {
+                html += `<div class="step-role you">👩 YOU SAY (read out loud):</div>`;
+                html += `</div>`; // close header
+                html += `<div class="say-box">`;
+                html += `<div class="say-text">"${s.say}"</div>`;
+                html += `<div class="say-vn">${s.vn}</div>`;
+                html += `</div>`;
+                html += `<button class="btn-speak" onclick="speak('${s.say.replace(/'/g, "\\'")}')">🔊 Hear it</button>`;
+                if (s.tip) html += `<div class="tip">💡 ${s.tip}</div>`;
+            } else {
+                html += `<div class="step-role student">💁‍♀️ STUDENT SHOULD
