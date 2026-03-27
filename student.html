@@ -92,11 +92,17 @@
         .field-row.wrong { border-color: #dc3545; background: #fff5f5; }
 
         .field-label {
-            display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+            display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
         }
         .field-label .icon { font-size: 1.2rem; }
         .field-label .text { font-size: 0.9rem; font-weight: bold; color: #555; }
         .field-label .vn { font-size: 0.75rem; color: #aaa; font-style: italic; margin-left: auto; }
+
+        .field-question {
+            font-size: 0.8rem; color: #6f42c1; margin-bottom: 8px;
+            padding: 6px 10px; background: #f0e6ff; border-radius: 8px;
+            border-left: 3px solid #6f42c1;
+        }
 
         .field-input-row { display: flex; gap: 8px; align-items: center; }
         .field-input {
@@ -161,7 +167,7 @@
 
 <div class="header">
     <h1>💁‍♀️ Nail Technician — Cửa 3</h1>
-    <p>Listen to the customer and fill in the correct information!</p>
+    <p>Ask the customer questions, listen, and type the answer!</p>
 </div>
 
 <!-- Customer Row -->
@@ -201,7 +207,7 @@
         <div class="av" id="cardAvatar">👩</div>
         <div class="info">
             <h2 id="cardTitle">Customer 1</h2>
-            <p id="cardDesc">Listen to the customer and fill in each field!</p>
+            <p id="cardDesc">Ask the customer and fill in each field!</p>
         </div>
     </div>
     <div id="fieldsContainer"></div>
@@ -225,66 +231,106 @@ const customers = [
     {
         name: "Customer 1", avatar: "👩", desc: "New client — first visit!",
         fields: [
-            { icon: "👤", label: "Name", vn: "Tên", answer: "sarah", display: "Sarah" },
-            { icon: "🆕", label: "First time?", vn: "Lần đầu?", answer: "yes", display: "Yes" },
-            { icon: "📅", label: "Appointment?", vn: "Lịch hẹn?", answer: "no", display: "No" },
-            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "manicure", display: "Manicure" },
-            { icon: "🔲", label: "Nail Shape", vn: "Hình dáng móng", answer: "round", display: "Round" },
-            { icon: "🎨", label: "Color", vn: "Màu", answer: "pink", display: "Pink" },
-            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "water", display: "Water" }
+            { icon: "👤", label: "Name", vn: "Tên", answer: "sarah", display: "Sarah",
+              question: 'Ask: "What is your name?"', placeholder: 'What is your name?' },
+            { icon: "🆕", label: "First time?", vn: "Lần đầu?", answer: "yes", display: "Yes",
+              question: 'Ask: "Is this your first time here?"', placeholder: 'Is this your first time here?' },
+            { icon: "📅", label: "Appointment?", vn: "Lịch hẹn?", answer: "no", display: "No",
+              question: 'Ask: "Do you have an appointment?"', placeholder: 'Do you have an appointment?' },
+            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "manicure", display: "Manicure",
+              question: 'Ask: "What service would you like today?"', placeholder: 'What service would you like?' },
+            { icon: "🔲", label: "Nail Shape", vn: "Hình dáng móng", answer: "round", display: "Round",
+              question: 'Ask: "What nail shape would you like?"', placeholder: 'What nail shape would you like?' },
+            { icon: "🎨", label: "Color", vn: "Màu", answer: "pink", display: "Pink",
+              question: 'Ask: "What color would you like?"', placeholder: 'What color would you like?' },
+            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "water", display: "Water",
+              question: 'Ask: "Would you like something to drink?"', placeholder: 'Would you like something to drink?' }
         ]
     },
     {
         name: "Customer 2", avatar: "👩‍🦰", desc: "Returning client with her sister!",
         fields: [
-            { icon: "👤", label: "Name", vn: "Tên", answer: "jessica", display: "Jessica" },
-            { icon: "🆕", label: "First time?", vn: "Lần đầu?", answer: "no", display: "No — regular!" },
-            { icon: "📅", label: "Appointment?", vn: "Lịch hẹn?", answer: "yes", display: "Yes, at 2 o'clock" },
-            { icon: "👫", label: "Came with?", vn: "Đến cùng?", answer: "sister", display: "Her sister" },
-            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "pedicure", display: "Pedicure" },
-            { icon: "🔲", label: "Nail Shape", vn: "Hình dáng móng", answer: "square", display: "Square" },
-            { icon: "🎨", label: "Color", vn: "Màu", answer: "red", display: "Red" },
-            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "coffee", display: "Coffee" }
+            { icon: "👤", label: "Name", vn: "Tên", answer: "jessica", display: "Jessica",
+              question: 'Ask: "What is your name?"', placeholder: 'What is your name?' },
+            { icon: "🆕", label: "First time?", vn: "Lần đầu?", answer: "no", display: "No — regular!",
+              question: 'Ask: "Is this your first time here?"', placeholder: 'Is this your first time here?' },
+            { icon: "📅", label: "Appointment?", vn: "Lịch hẹn?", answer: "yes", display: "Yes, at 2 o'clock",
+              question: 'Ask: "Do you have an appointment?"', placeholder: 'Do you have an appointment?' },
+            { icon: "👫", label: "Came with?", vn: "Đến cùng?", answer: "sister", display: "Her sister",
+              question: 'Ask: "Did you come with anyone today?"', placeholder: 'Did you come with anyone today?' },
+            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "pedicure", display: "Pedicure",
+              question: 'Ask: "What service would you like?"', placeholder: 'What service would you like?' },
+            { icon: "🔲", label: "Nail Shape", vn: "Hình dáng móng", answer: "square", display: "Square",
+              question: 'Ask: "What nail shape would you like?"', placeholder: 'What nail shape would you like?' },
+            { icon: "🎨", label: "Color", vn: "Màu", answer: "red", display: "Red",
+              question: 'Ask: "What color would you like?"', placeholder: 'What color would you like?' },
+            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "coffee", display: "Coffee",
+              question: 'Ask: "Would you like something to drink?"', placeholder: 'Would you like something to drink?' }
         ]
     },
     {
         name: "Customer 3", avatar: "👱‍♀️", desc: "Chatty client — loves family talk!",
         fields: [
-            { icon: "👤", label: "Name", vn: "Tên", answer: "emily", display: "Emily" },
-            { icon: "💍", label: "Married?", vn: "Kết hôn?", answer: "yes", display: "Yes" },
-            { icon: "👨", label: "Husband's name", vn: "Tên chồng", answer: "david", display: "David" },
-            { icon: "👶", label: "Children?", vn: "Có con?", answer: "2", display: "Yes, 2 kids" },
-            { icon: "🏫", label: "Kids in school?", vn: "Con đi học?", answer: "yes", display: "Yes — primary school" },
-            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "gel", display: "Gel nails" },
-            { icon: "🎨", label: "Color", vn: "Màu", answer: "french", display: "French tips" },
-            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "tea", display: "Tea" }
+            { icon: "👤", label: "Name", vn: "Tên", answer: "emily", display: "Emily",
+              question: 'Ask: "What is your name?"', placeholder: 'What is your name?' },
+            { icon: "💍", label: "Married?", vn: "Kết hôn?", answer: "yes", display: "Yes",
+              question: 'Ask: "Are you married?"', placeholder: 'Are you married?' },
+            { icon: "👨", label: "Husband's name", vn: "Tên chồng", answer: "david", display: "David",
+              question: 'Ask: "What is your husband\'s name?"', placeholder: "What is your husband's name?" },
+            { icon: "👶", label: "Children?", vn: "Có con?", answer: "2", display: "Yes, 2 kids",
+              question: 'Ask: "Do you have children?"', placeholder: 'Do you have children?' },
+            { icon: "🏫", label: "Kids in school?", vn: "Con đi học?", answer: "yes", display: "Yes — primary school",
+              question: 'Ask: "Are they going to school?"', placeholder: 'Are they going to school?' },
+            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "gel", display: "Gel nails",
+              question: 'Ask: "What service would you like?"', placeholder: 'What service would you like?' },
+            { icon: "🎨", label: "Color", vn: "Màu", answer: "french", display: "French tips",
+              question: 'Ask: "What color would you like?"', placeholder: 'What color would you like?' },
+            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "tea", display: "Tea",
+              question: 'Ask: "Would you like something to drink?"', placeholder: 'Would you like something to drink?' }
         ]
     },
     {
         name: "Customer 4", avatar: "👩‍🦱", desc: "Shy new client — mom is a regular!",
         fields: [
-            { icon: "👤", label: "Name", vn: "Tên", answer: "lisa", display: "Lisa" },
-            { icon: "🆕", label: "First time?", vn: "Lần đầu?", answer: "yes", display: "Yes" },
-            { icon: "👩‍👧", label: "Who recommended?", vn: "Ai giới thiệu?", answer: "mother", display: "Her mother" },
-            { icon: "📅", label: "Appointment?", vn: "Lịch hẹn?", answer: "no", display: "No — walk-in" },
-            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "manicure", display: "Manicure" },
-            { icon: "🔲", label: "Nail Shape", vn: "Hình dáng móng", answer: "oval", display: "Oval" },
-            { icon: "🎨", label: "Color", vn: "Màu", answer: "white", display: "White" },
-            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "juice", display: "Orange juice" }
+            { icon: "👤", label: "Name", vn: "Tên", answer: "lisa", display: "Lisa",
+              question: 'Ask: "What is your name?"', placeholder: 'What is your name?' },
+            { icon: "🆕", label: "First time?", vn: "Lần đầu?", answer: "yes", display: "Yes",
+              question: 'Ask: "Is this your first time here?"', placeholder: 'Is this your first time here?' },
+            { icon: "👩‍👧", label: "Who recommended?", vn: "Ai giới thiệu?", answer: "mother", display: "Her mother",
+              question: 'Ask: "How did you hear about us?"', placeholder: 'How did you hear about us?' },
+            { icon: "📅", label: "Appointment?", vn: "Lịch hẹn?", answer: "no", display: "No — walk-in",
+              question: 'Ask: "Do you have an appointment?"', placeholder: 'Do you have an appointment?' },
+            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "manicure", display: "Manicure",
+              question: 'Ask: "What service would you like?"', placeholder: 'What service would you like?' },
+            { icon: "🔲", label: "Nail Shape", vn: "Hình dáng móng", answer: "oval", display: "Oval",
+              question: 'Ask: "What nail shape would you like?"', placeholder: 'What nail shape would you like?' },
+            { icon: "🎨", label: "Color", vn: "Màu", answer: "white", display: "White",
+              question: 'Ask: "What color would you like?"', placeholder: 'What color would you like?' },
+            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "juice", display: "Orange juice",
+              question: 'Ask: "Would you like something to drink?"', placeholder: 'Would you like something to drink?' }
         ]
     },
     {
         name: "Customer 5", avatar: "🧑‍🦳", desc: "Chatty grandma — big family!",
         fields: [
-            { icon: "👤", label: "Name", vn: "Tên", answer: "margaret", display: "Margaret" },
-            { icon: "🆕", label: "First time?", vn: "Lần đầu?", answer: "no", display: "No — regular" },
-            { icon: "👶", label: "How many children?", vn: "Mấy con?", answer: "3", display: "3 children" },
-            { icon: "👶", label: "How many grandchildren?", vn: "Mấy cháu?", answer: "5", display: "5 grandchildren" },
-            { icon: "💒", label: "Family event?", vn: "Sự kiện gia đình?", answer: "wedding", display: "Daughter's wedding" },
-            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "acrylic", display: "Acrylic nails" },
-            { icon: "🔲", label: "Nail Shape", vn: "Hình dáng móng", answer: "coffin", display: "Coffin" },
-            { icon: "🎨", label: "Color", vn: "Màu", answer: "gold", display: "Gold" },
-            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "wine", display: "Wine" }
+            { icon: "👤", label: "Name", vn: "Tên", answer: "margaret", display: "Margaret",
+              question: 'Ask: "What is your name?"', placeholder: 'What is your name?' },
+            { icon: "🆕", label: "First time?", vn: "Lần đầu?", answer: "no", display: "No — regular",
+              question: 'Ask: "Is this your first time here?"', placeholder: 'Is this your first time here?' },
+            { icon: "👶", label: "How many children?", vn: "Mấy con?", answer: "3", display: "3 children",
+              question: 'Ask: "Do you have children? How many?"', placeholder: 'Do you have children?' },
+            { icon: "👶", label: "How many grandchildren?", vn: "Mấy cháu?", answer: "5", display: "5 grandchildren",
+              question: 'Ask: "Do you have grandchildren?"', placeholder: 'Do you have grandchildren?' },
+            { icon: "💒", label: "Family event?", vn: "Sự kiện gia đình?", answer: "wedding", display: "Daughter's wedding",
+              question: 'Ask: "Any special occasion recently?"', placeholder: 'Any special occasion?' },
+            { icon: "💅", label: "Service", vn: "Dịch vụ", answer: "acrylic", display: "Acrylic nails",
+              question: 'Ask: "What service would you like?"', placeholder: 'What service would you like?' },
+            { icon: "🔲", label: "Nail Shape", vn: "Hình dáng móng", answer: "coffin", display: "Coffin",
+              question: 'Ask: "What nail shape would you like?"', placeholder: 'What nail shape would you like?' },
+            { icon: "🎨", label: "Color", vn: "Màu", answer: "gold", display: "Gold",
+              question: 'Ask: "What color would you like?"', placeholder: 'What color would you like?' },
+            { icon: "🥤", label: "Drink", vn: "Thức uống", answer: "wine", display: "Wine",
+              question: 'Ask: "Would you like something to drink?"', placeholder: 'Would you like something to drink?' }
         ]
     }
 ];
@@ -309,19 +355,16 @@ function render() {
     const st = states[active];
     const c = customers[active];
 
-    // Slot dots
     document.querySelectorAll('.customer-slot').forEach((s, i) => {
         s.classList.remove('done', 'in-progress');
         if (states[i].done) s.classList.add('done');
         else if (states[i].answered.some(a => a)) s.classList.add('in-progress');
     });
 
-    // Scores
     document.getElementById('numCorrect').textContent = st.correct;
     document.getElementById('numWrong').textContent = st.wrong;
     document.getElementById('numStreak').textContent = st.streak;
 
-    // Done?
     if (st.done) {
         document.getElementById('infoCard').style.display = 'none';
         showComplete(); return;
@@ -329,12 +372,10 @@ function render() {
     document.getElementById('infoCard').style.display = 'block';
     document.getElementById('completeScreen').classList.remove('show');
 
-    // Header
     document.getElementById('cardAvatar').textContent = c.avatar;
     document.getElementById('cardTitle').textContent = c.name;
     document.getElementById('cardDesc').textContent = c.desc;
 
-    // Fields
     const container = document.getElementById('fieldsContainer');
     container.innerHTML = '';
 
@@ -352,7 +393,7 @@ function render() {
         } else {
             inputArea = `
                 <input type="text" class="field-input" id="input-${i}"
-                       placeholder="Type what you hear..."
+                       placeholder="Type the answer..."
                        onkeypress="if(event.key==='Enter')checkField(${i})"
                        autocomplete="off">
                 <button class="btn-check" onclick="checkField(${i})">Check</button>
@@ -365,6 +406,7 @@ function render() {
                 <span class="text">${f.label}</span>
                 <span class="vn">${f.vn}</span>
             </div>
+            ${!st.answered[i] ? `<div class="field-question">🗣️ ${f.question}</div>` : ''}
             <div class="field-input-row">${inputArea}</div>
             <div class="field-feedback" id="fb-${i}"></div>
         `;
@@ -389,10 +431,8 @@ function checkField(idx) {
     if (isCorrect) { st.correct++; st.streak++; }
     else { st.wrong++; st.streak = 0; }
 
-    // Re-render to lock field
     render();
 
-    // Show feedback (after render recreates the elements)
     const fb = document.getElementById('fb-' + idx);
     if (fb) {
         if (isCorrect) {
@@ -404,7 +444,6 @@ function checkField(idx) {
         }
     }
 
-    // Check if all done
     if (st.answered.every(a => a)) {
         st.done = true;
         setTimeout(() => {
