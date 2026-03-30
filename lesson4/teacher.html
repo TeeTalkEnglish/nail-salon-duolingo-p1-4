@@ -6,16 +6,13 @@
   <title>Teacher Mode – Lesson 4 | TeeTalk English</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #1a1a2e;
       min-height: 100vh;
       color: white;
-      padding-bottom: 40px;
+      padding-bottom: 60px;
     }
-
-    /* TOP BAR */
     .top-bar {
       background: #0f3460;
       padding: 12px 20px;
@@ -27,14 +24,7 @@
       top: 0;
       z-index: 100;
     }
-
-    .back-btn {
-      color: #64b5f6;
-      text-decoration: none;
-      font-size: 0.9em;
-      font-weight: 700;
-    }
-
+    .back-btn { color: #64b5f6; text-decoration: none; font-size: 0.9em; font-weight: 700; }
     .teacher-badge {
       background: rgba(100,181,246,0.2);
       border: 1px solid #64b5f6;
@@ -47,250 +37,207 @@
       letter-spacing: 1px;
     }
 
-    /* HEADER */
-    .page-header {
+    /* PICKER */
+    .picker-screen { display: block; }
+    .picker-screen.hide { display: none; }
+
+    .picker-header {
       background: linear-gradient(135deg, #0f3460, #1a2a4e);
-      padding: 24px 20px;
+      padding: 28px 20px;
       text-align: center;
       border-bottom: 1px solid #1e2a4a;
     }
+    .picker-header .icon { font-size: 44px; margin-bottom: 10px; }
+    .picker-header h1 { font-size: 1.3em; font-weight: 900; margin-bottom: 4px; }
+    .picker-header h1 span { color: #64b5f6; }
+    .picker-header p { font-size: 0.85em; color: #8892b0; }
 
-    .page-header h1 {
-      font-size: 1.4em;
-      font-weight: 900;
-      margin-bottom: 4px;
-    }
+    .picker-area { max-width: 500px; margin: 24px auto; padding: 0 20px; }
 
-    .page-header h1 span { color: #64b5f6; }
-
-    .page-header p {
-      font-size: 0.85em;
+    .picker-label {
+      font-size: 0.78em;
       color: #8892b0;
-    }
-
-    /* HOW TO USE box */
-    .how-to {
-      background: rgba(100,181,246,0.08);
-      border: 1px solid rgba(100,181,246,0.25);
-      border-radius: 14px;
-      padding: 14px 18px;
-      margin: 20px;
-      font-size: 0.85em;
-      color: #c8d3f5;
-      line-height: 1.6;
-    }
-
-    .how-to strong { color: #64b5f6; }
-
-    .how-to ul {
-      margin-top: 8px;
-      padding-left: 18px;
-    }
-
-    .how-to ul li { margin-bottom: 4px; }
-
-    /* SCRIPT AREA */
-    .script-area {
-      padding: 0 20px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .script-area h2 {
-      font-size: 0.8em;
-      color: #64b5f6;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    /* Each conversation turn */
-    .turn {
       margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .customer-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .customer-pick-card {
+      background: #16213e;
+      border: 2px solid #0f3460;
       border-radius: 16px;
-      overflow: hidden;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .customer-pick-card:hover {
+      border-color: #64b5f6;
+      transform: translateX(4px);
+      box-shadow: 0 0 16px rgba(100,181,246,0.15);
+    }
+    .customer-pick-card.selected {
+      border-color: #64b5f6;
+      background: rgba(100,181,246,0.08);
     }
 
-    /* TEACHER speaks (CLIENT lines) */
-    .turn.teacher-speaks {
-      border: 2px solid #64b5f6;
+    .pick-avatar {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: rgba(100,181,246,0.1);
+      border: 2px solid rgba(100,181,246,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; flex-shrink: 0;
     }
-
-    /* STUDENT speaks (NAIL TECH lines) */
-    .turn.student-speaks {
-      border: 2px solid #ff6b9d;
-    }
-
-    .turn-header {
-      padding: 8px 14px;
+    .pick-info { flex: 1; }
+    .pick-info h3 { font-size: 0.98em; font-weight: 800; color: white; margin-bottom: 5px; }
+    .pick-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .pick-tag {
+      background: rgba(100,181,246,0.1);
+      border: 1px solid rgba(100,181,246,0.2);
+      border-radius: 20px;
+      padding: 2px 9px;
       font-size: 0.72em;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      color: #64b5f6;
+    }
+    .pick-arrow { color: #4a5568; font-size: 1.2em; transition: color 0.2s; }
+    .customer-pick-card:hover .pick-arrow { color: #64b5f6; }
+
+    .start-btn {
+      display: block; width: 100%; margin-top: 20px;
+      padding: 15px;
+      background: linear-gradient(135deg, #64b5f6, #1565c0);
+      color: white; border: none; border-radius: 14px;
+      font-size: 1em; font-weight: 700; cursor: pointer;
+      opacity: 0.4; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .start-btn.ready { opacity: 1; pointer-events: all; }
+
+    /* SECRET CARD SCREEN */
+    .card-screen { display: none; }
+    .card-screen.show { display: block; }
+
+    /* Active bar */
+    .active-customer-bar {
+      background: #0f3460;
+      border-bottom: 1px solid rgba(100,181,246,0.2);
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
-    .turn.teacher-speaks .turn-header {
-      background: rgba(100,181,246,0.15);
-      color: #64b5f6;
+    .active-customer-info { display: flex; align-items: center; gap: 10px; }
+    .active-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(100,181,246,0.1);
+      border: 1px solid rgba(100,181,246,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
     }
-
-    .turn.student-speaks .turn-header {
-      background: rgba(255,107,157,0.15);
-      color: #ff6b9d;
+    .active-name { font-size: 0.88em; font-weight: 700; color: white; }
+    .active-sub  { font-size: 0.72em; color: #8892b0; }
+    .change-btn {
+      font-size: 0.75em; color: #64b5f6;
+      background: rgba(100,181,246,0.1);
+      border: 1px solid rgba(100,181,246,0.3);
+      border-radius: 20px; padding: 4px 12px;
+      cursor: pointer; font-weight: 700;
     }
+    .change-btn:hover { background: rgba(100,181,246,0.2); }
 
-    .turn-header .role-tag {
+    /* HOW TO */
+    .how-to {
+      background: rgba(100,181,246,0.06);
+      border: 1px solid rgba(100,181,246,0.2);
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin: 16px 20px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
       font-size: 0.85em;
-      padding: 2px 10px;
-      border-radius: 10px;
+      color: #c8d3f5;
+      line-height: 1.6;
     }
+    .how-to strong { color: #64b5f6; }
+    .how-to ol { padding-left: 18px; margin-top: 6px; }
+    .how-to ol li { margin-bottom: 4px; }
 
-    .turn.teacher-speaks .turn-header .role-tag {
-      background: rgba(100,181,246,0.2);
-      color: #64b5f6;
+    /* SECRET CARD */
+    .secret-card {
+      background: linear-gradient(135deg, #0f3460, #1a2a4e);
+      border: 2px solid #64b5f6;
+      border-radius: 20px;
+      margin: 0 20px 20px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(100,181,246,0.15);
     }
-
-    .turn.student-speaks .turn-header .role-tag {
-      background: rgba(255,107,157,0.2);
-      color: #ff6b9d;
-    }
-
-    .turn-body {
-      padding: 14px;
-      background: #16213e;
-    }
-
-    /* Teacher line: show the text, tap to reveal */
-    .client-line {
-      font-size: 1.05em;
-      color: white;
-      line-height: 1.5;
-      font-weight: 600;
-    }
-
-    /* Student expected answer — hidden until tap */
-    .expected-wrap {
-      position: relative;
-    }
-
-    .expected-line {
-      font-size: 1.05em;
-      color: #ff6b9d;
-      line-height: 1.5;
-      font-weight: 600;
-      filter: blur(5px);
-      user-select: none;
-      transition: filter 0.4s ease;
-      cursor: pointer;
-    }
-
-    .expected-line.revealed {
-      filter: blur(0);
-      cursor: default;
-    }
-
-    .reveal-hint {
-      font-size: 0.72em;
-      color: #8892b0;
-      margin-top: 6px;
+    .card-top {
+      background: rgba(100,181,246,0.12);
+      padding: 14px 20px;
       display: flex;
       align-items: center;
-      gap: 4px;
-      cursor: pointer;
+      gap: 14px;
+      border-bottom: 1px solid rgba(100,181,246,0.2);
     }
-
-    .reveal-hint.hidden { display: none; }
-
-    /* Tip box below each student turn */
-    .tip-box {
-      background: rgba(255,255,255,0.03);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 8px 14px;
-      font-size: 0.78em;
-      color: #8892b0;
-      line-height: 1.5;
-    }
-
-    .tip-box strong { color: #ffd700; }
-
-    /* Step counter */
-    .step-counter {
-      display: inline-block;
-      background: rgba(100,181,246,0.1);
-      border: 1px solid rgba(100,181,246,0.2);
-      border-radius: 20px;
-      padding: 2px 10px;
-      font-size: 0.72em;
-      color: #64b5f6;
-    }
-
-    /* Reveal ALL button */
-    .reveal-all-btn {
-      display: block;
-      width: 100%;
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 14px;
-      background: transparent;
+    .client-avatar {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(100,181,246,0.15);
       border: 2px solid #64b5f6;
-      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; flex-shrink: 0;
+    }
+    .client-meta h2 { font-size: 1.2em; font-weight: 800; color: white; }
+    .client-meta p  { font-size: 0.8em; color: #8892b0; }
+    .secret-badge {
+      margin-left: auto;
+      background: rgba(100,181,246,0.15);
+      border: 1px solid #64b5f6;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.7em;
       color: #64b5f6;
-      font-size: 0.9em;
       font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
+      text-transform: uppercase;
     }
 
-    .reveal-all-btn:hover {
-      background: rgba(100,181,246,0.1);
+    .info-rows { padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+    .info-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 12px 16px;
     }
+    .info-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .info-question {
+      font-size: 0.72em; color: #8892b0;
+      text-transform: uppercase; letter-spacing: 1px;
+      font-weight: 700; margin-bottom: 3px;
+    }
+    .info-answer { font-size: 1em; color: white; font-weight: 700; }
+    .info-say { margin-top: 6px; font-size: 0.85em; color: #64b5f6; font-style: italic; }
 
-    /* Bottom buttons */
+    /* Bottom btn */
     .bottom-btns {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 20px;
-      max-width: 600px;
-      margin: 0 auto;
+      display: flex; flex-direction: column; gap: 12px;
+      padding: 20px; max-width: 520px; margin: 0 auto;
     }
-
-    .btn-primary {
-      padding: 16px;
-      background: linear-gradient(135deg, #64b5f6, #1565c0);
-      color: white;
-      border: none;
-      border-radius: 14px;
-      font-size: 1em;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      display: block;
-      transition: opacity 0.2s;
-    }
-
-    .btn-primary:hover { opacity: 0.9; }
-
     .btn-secondary {
-      padding: 14px;
-      background: transparent;
-      color: #8892b0;
-      border: 2px solid #1e2a4a;
-      border-radius: 14px;
-      font-size: 0.9em;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      display: block;
-      transition: border-color 0.2s;
+      padding: 13px; background: transparent; color: #8892b0;
+      border: 2px solid #1e2a4a; border-radius: 14px;
+      font-size: 0.9em; font-weight: 700; cursor: pointer;
+      text-decoration: none; text-align: center; display: block;
     }
-
     .btn-secondary:hover { border-color: #8892b0; }
   </style>
 </head>
@@ -302,194 +249,353 @@
     <div class="teacher-badge">👩‍🏫 Teacher Mode</div>
   </div>
 
-  <!-- HEADER -->
-  <div class="page-header">
-    <h1>Role Play <span>Script</span></h1>
-    <p>Lesson 4 · Walk-In Client · Star Nails, Pennsauken NJ</p>
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PICKER SCREEN                              -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="picker-screen" id="picker-screen">
+
+    <div class="picker-header">
+      <div class="icon">👥</div>
+      <h1>Choose a <span>Customer</span></h1>
+      <p>Pick the same customer as your student!</p>
+    </div>
+
+    <div class="picker-area">
+      <div class="picker-label">👇 Pick who you will play today</div>
+
+      <div class="customer-list" id="customer-list">
+        <!-- Rendered by JS -->
+      </div>
+
+      <button class="start-btn" id="start-btn" onclick="startCard()">
+        See My Script →
+      </button>
+    </div>
+
   </div>
 
-  <!-- HOW TO USE -->
-  <div class="how-to">
-    <strong>👩‍🏫 How to use this page:</strong>
-    <ul>
-      <li>
-        <strong>You (Teacher)</strong> read the 
-        <span style="color:#64b5f6">🔵 BLUE lines</span> — you play the CLIENT
-      </li>
-      <li>
-        <strong>Student</strong> says the 
-        <span style="color:#ff6b9d">🩷 PINK lines</span> — they play NAIL TECH
-      </li>
-      <li>Tap the pink lines to <strong>reveal the answer</strong> if student is stuck</li>
-      <li>Give the student time to speak before revealing!</li>
-    </ul>
-  </div>
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECRET CARD SCREEN                         -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="card-screen" id="card-screen">
 
-  <!-- SCRIPT -->
-  <div class="script-area">
-    <h2>📋 Conversation Script</h2>
-
-    <!-- TURN 1: Student speaks first (Nail Tech greets) -->
-    <div class="turn student-speaks">
-      <div class="turn-header">
-        <span>💅 Nail Tech — <strong>STUDENT speaks</strong></span>
-        <span class="role-tag">Step 1</span>
-      </div>
-      <div class="turn-body">
-        <div class="expected-wrap">
-          <div class="expected-line" id="s1" onclick="reveal('s1', 'h1')">
-            "Hello! Do you have an appointment?"
-          </div>
-          <div class="reveal-hint" id="h1" onclick="reveal('s1', 'h1')">
-            👆 Tap to reveal if student is stuck
-          </div>
+    <!-- Active bar -->
+    <div class="active-customer-bar">
+      <div class="active-customer-info">
+        <div class="active-avatar" id="active-avatar"></div>
+        <div>
+          <div class="active-name" id="active-name"></div>
+          <div class="active-sub"  id="active-sub"></div>
         </div>
       </div>
-      <div class="tip-box">
-        💡 <strong>Tip:</strong> Student should greet AND ask about appointment in one sentence.
-        Listen for: <em>"Hello"</em> + <em>"appointment"</em>
-      </div>
+      <button class="change-btn" onclick="changePerson()">
+        ↩ Change
+      </button>
     </div>
 
-    <!-- TURN 2: Teacher speaks (Client responds) -->
-    <div class="turn teacher-speaks">
-      <div class="turn-header">
-        <span>👩 Client Linda — <strong>YOU say this</strong></span>
-        <span class="role-tag">Step 2</span>
-      </div>
-      <div class="turn-body">
-        <div class="client-line">
-          "No, I don't. Can I walk in?"
-        </div>
-      </div>
+    <!-- How to use -->
+    <div class="how-to">
+      <strong>👩‍🏫 How to use:</strong>
+      <ol>
+        <li><strong>Don't show</strong> this screen to the student!</li>
+        <li>Wait for the student to <strong>ask you in English</strong></li>
+        <li>Answer using the <strong>blue "Say:" lines</strong> below</li>
+        <li>If they type wrong — <strong>say your line again slowly</strong></li>
+      </ol>
     </div>
 
-    <!-- TURN 3: Student speaks -->
-    <div class="turn student-speaks">
-      <div class="turn-header">
-        <span>💅 Nail Tech — <strong>STUDENT speaks</strong></span>
-        <span class="role-tag">Step 3</span>
-      </div>
-      <div class="turn-body">
-        <div class="expected-wrap">
-          <div class="expected-line" id="s2" onclick="reveal('s2', 'h2')">
-            "Yes, of course! Which service would you like?"
-          </div>
-          <div class="reveal-hint" id="h2" onclick="reveal('s2', 'h2')">
-            👆 Tap to reveal if student is stuck
-          </div>
-        </div>
-      </div>
-      <div class="tip-box">
-        💡 <strong>Tip:</strong> Student should say YES positively then ask about service.
-        Listen for: <em>"of course"</em> + <em>"service"</em>
-      </div>
+    <!-- Secret card -->
+    <div class="secret-card" id="secret-card">
+      <!-- Filled by JS -->
     </div>
 
-    <!-- TURN 4: Teacher speaks -->
-    <div class="turn teacher-speaks">
-      <div class="turn-header">
-        <span>👩 Client Linda — <strong>YOU say this</strong></span>
-        <span class="role-tag">Step 4</span>
-      </div>
-      <div class="turn-body">
-        <div class="client-line">
-          "What do you have?"
-        </div>
-      </div>
+    <!-- Bottom -->
+    <div class="bottom-btns">
+      <a href="student.html" class="btn-secondary">
+        👨‍🎓 Switch to Student Mode
+      </a>
     </div>
 
-    <!-- TURN 5: Student speaks (longest line!) -->
-    <div class="turn student-speaks">
-      <div class="turn-header">
-        <span>💅 Nail Tech — <strong>STUDENT speaks</strong></span>
-        <span class="role-tag">Step 5</span>
-      </div>
-      <div class="turn-body">
-        <div class="expected-wrap">
-          <div class="expected-line" id="s3" onclick="reveal('s3', 'h3')">
-            "We have a basic pedicure for 30 minutes, a spa pedicure for 40 minutes, and a deluxe pedicure for 50 minutes."
-          </div>
-          <div class="reveal-hint" id="h3" onclick="reveal('s3', 'h3')">
-            👆 Tap to reveal if student is stuck
-          </div>
-        </div>
-      </div>
-      <div class="tip-box">
-        💡 <strong>Tip:</strong> This is the hardest line! Student must name all 3 services with times.
-        If struggling, let them use notes first. 
-        Key words: <em>"basic / spa / deluxe"</em> + <em>"30 / 40 / 50 minutes"</em>
-      </div>
-    </div>
-
-    <!-- TURN 6: Teacher speaks -->
-    <div class="turn teacher-speaks">
-      <div class="turn-header">
-        <span>👩 Client Linda — <strong>YOU say this</strong></span>
-        <span class="role-tag">Step 6</span>
-      </div>
-      <div class="turn-body">
-        <div class="client-line">
-          "I would like the spa pedicure, please."
-        </div>
-      </div>
-    </div>
-
-    <!-- TURN 7: Student speaks -->
-    <div class="turn student-speaks">
-      <div class="turn-header">
-        <span>💅 Nail Tech — <strong>STUDENT speaks</strong></span>
-        <span class="role-tag">Step 7</span>
-      </div>
-      <div class="turn-body">
-        <div class="expected-wrap">
-          <div class="expected-line" id="s4" onclick="reveal('s4', 'h4')">
-            "Perfect! Please go to chair number 2."
-          </div>
-          <div class="reveal-hint" id="h4" onclick="reveal('s4', 'h4')">
-            👆 Tap to reveal if student is stuck
-          </div>
-        </div>
-      </div>
-      <div class="tip-box">
-        💡 <strong>Tip:</strong> Student should confirm the choice positively then direct to a chair.
-        Listen for: <em>"Perfect"</em> + <em>"chair number"</em>
-      </div>
-    </div>
-
-  </div><!-- end script-area -->
-
-  <!-- REVEAL ALL -->
-  <button class="reveal-all-btn" onclick="revealAll()">
-    👁️ Reveal All Answers
-  </button>
-
-  <!-- BOTTOM BUTTONS -->
-  <div class="bottom-btns">
-    <a href="student.html" class="btn-primary">
-      👨‍🎓 Switch to Student Mode
-    </a>
-    <a href="index.html" class="btn-secondary">
-      ← Back to Lesson 4
-    </a>
   </div>
 
 <script>
-  function reveal(lineId, hintId) {
-    const line = document.getElementById(lineId);
-    const hint = document.getElementById(hintId);
-    line.classList.add('revealed');
-    hint.classList.add('hidden');
+  const customers = [
+    {
+      id: 0, avatar: "👩", name: "Linda Johnson",
+      tag1: "Cherry Hill, NJ", tag2: "First visit",
+      fields: {
+        1: {
+          // ✅ helps ask the question, not reveal answer
+          hints: ["Hello!", "Do you have...?", "appointment?"],
+          accepted: ["no","no i dont","no i don't","no appointment",
+                     "no i don't have one","no i dont have one"],
+          display: "No appointment", summary: "No appointment"
+        },
+        2: {
+          // ✅ menu options are OK — nail tech already knows the menu
+          hints: ["Which service...?", "would you like", "basic / spa / deluxe"],
+          accepted: ["spa","spa pedicure","the spa pedicure",
+                     "i would like spa","i want spa","spa please"],
+          display: "Spa pedicure", summary: "Spa Pedicure"
+        },
+        3: {
+          // ✅ helps ask for name, no name given
+          hints: ["May I have...?", "your name?", "for our records"],
+          accepted: ["linda","my name is linda","im linda","i'm linda","linda johnson"],
+          display: "Linda", summary: "Linda"
+        },
+        4: {
+          // ✅ NO location name in hints
+          hints: ["Did you drive far?", "Where are you coming from?", "today?"],
+          accepted: ["cherry hill","from cherry hill","i came from cherry hill",
+                     "cherry hill nj","drove from cherry hill"],
+          display: "Cherry Hill, NJ", summary: "Cherry Hill, NJ"
+        }
+      }
+    },
+    {
+      id: 1, avatar: "👩‍🦱", name: "Maria Rodriguez",
+      tag1: "Camden, NJ", tag2: "Has a dog 🐶",
+      fields: {
+        1: {
+          hints: ["Hello!", "Do you have...?", "appointment?"],
+          accepted: ["yes","yes i do","i have an appointment","yes i have","yes at 2"],
+          display: "Yes – 2pm", summary: "Has appointment – 2pm"
+        },
+        2: {
+          hints: ["Which service...?", "would you like", "manicure / pedicure?"],
+          accepted: ["gel","gel nails","gel manicure","i want gel",
+                     "i would like gel","gel please"],
+          display: "Gel manicure", summary: "Gel Manicure"
+        },
+        3: {
+          // ✅ no name given
+          hints: ["May I have...?", "your name?", "please"],
+          accepted: ["maria","my name is maria","im maria","i'm maria","maria rodriguez"],
+          display: "Maria", summary: "Maria"
+        },
+        4: {
+          // ✅ NO "Camden" in hints
+          hints: ["Did you drive far?", "Where are you coming from?", "today?"],
+          accepted: ["camden","from camden","i came from camden",
+                     "camden nj","i live in camden"],
+          display: "Camden, NJ", summary: "Camden, NJ"
+        }
+      }
+    },
+    {
+      id: 2, avatar: "👩‍⚕️", name: "Ashley Kim",
+      tag1: "Cooper Hospital", tag2: "Nurse 🏥",
+      fields: {
+        1: {
+          hints: ["Hello!", "Do you have...?", "appointment?"],
+          accepted: ["no","no i dont","no i don't","no appointment",
+                     "i dont have one","walk in","just walked in"],
+          display: "No appointment", summary: "No appointment"
+        },
+        2: {
+          hints: ["Which service...?", "would you like", "manicure / pedicure?"],
+          accepted: ["basic pedicure","basic","pedicure","just basic",
+                     "i want basic","i would like basic pedicure","basic ped"],
+          display: "Basic pedicure", summary: "Basic Pedicure"
+        },
+        3: {
+          // ✅ no name given
+          hints: ["May I have...?", "your name?", "please"],
+          accepted: ["ashley","my name is ashley","im ashley","i'm ashley","ashley kim"],
+          display: "Ashley", summary: "Ashley"
+        },
+        4: {
+          // ✅ NO "Cooper Hospital" in hints
+          hints: ["Did you drive far?", "Where are you coming from?", "today?"],
+          accepted: ["cooper hospital","hospital","cooper",
+                     "from the hospital","i work at cooper","came from hospital"],
+          display: "Cooper Hospital", summary: "Cooper Hospital, Camden"
+        }
+      }
+    },
+    {
+      id: 3, avatar: "👴", name: "Tom Williams",
+      tag1: "Moorestown, NJ", tag2: "First time 😅",
+      fields: {
+        1: {
+          hints: ["Hello!", "Do you have...?", "appointment?"],
+          accepted: ["no","no i dont","no i don't","first time","no appointment",
+                     "i don't have one","i dont have one"],
+          display: "No appointment", summary: "No appointment"
+        },
+        2: {
+          hints: ["Which service...?", "would you like", "manicure / pedicure?"],
+          accepted: ["manicure","basic manicure","just a manicure","i want a manicure",
+                     "i would like a manicure","manicure please"],
+          display: "Basic manicure", summary: "Basic Manicure"
+        },
+        3: {
+          // ✅ no name given
+          hints: ["May I have...?", "your name?", "please"],
+          accepted: ["tom","my name is tom","im tom","i'm tom","tom williams"],
+          display: "Tom", summary: "Tom"
+        },
+        4: {
+          // ✅ NO "Moorestown" in hints
+          hints: ["Did you drive far?", "Where are you coming from?", "today?"],
+          accepted: ["moorestown","from moorestown","i came from moorestown",
+                     "moorestown nj","i live in moorestown"],
+          display: "Moorestown, NJ", summary: "Moorestown, NJ"
+        }
+      }
+    },
+    {
+      id: 4, avatar: "👩‍🦳", name: "Diane Carter",
+      tag1: "Haddonfield, NJ", tag2: "Regular ⭐",
+      fields: {
+        1: {
+          hints: ["Hello!", "Do you have...?", "appointment?"],
+          accepted: ["yes","yes i do","i have an appointment","yes i have",
+                     "yes at 3","yes appointment"],
+          display: "Yes – 3pm", summary: "Has appointment – 3pm"
+        },
+        2: {
+          hints: ["Which service...?", "would you like", "basic / spa / deluxe?"],
+          accepted: ["deluxe","deluxe pedicure","the deluxe","i want deluxe",
+                     "i would like deluxe","deluxe please"],
+          display: "Deluxe pedicure", summary: "Deluxe Pedicure"
+        },
+        3: {
+          // ✅ no name given
+          hints: ["May I have...?", "your name?", "please"],
+          accepted: ["diane","my name is diane","im diane","i'm diane","diane carter"],
+          display: "Diane", summary: "Diane"
+        },
+        4: {
+          // ✅ NO "Haddonfield" in hints
+          hints: ["Did you drive far?", "Where are you coming from?", "today?"],
+          accepted: ["haddonfield","from haddonfield","i came from haddonfield",
+                     "haddonfield nj","i live in haddonfield"],
+          display: "Haddonfield, NJ", summary: "Haddonfield, NJ"
+        }
+      }
+    }
+  ];
+  let selectedId = null;
+
+  // ── RENDER PICKER ──────────────────────────────────────────────────
+  function renderPicker() {
+    const list = document.getElementById('customer-list');
+    list.innerHTML = '';
+    customers.forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'customer-pick-card';
+      card.id = `pick-${c.id}`;
+      card.onclick = () => selectCustomer(c.id);
+      card.innerHTML = `
+        <div class="pick-avatar">${c.avatar}</div>
+        <div class="pick-info">
+          <h3>${c.name}</h3>
+          <div class="pick-tags">
+            <span class="pick-tag">📍 ${c.tag1}</span>
+            <span class="pick-tag">${c.tag2}</span>
+          </div>
+        </div>
+        <div class="pick-arrow">›</div>
+      `;
+      list.appendChild(card);
+    });
   }
 
-  function revealAll() {
-    ['s1','s2','s3','s4'].forEach(id => {
-      document.getElementById(id).classList.add('revealed');
+  // ── SELECT ─────────────────────────────────────────────────────────
+  function selectCustomer(id) {
+    selectedId = id;
+    customers.forEach(c => {
+      document.getElementById(`pick-${c.id}`)
+        .classList.toggle('selected', c.id === id);
     });
-    ['h1','h2','h3','h4'].forEach(id => {
-      document.getElementById(id).classList.add('hidden');
-    });
+    document.getElementById('start-btn').classList.add('ready');
   }
+
+  // ── START ──────────────────────────────────────────────────────────
+   function startCard() {
+    if (selectedId === null) return;
+    const c = customers[selectedId];
+
+    // Switch screens
+    document.getElementById('picker-screen').classList.add('hide');
+    document.getElementById('card-screen').classList.add('show');
+
+    // Update mini bar
+    document.getElementById('active-avatar').textContent = c.avatar;
+    document.getElementById('active-name').textContent   = c.name;
+    document.getElementById('active-sub').textContent    = `📍 ${c.tag1} · ${c.tag2}`;
+
+    // ── Render secret card ──
+    const card = document.getElementById('secret-card');
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="client-avatar">${c.avatar}</div>
+        <div class="client-meta">
+          <h2>${c.name}</h2>
+          <p>${c.tag1} · ${c.tag2}</p>
+        </div>
+        <div class="secret-badge">🔒 Secret Info</div>
+      </div>
+      <div class="info-rows">
+        <div class="info-row">
+          <div class="info-icon">📅</div>
+          <div class="info-content">
+            <div class="info-question">Do you have an appointment?</div>
+            <div class="info-answer">${c.fields[1].display}</div>
+            <div class="info-say">Say: "${c.fields[1].say}"</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">💅</div>
+          <div class="info-content">
+            <div class="info-question">Which service do you want?</div>
+            <div class="info-answer">${c.fields[2].display}</div>
+            <div class="info-say">Say: "${c.fields[2].say}"</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🪪</div>
+          <div class="info-content">
+            <div class="info-question">What is your name?</div>
+            <div class="info-answer">${c.fields[3].display}</div>
+            <div class="info-say">Say: "${c.fields[3].say}"</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <div class="info-question">Where are you coming from?</div>
+            <div class="info-answer">${c.fields[4].display}</div>
+            <div class="info-say">Say: "${c.fields[4].say}"</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // ── CHANGE PERSON ──────────────────────────────────────────────────
+  function changePerson() {
+    selectedId = null;
+
+    // Reset picker highlights
+    customers.forEach(c => {
+      document.getElementById(`pick-${c.id}`)
+        .classList.remove('selected');
+    });
+    document.getElementById('start-btn').classList.remove('ready');
+
+    // Switch screens
+    document.getElementById('card-screen').classList.remove('show');
+    document.getElementById('picker-screen').classList.remove('hide');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────
+  renderPicker();
 </script>
 </body>
 </html>

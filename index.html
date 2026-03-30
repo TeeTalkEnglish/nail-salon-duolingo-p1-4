@@ -1,82 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💅 Nail Salon English — Cửa 3</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #ffe0f0, #fff0f5);
-            min-height: 100vh;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            padding: 20px;
-        }
-        .container { text-align: center; max-width: 600px; width: 100%; }
-        h1 { font-size: 2rem; color: #d63384; margin-bottom: 5px; }
-        .subtitle { font-size: 1rem; color: #888; margin-bottom: 8px; }
-        .topic-badge {
-            display: inline-block; background: linear-gradient(135deg, #ff69b4, #ff1493);
-            color: white; padding: 6px 18px; border-radius: 20px;
-            font-size: 0.85rem; font-weight: bold; margin-bottom: 35px;
-        }
-        .emoji-header { font-size: 4rem; margin-bottom: 20px; }
-        .role-cards { display: flex; flex-direction: column; gap: 20px; align-items: center; }
-        .role-card {
-            display: flex; align-items: center; gap: 20px;
-            background: white; border-radius: 20px; padding: 25px 30px;
-            width: 100%; max-width: 450px; text-decoration: none; color: inherit;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 3px solid transparent;
-        }
-        .role-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
-        .role-card.student { border-color: #ff69b4; }
-        .role-card.student:hover { background: linear-gradient(135deg, #fff0f5, #ffe0f0); }
-        .role-card.teacher { border-color: #6f42c1; }
-        .role-card.teacher:hover { background: linear-gradient(135deg, #f3e8ff, #ede0ff); }
-        .role-icon { font-size: 3.5rem; flex-shrink: 0; }
-        .role-info { text-align: left; }
-        .role-info h2 { font-size: 1.4rem; margin-bottom: 5px; }
-        .role-card.student .role-info h2 { color: #d63384; }
-        .role-card.teacher .role-info h2 { color: #6f42c1; }
-        .role-info p { font-size: 0.95rem; color: #777; line-height: 1.4; }
-        .role-badge {
-            display: inline-block; font-size: 0.75rem; font-weight: bold;
-            padding: 3px 10px; border-radius: 20px; margin-bottom: 6px; color: white;
-        }
-        .role-card.student .role-badge { background: #ff69b4; }
-        .role-card.teacher .role-badge { background: #6f42c1; }
-        .footer { margin-top: 50px; font-size: 0.85rem; color: #aaa; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nail Salon English – Learn with Linh</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1a1a2e;
+      min-height: 100vh;
+      color: white;
+    }
+
+    /* ── TOP HEADER ── */
+    .top-bar {
+      background: #16213e;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #ff6b9d;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .top-bar .logo {
+      font-size: 1.2em;
+      font-weight: 800;
+      color: #ff6b9d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .top-bar .stats {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .stat-chip {
+      background: #0f3460;
+      border: 1px solid #ff6b9d;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.85em;
+      font-weight: 700;
+      color: #ff6b9d;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      background: linear-gradient(135deg, #16213e 0%, #0f3460 50%, #533483 100%);
+      padding: 40px 20px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,107,157,0.08) 0%, transparent 60%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .hero .character-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .hero .avatar-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff6b9d, #c44569);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+      margin: 0 auto 4px;
+      border: 4px solid #ff6b9d;
+      box-shadow: 0 0 30px rgba(255,107,157,0.5);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero h1 {
+      font-size: 2em;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 6px;
+      text-shadow: 0 0 20px rgba(255,107,157,0.5);
+    }
+
+    .hero h1 span {
+      color: #ff6b9d;
+    }
+
+    .hero .subtitle {
+      color: #a8b2d8;
+      font-size: 0.95em;
+      margin-bottom: 20px;
+    }
+
+    /* Story card */
+    .story-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,107,157,0.3);
+      border-radius: 16px;
+      padding: 16px 20px;
+      max-width: 480px;
+      margin: 0 auto 20px;
+      text-align: left;
+      backdrop-filter: blur(10px);
+    }
+
+    .story-card .flag-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.4em;
+      margin-bottom: 8px;
+    }
+
+    .story-card .arrow {
+      font-size: 0.9em;
+      color: #ff6b9d;
+    }
+
+    .story-card p {
+      font-size: 0.88em;
+      color: #c8d3f5;
+      line-height: 1.6;
+    }
+
+    .story-card strong {
+      color: #ff6b9d;
+    }
+
+    /* Progress bar in hero */
+    .progress-hero {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .progress-hero .label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8em;
+      color: #a8b2d8;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      height: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,107,157,0.2);
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #ff6b9d, #c44569);
+      height: 100%;
+      border-radius: 20px;
+      transition: width 0.8s ease;
+      box-shadow: 0 0 10px rgba(255,107,157,0.6);
+    }
+
+    /* ── PATH / LESSON MAP ── */
+    .lessons-container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      font-size: 1.1em;
+      color: #ff6b9d;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* The zigzag path */
+    .lesson-path {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .path-row {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    /* Alternate left/right for zigzag */
+    .path-row:nth-child(odd) { justify-content: flex-start; padding-left: 40px; }
+    .path-row:nth-child(even) { justify-content: flex-end; padding-right: 40px; }
+
+    /* Connector line */
+    .connector {
+      position: absolute;
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, #ff6b9d44, #ff6b9d22);
+      left: 50%;
+      bottom: -40px;
+      z-index: 0;
+    }
+
+    /* Lesson Node */
+    .lesson-node {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #16213e;
+      border: 2px solid #0f3460;
+      border-radius: 20px;
+      padding: 14px 18px;
+      width: 300px;
+      max-width: 90vw;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lesson-node:hover {
+      transform: scale(1.03);
+      border-color: #ff6b9d;
+      box-shadow: 0 0 20px rgba(255,107,157,0.3);
+    }
+
+    /* States */
+    .lesson-node.available {
+      border-color: #ff6b9d;
+      background: linear-gradient(135deg, #1a1a3e, #2d1b4e);
+      box-shadow: 0 0 15px rgba(255,107,157,0.2);
+    }
+
+    .lesson-node.completed {
+      border-color: #4caf50;
+      background: linear-gradient(135deg, #1a2e1a, #1b3a1f);
+    }
+
+    .lesson-node.locked {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Icon bubble */
+    .node-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255,107,157,0.15);
+      border: 2px solid #ff6b9d44;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .lesson-node.completed .node-icon {
+      background: rgba(76,175,80,0.15);
+      border-color: #4caf5088;
+    }
+
+    .lesson-node.locked .node-icon {
+      background: rgba(255,255,255,0.05);
+      border-color: #ffffff22;
+    }
+
+    /* Text */
+    .node-text { flex: 1; }
+
+    .node-text .lesson-num {
+      font-size: 0.7em;
+      color: #ff6b9d;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .lesson-node.completed .node-text .lesson-num { color: #66bb6a; }
+    .lesson-node.locked .node-text .lesson-num { color: #555; }
+
+    .node-text h3 {
+      font-size: 0.95em;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 2px;
+    }
+
+    .node-text p {
+      font-size: 0.75em;
+      color: #8892b0;
+    }
+
+    /* Status icon on right */
+    .node-status {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    /* "Coming Soon" badge */
+    .coming-badge {
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      background: #533483;
+      color: #cba6f7;
+      font-size: 0.65em;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* NEW badge */
+    .new-badge {
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      background: #ff6b9d;
+      color: white;
+      font-size: 0.65em;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Zigzag path line */
+    .path-divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 35px;
+      color: #ff6b9d44;
+      font-size: 1.4em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #4a5568;
+      font-size: 0.8em;
+      border-top: 1px solid #1e2a4a;
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      .path-row:nth-child(odd) { justify-content: center; padding-left: 0; }
+      .path-row:nth-child(even) { justify-content: center; padding-right: 0; }
+      .top-bar .stats { gap: 8px; }
+      .stat-chip { padding: 4px 10px; font-size: 0.75em; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="emoji-header">💅</div>
-        <h1>Nail Salon English</h1>
-        <p class="subtitle">Cửa 3 — Introducing Yourself & Family</p>
-        <div class="topic-badge">🚪 CỬA 3 — Giới Thiệu Bản Thân và Gia Đình</div>
-        <div class="role-cards">
-            <a href="student.html" class="role-card student">
-                <div class="role-icon">💁‍♀️</div>
-                <div class="role-info">
-                    <span class="role-badge">STUDENT</span>
-                    <h2>Nail Technician</h2>
-                    <p>Listen to the customer and type the correct English responses! 💅</p>
-                </div>
-            </a>
-            <a href="teacher.html" class="role-card teacher">
-                <div class="role-icon">👩</div>
-                <div class="role-info">
-                    <span class="role-badge">TEACHER</span>
-                    <h2>Customer</h2>
-                    <p>Read the customer lines to your student and check their answers! 📋</p>
-                </div>
-            </a>
-        </div>
-        <p class="footer">TeeTalk English — Learn English through Real-Life Scenarios</p>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+<div class="logo">💅 NailShop TeeTalk English</div>
+    <div class="stats">
+      <div class="stat-chip">🔥 <span id="streak">0</span></div>
+      <div class="stat-chip">⭐ <span id="xp">0</span> XP</div>
     </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="character-wrap">
+      <div class="avatar-circle">💅</div>
+    </div>
+    <h1>Nail Salon <span>English</span></h1>
+    <p class="subtitle">Real conversations for nail technicians in America</p>
+
+    <div class="story-card">
+      <div class="flag-row">
+        <span>🇻🇳</span>
+        <span class="arrow">──✈️──▶</span>
+        <span>🇺🇸</span>
+        <span style="font-size:0.7em; color:#c8d3f5; margin-left:4px;">Working in America</span>
+      </div>
+      <p>
+        Practice <strong>real English conversations</strong> you use 
+        every day at the nail salon — with customers, coworkers, 
+        and in daily life. 🌸
+      </p>
+    </div>
+
+    <div class="progress-hero">
+      <div class="label-row">
+        <span>Your progress</span>
+        <span id="progress-text">0 / 10 lessons</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON PATH -->
+  <div class="lessons-container">
+    <div class="section-header">
+      <h2>📚 Lesson Path</h2>
+    </div>
+
+    <div class="lesson-path" id="lesson-path">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+
+  <footer>
+    💅 Nail Salon English · Made for Vietnamese nail techs in America 🇺🇸
+  </footer>
+
+<script>
+  // ── LESSON DATA ──────────────────────────────────────────────────
+  const lessons = [
+    {
+      id: 1,
+      icon: "🥤",
+      title: "Offering Drinks",
+      sub: "Greet clients + serve drinks",
+      url: "lesson1/index.html",
+      status: "coming" // change to "available" when ready
+    },
+    {
+      id: 2,
+      icon: "🌍",
+      title: "Where Are You From?",
+      sub: "Small talk about origins",
+      url: "lesson2/index.html",
+      status: "coming"
+    },
+    {
+      id: 3,
+      icon: "💅",
+      title: "Nail Service Intro",
+      sub: "Service menu + directing clients",
+      url: "lesson3/index.html",
+      status: "available", // ← YOUR EXISTING GAME
+      badge: "new"
+    },
+    {
+      id: 4,
+      icon: "👋",
+      title: "Direction to Nail Salon",
+      sub: "Direct Customer to their chair",
+      url: "lesson4/index.html",
+      status: "available",
+      badge: "new"
+    },
+    {
+      id: 5,
+      icon: "🎨",
+      title: "Describing Nails",
+      sub: "Shapes, colors & adjectives",
+      url: "lesson5/index.html",
+      status: "coming"
+    },
+    {
+      id: 6,
+      icon: "🛍️",
+      title: "Ordering Services",
+      sub: "Ordering nail colors & services",
+      url: "lesson6/index.html",
+      status: "coming"
+    },
+    {
+      id: 7,
+      icon: "💼",
+      title: "Talking About Your Job",
+      sub: "Work & career conversations",
+      url: "lesson7/index.html",
+      status: "coming"
+    },
+    {
+      id: 8,
+      icon: "🔁",
+      title: "Service Steps",
+      sub: "Present simple tense practice",
+      url: "lesson8/index.html",
+      status: "coming"
+    },
+    {
+      id: 9,
+      icon: "☀️",
+      title: "Weather & Weekend",
+      sub: "Small talk with clients",
+      url: "lesson9/index.html",
+      status: "coming"
+    },
+    {
+      id: 10,
+      icon: "🐾",
+      title: "Talking About Pets",
+      sub: "Personal life small talk",
+      url: "lesson10/index.html",
+      status: "coming"
+    }
+  ];
+
+  // ── LOAD SAVED PROGRESS ──────────────────────────────────────────
+  function getCompleted() {
+    return JSON.parse(localStorage.getItem('nailCompleted') || '[]');
+  }
+
+  // ── RENDER LESSON PATH ───────────────────────────────────────────
+  function renderPath() {
+    const completed = getCompleted();
+    const path = document.getElementById('lesson-path');
+    path.innerHTML = '';
+
+    lessons.forEach((lesson, index) => {
+      const isDone = completed.includes(lesson.id);
+      const isAvailable = lesson.status === 'available' || isDone;
+      const isLocked = lesson.status === 'coming' && !isDone;
+
+      // Determine final state class
+      let stateClass = 'locked';
+      if (isDone) stateClass = 'completed';
+      else if (isAvailable) stateClass = 'available';
+
+      // Status icon
+      let statusIcon = '🔒';
+      if (isDone) statusIcon = '✅';
+      else if (isAvailable) statusIcon = '▶️';
+
+      // Badge HTML
+      let badgeHTML = '';
+      if (lesson.badge === 'new' && !isDone) {
+        badgeHTML = `<div class="new-badge">NEW</div>`;
+      } else if (isLocked) {
+        badgeHTML = `<div class="coming-badge">Soon</div>`;
+      }
+
+      // Wrap in link or div
+      const tag = isAvailable ? 'a' : 'div';
+      const hrefAttr = isAvailable ? `href="${lesson.url}"` : '';
+
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'path-row';
+      rowDiv.innerHTML = `
+        <${tag} ${hrefAttr} class="lesson-node ${stateClass}">
+          ${badgeHTML}
+          <div class="node-icon">${lesson.icon}</div>
+          <div class="node-text">
+            <div class="lesson-num">Lesson ${lesson.id}</div>
+            <h3>${lesson.title}</h3>
+            <p>${lesson.sub}</p>
+          </div>
+          <div class="node-status">${statusIcon}</div>
+        </${tag}>
+      `;
+
+      path.appendChild(rowDiv);
+
+      // Add path divider between cards
+      if (index < lessons.length - 1) {
+        const divider = document.createElement('div');
+        divider.className = 'path-divider';
+        divider.innerHTML = index % 2 === 0 ? '╰──╮' : '╭──╯';
+        path.appendChild(divider);
+      }
+    });
+  }
+
+  // ── UPDATE STATS ─────────────────────────────────────────────────
+  function updateStats() {
+    const completed = getCompleted();
+    const xp = parseInt(localStorage.getItem('nailXP') || '0');
+    const streak = parseInt(localStorage.getItem('nailStreak') || '0');
+    const count = completed.length;
+
+    document.getElementById('xp').textContent = xp;
+    document.getElementById('streak').textContent = streak;
+    document.getElementById('progress-text').textContent = `${count} / 10 lessons`;
+    document.getElementById('progress-fill').style.width = (count / 10 * 100) + '%';
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────────
+  renderPath();
+  updateStats();
+</script>
 </body>
 </html>
