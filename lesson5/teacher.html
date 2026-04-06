@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher – Lesson 5: Describing Nails</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">
+        <span class="logo-emoji">💅</span>
+        NailShop TeeTalk English
+    </div>
+    <div class="header-badges">
+        <span class="badge badge-role badge-teacher">👩‍🏫 Teacher</span>
+        <span class="badge badge-xp" id="studentXPBadge">⭐ Student: 0 XP</span>
+    </div>
+</header>
+
+<div class="game-container">
+
+    <!-- Back Link -->
+    <a href="index.html" class="back-link">← Back to Lesson 5</a>
+
+    <!-- Connection Status -->
+    <div id="connectionStatus" class="room-code-display" style="border-color:rgba(251,191,36,0.4); background:rgba(251,191,36,0.05);">
+        <label>🔗 Connection Status</label>
+        <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:8px;">
+            <span class="notification-dot" id="statusDot" style="background:var(--yellow);"></span>
+            <span id="statusText" style="color:var(--yellow); font-weight:700; font-size:1rem;">Waiting for student...</span>
+        </div>
+        <p style="color:var(--text-muted); font-size:0.8rem; margin-top:10px;">
+            Make sure the student has <strong>student.html</strong> open in the same browser or device network.
+        </p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+    </div>
+
+    <!-- Round Nav -->
+    <div class="round-nav" id="roundNav"></div>
+
+    <!-- Score Overview -->
+    <div class="score-display">
+        <div class="score-item">
+            <div class="score-value xp" id="scoreXP">0</div>
+            <div class="score-label">Student XP</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value correct" id="scoreCorrect">0</div>
+            <div class="score-label">Correct</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value wrong" id="scoreWrong">0</div>
+            <div class="score-label">Wrong</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value" id="scoreRound" style="color:var(--cyan);">0/8</div>
+            <div class="score-label">Rounds</div>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN TEACHER VIEW ==================== -->
+    <div id="teacherView">
+
+        <!-- Current Round Card -->
+        <div class="scenario-card" id="roundCard">
+            <div class="scenario-header">
+                <h3 id="roundLabel">Waiting for student...</h3>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <span class="points" id="roundPoints">+0 XP</span>
+                    <span id="roundType" class="badge" style="background:rgba(124,58,237,0.2); color:var(--purple); border:1px solid rgba(124,58,237,0.3); font-size:0.7rem;">--</span>
+                </div>
+            </div>
+            <div class="scenario-body">
+
+                <!-- Round Title -->
+                <div class="scenario-title" id="scenarioTitle">Waiting for student to start a round...</div>
+
+                <!-- Teacher Script / What to say -->
+                <div class="teacher-panel" id="teacherScript" style="display:none;">
+                    <h3>📜 Teacher Script</h3>
+                    <div class="prompt-box">
+                        <div class="prompt-label">Say to the student:</div>
+                        <div class="prompt-text" id="scriptText"></div>
+                    </div>
+                </div>
+
+                <!-- Nail Display (VISIBLE to teacher with labels) -->
+                <div id="nailDisplayContainer" class="hidden">
+                    <div class="nail-display" id="nailDisplay"></div>
+                    <div class="nail-label" id="nailLabel" style="opacity:1; color:var(--cyan); font-size:0.85rem;"></div>
+                </div>
+
+                <!-- Answer Key / Expected -->
+                <div id="answerKeySection" style="display:none;">
+                    <div class="keywords-box">
+                        <div class="keywords-label">🎯 Expected Keywords</div>
+                        <div class="keyword-tags" id="expectedKeywords"></div>
+                    </div>
+
+                    <div class="example-box" id="exampleBox" style="display:none;">
+                        <div class="example-label">📝 Example Answer</div>
+                        <div class="example-text" id="exampleAnswer"></div>
+                    </div>
+
+                    <div class="hint-box" id="correctAnswerBox" style="display:none;">
+                        <div class="hint-label">✅ Correct Answer</div>
+                        <div class="hint-text" id="correctAnswerText" style="font-weight:700; font-size:1.1rem;"></div>
+                    </div>
+                </div>
+
+                <!-- ===== WAITING FOR STUDENT ANSWER ===== -->
+                <div id="waitingForAnswer" style="display:none;">
+                    <div style="text-align:center; padding:40px 20px;">
+                        <div class="waiting-spinner"></div>
+                        <h3 style="margin-top:16px;">⏳ Waiting for Student's Answer...</h3>
+                        <p style="color:var(--text-secondary); margin-top:8px;">The student is working on their response.</p>
+                        <p style="color:var(--text-muted); font-size:0.8rem; margin-top:8px;" id="waitingHint"></p>
+                    </div>
+                </div>
+
+                <!-- ===== STUDENT RESPONSE + GRADING ===== -->
+                <div id="gradingSection" style="display:none;">
+                    <div class="teacher-panel">
+                        <h3>📋 Student's Response</h3>
+
+                        <!-- Student's Answer -->
+                        <div class="student-response-box">
+                            <div class="student-response-label">🧑‍🎓 Student wrote:</div>
+                            <div class="student-response-text" id="studentAnswerText"></div>
+                        </div>
+
+                        <!-- Keyword Analysis -->
+                        <div id="keywordAnalysis" style="margin-bottom:16px;">
+                            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                                <span style="font-size:0.85rem; font-weight:700; color:var(--text-primary);">Keyword Check:</span>
+                                <span id="keywordScoreBadge" class="badge" style="font-size:0.75rem;"></span>
+                            </div>
+                            <div id="keywordCheckList"></div>
+                        </div>
+
+                        <!-- Grading Buttons -->
+                        <div class="grading-section">
+                            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:12px;">
+                                How did the student do? Grade their response:
+                            </p>
+                            <div class="grade-buttons" id="gradeButtons">
+                                <button class="grade-btn perfect" onclick="selectGrade('perfect', this)">
+                                    <span class="grade-emoji">🌟</span>
+                                    <span>Perfect!</span>
+                                    <span style="font-size:0.7rem; color:var(--text-muted);">Full XP</span>
+                                </button>
+                                <button class="grade-btn good" onclick="selectGrade('good', this)">
+                                    <span class="grade-emoji">👍</span>
+                                    <span>Good</span>
+                                    <span style="font-size:0.7rem; color:var(--text-muted);">60% XP</span>
+                                </button>
+                                <button class="grade-btn try-again" onclick="selectGrade('try-again', this)">
+                                    <span class="grade-emoji">🔄</span>
+                                    <span>Try Again</span>
+                                    <span style="font-size:0.7rem; color:var(--text-muted);">0 XP</span>
+                                </button>
+                            </div>
+
+                            <!-- Correction / Comment -->
+                            <div class="correction-area" style="margin-top:16px;">
+                                <label>💬 Add a comment or correction (optional):</label>
+                                <textarea class="correction-input" id="correctionInput" 
+                                    placeholder="e.g., Good job! Try to also mention the finish next time."></textarea>
+                            </div>
+
+                            <!-- Model Correction -->
+                            <div class="correction-area" style="margin-top:12px;">
+                                <label>✏️ Write the correct sentence (optional):</label>
+                                <textarea class="correction-input" id="modelCorrection" 
+                                    placeholder="e.g., These are medium oval nails with a glossy red finish."></textarea>
+                            </div>
+
+                            <!-- Submit Grade -->
+                            <div class="action-buttons" style="margin-top:16px;">
+                                <button class="btn btn-primary" id="submitGradeBtn" onclick="submitGrade()" disabled>
+                                    📤 Send Grade to Student
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== AUTO-GRADED RESULT (MC/Sentence) ===== -->
+                <div id="autoGradedSection" style="display:none;">
+                    <div class="teacher-panel">
+                        <h3>📊 Auto-Graded Result</h3>
+                        <div class="student-response-box">
+                            <div class="student-response-label">🧑‍🎓 Student answered:</div>
+                            <div class="student-response-text" id="autoStudentAnswer"></div>
+                        </div>
+                        <div id="autoResultDisplay"></div>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin-top:12px;">
+                            This round was auto-graded. No action needed from you.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Graded Confirmation -->
+                <div id="gradedConfirmation" style="display:none;">
+                    <div style="text-align:center; padding:30px 20px; background:rgba(74,222,128,0.1); 
+                        border:1px solid rgba(74,222,128,0.3); border-radius:var(--radius-sm); margin-top:16px;">
+                        <div style="font-size:2.5rem; margin-bottom:10px;">✅</div>
+                        <h3 style="color:var(--green); margin-bottom:6px;">Grade Sent!</h3>
+                        <p style="color:var(--text-secondary); font-size:0.9rem;" id="gradeConfirmText"></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== VOCABULARY REFERENCE (for teacher) ===== -->
+        <div class="vocab-panel">
+            <div class="vocab-panel-header" onclick="toggleTeacherVocab()">
+                <h3>📖 Vocabulary Reference</h3>
+                <span class="vocab-toggle" id="teacherVocabToggle">▼</span>
+            </div>
+            <div class="vocab-panel-body" id="teacherVocabBody">
+                <div class="vocab-category">
+                    <h4>🔷 Shapes</h4>
+                    <div class="vocab-words">
+                        <span class="vocab-word">round</span>
+                        <span class="vocab-word">oval</span>
+                        <span class="vocab-word">square</span>
+                        <span class="vocab-word">squoval</span>
+                        <span class="vocab-word">almond</span>
+                        <span class="vocab-word">coffin</span>
+                        <span class="vocab-word">stiletto</span>
+                    </div>
+                </div>
+                <div class="vocab-category">
+                    <h4>🎨 Colors</h4>
+                    <div class="vocab-words">
+                        <span class="vocab-word">red</span>
+                        <span class="vocab-word">pink</span>
+                        <span class="vocab-word">nude</span>
+                        <span class="vocab-word">white</span>
+                        <span class="vocab-word">black</span>
+                        <span class="vocab-word">burgundy</span>
+                        <span class="vocab-word">coral</span>
+                        <span class="vocab-word">lavender</span>
+                        <span class="vocab-word">gold</span>
+                        <span class="vocab-word">french tip</span>
+                    </div>
+                </div>
+                <div class="vocab-category">
+                    <h4>✨ Finishes</h4>
+                    <div class="vocab-words">
+                        <span class="vocab-word">glossy</span>
+                        <span class="vocab-word">matte</span>
+                        <span class="vocab-word">glitter</span>
+                        <span class="vocab-word">chrome</span>
+                        <span class="vocab-word">shimmer</span>
+                    </div>
+                </div>
+                <div class="vocab-category">
+                    <h4>📏 Length</h4>
+                    <div class="vocab-words">
+                        <span class="vocab-word">short</span>
+                        <span class="vocab-word">medium</span>
+                        <span class="vocab-word">long</span>
+                        <span class="vocab-word">extra long</span>
+                    </div>
+                </div>
+                <div class="vocab-category">
+                    <h4>🗣️ Sentence Patterns</h4>
+                    <div class="vocab-words">
+                        <span class="vocab-word">These are [length] [shape] nails with a [finish] [color] finish.</span>
+                    </div>
+                    <div class="vocab-words" style="margin-top:6px;">
+                        <span class="vocab-word">I recommend [length] [shape] nails in [color] with a [finish] finish.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ROUND HISTORY ===== -->
+        <div class="vocab-panel" id="historyPanel">
+            <div class="vocab-panel-header" onclick="toggleHistory()">
+                <h3>📊 Round History</h3>
+                <span class="vocab-toggle" id="historyToggle">▼</span>
+            </div>
+            <div class="vocab-panel-body" id="historyBody">
+                <div id="historyList">
+                    <p style="color:var(--text-muted); font-size:0.9rem; text-align:center;">
+                        No rounds completed yet.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== FINAL RESULTS (Teacher View) ==================== -->
+    <div id="teacherResults" class="hidden">
+        <div class="results-page">
+            <div class="results-trophy">📋</div>
+            <h1>Lesson Summary</h1>
+            <p class="subtitle">Teacher's report for Lesson 5: Describing Nails</p>
+
+            <div class="results-grid">
+                <div class="result-stat">
+                    <div class="stat-emoji">⭐</div>
+                    <div class="stat-value text-yellow" id="finalXP">0</div>
+                    <div class="stat-label">Total XP</div>
+                </div>
+                <div class="result-stat">
+                    <div class="stat-emoji">✅</div>
+                    <div class="stat-value text-green" id="finalCorrect">0</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="result-stat">
+                    <div class="stat-emoji">❌</div>
+                    <div class="stat-value text-red" id="finalWrong">0</div>
+                    <div class="stat-label">Wrong</div>
+                </div>
+            </div>
+
+            <div class="results-rounds" id="finalRoundsHistory">
+                <h3>📊 Full Round History</h3>
+            </div>
+
+            <div class="action-buttons" style="justify-content:center;">
+                <a href="index.html" class="btn btn-primary">🏠 Back to Lesson</a>
+                <button class="btn btn-next" onclick="resetTeacher()">🔄 New Session</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ================================================================
+// GAME DATA (same as student)
+// ================================================================
+const rounds = [
+    {
+        type: "describe",
+        title: "🔴 Describe these red nails",
+        task: "Student describes SHAPE, COLOR, and FINISH.",
+        script: "Look at these nails. Can you describe the shape, color, and finish in a full English sentence?",
+        nail: { shape: "oval", color: "red", finish: "glossy", length: "medium" },
+        keywords: ["oval", "red", "glossy"],
+        example: "These are medium oval nails with a glossy red finish.",
+        xp: 15
+    },
+    {
+        type: "mc",
+        title: "🔷 What shape is this?",
+        task: "Student identifies the nail shape.",
+        script: "Look at these nails carefully. What shape are they? Is it round, coffin, oval, or stiletto?",
+        nail: { shape: "coffin", color: "black", finish: "matte", length: "long" },
+        answer: "coffin",
+        explanation: "Coffin nails are long with a flat, squared-off tip.",
+        xp: 10
+    },
+    {
+        type: "describe",
+        title: "💜 Describe the lavender nails",
+        task: "Student describes shape, color, finish AND length.",
+        script: "A client shows you their nails. Describe what you see — include shape, color, finish, and how long they are.",
+        nail: { shape: "almond", color: "lavender", finish: "chrome", length: "long" },
+        keywords: ["almond", "lavender", "chrome", "long"],
+        example: "These are long almond-shaped nails with a chrome lavender finish.",
+        xp: 15
+    },
+    {
+        type: "mc",
+        title: "🎨 What color is this?",
+        task: "Student identifies the nail color.",
+        script: "Look at the color of these nails. Is it red, black, burgundy, or coral?",
+        nail: { shape: "square", color: "burgundy", finish: "glossy", length: "short" },
+        answer: "burgundy",
+        explanation: "Burgundy is a deep dark red, like red wine.",
+        xp: 10
+    },
+    {
+        type: "sentence",
+        title: "🔨 Build the sentence",
+        task: "Student arranges words to form a correct sentence.",
+        script: "I'll give you some words. Can you put them in the correct order to describe these nails?",
+        nail: { shape: "stiletto", color: "gold", finish: "glitter", length: "extra long" },
+        correctSentence: "These are extra long stiletto nails with a gold glitter finish",
+        xp: 15
+    },
+    {
+        type: "describe",
+        title: "💅 Recommend a style",
+        task: "Student recommends a nail style using 'I recommend...'",
+        script: "Pretend I'm a client. Recommend this nail style to me. Start with 'I recommend...' and tell me about the shape, color, finish, and length.",
+        nail: { shape: "squoval", color: "french", finish: "glossy", length: "medium" },
+        keywords: ["recommend", "squoval", "french", "glossy", "medium"],
+        example: "I recommend medium squoval nails with a glossy French tip finish. Very elegant!",
+        xp: 15
+    },
+    {
+        type: "mc",
+        title: "✨ What finish is this?",
+        task: "Student identifies the finish type.",
+        script: "Look at the finish on these nails. Is it glossy, chrome, matte, or glitter?",
+        nail: { shape: "round", color: "pink", finish: "matte", length: "short" },
+        answer: "matte",
+        explanation: "Matte finish has no shine — flat and smooth.",
+        xp: 10
+    },
+    {
+        type: "describe",
+        title: "🌟 Full Description Challenge!",
+        task: "Student gives COMPLETE description with an extra adjective.",
+        script: "Last challenge! Give me a FULL description of these nails — shape, color, finish, length, AND add an extra word like 'beautiful', 'elegant', or 'trendy'!",
+        nail: { shape: "coffin", color: "coral", finish: "chrome", length: "long" },
+        keywords: ["coffin", "coral", "chrome", "long"],
+        example: "These are stunning long coffin-shaped nails in coral with a beautiful chrome finish.",
+        xp: 20
+    }
+];
+
+// ================================================================
+// STATE
+// ================================================================
+let currentTeacherRound = -1;
+let selectedGrade = null;
+let teacherHistory = [];
+let studentXP = 0;
+let studentCorrect = 0;
+let studentWrong = 0;
+let roundsCompleted = 0;
+let isConnected = false;
+let lastStudentTimestamp = 0;
+
+// ================================================================
+// INITIALIZATION
+// ================================================================
+window.addEventListener('DOMContentLoaded', () => {
+    buildRoundNav();
+    // Start polling for student data
+    setInterval(pollStudentData, 500);
+    setInterval(pollStudentAnswer, 500);
+    setInterval(pollStudentResults, 2000);
+});
+
+// ================================================================
+// ROUND NAV
+// ================================================================
+function buildRoundNav() {
+    const nav = document.getElementById('roundNav');
+    nav.innerHTML = '';
+    for (let i = 0; i < rounds.length; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'round-dot';
+        dot.textContent = i + 1;
+        dot.id = 'tdot-' + i;
+        nav.appendChild(dot);
+    }
+}
+
+// ================================================================
+// VOCABULARY & HISTORY TOGGLES
+// ================================================================
+function toggleTeacherVocab() {
+    const body = document.getElementById('teacherVocabBody');
+    const toggle = document.getElementById('teacherVocabToggle');
+    body.classList.toggle('open');
+    toggle.classList.toggle('open');
+}
+
+function toggleHistory() {
+    const body = document.getElementById('historyBody');
+    const toggle = document.getElementById('historyToggle');
+    body.classList.toggle('open');
+    toggle.classList.toggle('open');
+}
+
+// ================================================================
+// POLL: Student Round Data
+// ================================================================
+function pollStudentData() {
+    const raw = localStorage.getItem('student_round');
+    if (!raw) return;
+
+    try {
+        const data = JSON.parse(raw);
+        
+        // Check if this is new data
+        if (data.timestamp === lastStudentTimestamp) return;
+        lastStudentTimestamp = data.timestamp;
+
+        // Update connection status
+        if (!isConnected) {
+            isConnected = true;
+            updateConnectionStatus(true);
+        }
+
+        // Load this round for the teacher
+        if (data.roundIndex !== currentTeacherRound) {
+            loadTeacherRound(data.roundIndex);
+        }
+    } catch (e) {
+        console.error('Error parsing student data:', e);
+    }
+}
+
+// ================================================================
+// POLL: Student Answer (for describe rounds)
+// ================================================================
+function pollStudentAnswer() {
+    const raw = localStorage.getItem('student_answer');
+    if (!raw) return;
+
+    try {
+        const data = JSON.parse(raw);
+        
+        if (data.roundIndex !== currentTeacherRound) return;
+        
+        // Only process describe-type rounds
+        const round = rounds[data.roundIndex];
+        if (round.type !== 'describe') return;
+        
+        // Show grading section
+        showGradingSection(data);
+        
+        // Clear so we don't process again
+        localStorage.removeItem('student_answer');
+    } catch (e) {
+        console.error('Error parsing student answer:', e);
+    }
+}
+
+// ================================================================
+// POLL: Student Final Results
+// ================================================================
+function pollStudentResults() {
+    const raw = localStorage.getItem('student_results');
+    if (!raw) return;
+
+    try {
+        const results = JSON.parse(raw);
+        showTeacherResults(results);
+    } catch (e) {
+        console.error('Error parsing student results:', e);
+    }
+}
+
+// ================================================================
+// CONNECTION STATUS
+// ================================================================
+function updateConnectionStatus(connected) {
+    const dot = document.getElementById('statusDot');
+    const text = document.getElementById('statusText');
+    const container = document.getElementById('connectionStatus');
+
+    if (connected) {
+        dot.style.background = 'var(--green)';
+        text.style.color = 'var(--green)';
+        text.textContent = '✅ Student Connected!';
+        container.style.borderColor = 'rgba(74,222,128,0.4)';
+        container.style.background = 'rgba(74,222,128,0.05)';
+        showToast('🟢 Student has connected!', 'success');
+    } else {
+        dot.style.background = 'var(--yellow)';
+        text.style.color = 'var(--yellow)';
+        text.textContent = 'Waiting for student...';
+        container.style.borderColor = 'rgba(251,191,36,0.4)';
+        container.style.background = 'rgba(251,191,36,0.05)';
+    }
+}
+
+// ================================================================
+// LOAD TEACHER ROUND
+// ================================================================
+function loadTeacherRound(index) {
+    currentTeacherRound = index;
+    const round = rounds[index];
+
+    // Reset sections
+    selectedGrade = null;
+
+    // Update nav
+    document.querySelectorAll('.round-dot').forEach((d, i) => {
+        d.classList.remove('active');
+        if (i === index) d.classList.add('active');
+    });
+
+    // Update header
+    document.getElementById('roundLabel').textContent = `Round ${index + 1} of ${rounds.length}`;
+    document.getElementById('roundPoints').textContent = `+${round.xp} XP`;
+    document.getElementById('progressBar').style.width = `${((index + 1) / rounds.length) * 100}%`;
+    document.getElementById('scoreRound').textContent = `${index + 1}/${rounds.length}`;
+
+    // Round type badge
+    const typeEl = document.getElementById('roundType');
+    const typeLabels = { describe: '✍️ Describe', mc: '🔘 Multiple Choice', sentence: '🔨 Sentence' };
+    typeEl.textContent = typeLabels[round.type] || round.type;
+
+    // Title
+    document.getElementById('scenarioTitle').textContent = round.title;
+
+    // Teacher script
+    const scriptSection = document.getElementById('teacherScript');
+    scriptSection.style.display = 'block';
+    document.getElementById('scriptText').textContent = round.script;
+
+    // Nail display
+    if (round.nail) {
+        buildTeacherNailDisplay(round.nail);
+    }
+
+    // Answer key
+    const answerKeySection = document.getElementById('answerKeySection');
+    answerKeySection.style.display = 'block';
+
+    // Expected keywords
+    const keywordsEl = document.getElementById('expectedKeywords');
+    keywordsEl.innerHTML = '';
+    if (round.keywords) {
+        round.keywords.forEach(kw => {
+            const tag = document.createElement('span');
+            tag.className = 'keyword-tag';
+            tag.textContent = kw;
+            keywordsEl.appendChild(tag);
+        });
+    }
+
+    // Example answer
+    const exampleBox = document.getElementById('exampleBox');
+    if (round.example) {
+        exampleBox.style.display = 'block';
+        document.getElementById('exampleAnswer').textContent = round.example;
+    } else {
+        exampleBox.style.display = 'none';
+    }
+
+    // Correct answer (for MC/sentence)
+    const correctBox = document.getElementById('correctAnswerBox');
+    if (round.type === 'mc') {
+        correctBox.style.display = 'block';
+        document.getElementById('correctAnswerText').textContent = round.answer;
+    } else if (round.type === 'sentence') {
+        correctBox.style.display = 'block';
+        document.getElementById('correctAnswerText').textContent = round.correctSentence;
+    } else {
+        correctBox.style.display = 'none';
+    }
+
+    // Show/hide sections based on type
+    document.getElementById('waitingForAnswer').style.display = 'none';
+    document.getElementById('gradingSection').style.display = 'none';
+    document.getElementById('autoGradedSection').style.display = 'none';
+    document.getElementById('gradedConfirmation').style.display = 'none';
+
+    if (round.type === 'describe') {
+        // Show waiting for answer
+        document.getElementById('waitingForAnswer').style.display = 'block';
+        document.getElementById('waitingHint').textContent = `Expected keywords: ${round.keywords.join(', ')}`;
+    } else {
+        // MC and Sentence are auto-graded — show waiting for auto result
+        document.getElementById('waitingForAnswer').style.display = 'block';
+        document.getElementById('waitingHint').textContent = 'This round is auto-graded. You\'ll see the result shortly.';
+
+        // Start polling for auto-graded results from student
+        pollAutoGradeResult(index);
+    }
+
+    // Show teacher view
+    document.getElementById('teacherView').classList.remove('hidden');
+    document.getElementById('teacherResults').classList.add('hidden');
+
+    showToast(`📢 Round ${index + 1}: ${round.title}`, 'info');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ================================================================
+// POLL: Auto-Grade Results (for MC/Sentence)
+// ================================================================
+function pollAutoGradeResult(roundIndex) {
+    const checkInterval = setInterval(() => {
+        // Check if student has moved to next round or results exist
+        const raw = localStorage.getItem('student_round');
+        if (!raw) return;
+
+        try {
+            const data = JSON.parse(raw);
+            
+            // If student moved past this round
+            if (data.roundIndex > roundIndex) {
+                clearInterval(checkInterval);
+                
+                // Check student results
+                const resultsRaw = localStorage.getItem('student_results');
+                if (resultsRaw) {
+                    const results = JSON.parse(resultsRaw);
+                    // Find this round's result
+                    const roundResult = results.rounds?.find(r => r.round === roundIndex);
+                    if (roundResult) {
+                        showAutoGradedResult(roundResult);
+                    }
+                }
+            }
+        } catch (e) {}
+    }, 500);
+
+    // Also do a direct check for the round dot status
+    const dotCheck = setInterval(() => {
+        // We can infer from the student's next round load
+        const raw = localStorage.getItem('student_round');
+        if (!raw) return;
+        try {
+            const data = JSON.parse(raw);
+            if (data.roundIndex > roundIndex) {
+                clearInterval(dotCheck);
+            }
+        } catch (e) {}
+    }, 1000);
+}
+
+// ================================================================
+// NAIL DISPLAY (Teacher - with labels)
+// ================================================================
+function buildTeacherNailDisplay(nail) {
+    const container = document.getElementById('nailDisplayContainer');
+    const display = document.getElementById('nailDisplay');
+    const label = document.getElementById('nailLabel');
+
+    container.classList.remove('hidden');
+    display.innerHTML = '';
+
+    for (let i = 0; i < 5; i++) {
+        const finger = document.createElement('div');
+        finger.className = 'nail-finger';
+
+        const sizes = [0.75, 0.9, 1, 0.9, 0.7];
+        const heightMultiplier = nail.length === 'short' ? 0.8 : nail.length === 'long' ? 1.3 : nail.length === 'extra long' ? 1.6 : 1;
+
+        const nailEl = document.createElement('div');
+        nailEl.className = `nail nail-shape-${nail.shape} nail-color-${nail.color} nail-finish-${nail.finish}`;
+        nailEl.style.transform = `scale(${sizes[i]})`;
+        nailEl.style.height = `${48 * heightMultiplier}px`;
+
+        const inner = document.createElement('div');
+        inner.className = 'nail-inner';
+        nailEl.appendChild(inner);
+
+        const fingerBase = document.createElement('div');
+        fingerBase.className = 'finger-base';
+
+        finger.appendChild(nailEl);
+        finger.appendChild(fingerBase);
+        display.appendChild(finger);
+    }
+
+    const colorName = nail.color === 'french' ? 'French Tip' : capitalize(nail.color);
+    const shapeName = capitalize(nail.shape);
+    const finishName = capitalize(nail.finish);
+    const lengthName = capitalize(nail.length);
+    label.textContent = `${lengthName} • ${shapeName} • ${colorName} • ${finishName}`;
+    label.style.opacity = '1';
+}
+
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ================================================================
+// SHOW GRADING SECTION (when student submits describe answer)
+// ================================================================
+function showGradingSection(data) {
+    document.getElementById('waitingForAnswer').style.display = 'none';
+    document.getElementById('gradingSection').style.display = 'block';
+    document.getElementById('gradedConfirmation').style.display = 'none';
+    selectedGrade = null;
+
+    // Show student's answer
+    document.getElementById('studentAnswerText').textContent = data.answer;
+
+    // Keyword analysis
+    const round = rounds[data.roundIndex];
+    const keywordCheckList = document.getElementById('keywordCheckList');
+    keywordCheckList.innerHTML = '';
+
+    const foundKeywords = data.foundKeywords || [];
+    const allKeywords = round.keywords || [];
+    const score = data.keywordScore || 0;
+
+    allKeywords.forEach(kw => {
+        const found = foundKeywords.includes(kw);
+        const item = document.createElement('div');
+        item.style.cssText = `
+            display:inline-flex; align-items:center; gap:6px; padding:4px 12px; 
+            margin:3px; border-radius:14px; font-size:0.8rem; font-weight:600;
+            background:${found ? 'rgba(74,222,128,0.15)' : 'rgba(248,113,113,0.15)'};
+            color:${found ? 'var(--green)' : 'var(--red)'};
+            border:1px solid ${found ? 'rgba(74,222,128,0.3)' : 'rgba(248,113,113,0.3)'};
+        `;
+        item.textContent = `${found ? '✅' : '❌'} ${kw}`;
+        keywordCheckList.appendChild(item);
+    });
+
+    // Score badge
+    const scoreBadge = document.getElementById('keywordScoreBadge');
+    const pct = Math.round(score * 100);
+    scoreBadge.textContent = `${foundKeywords.length}/${allKeywords.length} keywords (${pct}%)`;
+    if (score >= 0.75) {
+        scoreBadge.style.cssText = 'background:rgba(74,222,128,0.2); color:var(--green); border:1px solid rgba(74,222,128,0.3);';
+    } else if (score >= 0.5) {
+        scoreBadge.style.cssText = 'background:rgba(251,191,36,0.2); color:var(--yellow); border:1px solid rgba(251,191,36,0.3);';
+    } else {
+        scoreBadge.style.cssText = 'background:rgba(248,113,113,0.2); color:var(--red); border:1px solid rgba(248,113,113,0.3);';
+    }
+
+    // Reset grade buttons
+    document.querySelectorAll('.grade-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('submitGradeBtn').disabled = true;
+    document.getElementById('correctionInput').value = '';
+    document.getElementById('modelCorrection').value = '';
+
+    // Pre-fill model correction with example
+    if (round.example) {
+        document.getElementById('modelCorrection').placeholder = `e.g., ${round.example}`;
+    }
+
+    showToast('📩 Student answer received! Please grade it.', 'info');
+}
+
+// ================================================================
+// GRADE SELECTION
+// ================================================================
+function selectGrade(grade, btn) {
+    selectedGrade = grade;
+    document.querySelectorAll('.grade-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('submitGradeBtn').disabled = false;
+}
+
+// ================================================================
+// SUBMIT GRADE
+// ================================================================
+function submitGrade() {
+    if (!selectedGrade) {
+        showToast('👆 Please select a grade first!', 'error');
+        return;
+    }
+
+    const round = rounds[currentTeacherRound];
+    const comment = document.getElementById('correctionInput').value.trim();
+    const correction = document.getElementById('modelCorrection').value.trim();
+
+    // Send feedback to student via localStorage
+    const feedback = {
+        roundIndex: currentTeacherRound,
+        grade: selectedGrade,
+        comment: comment || null,
+        correction: correction || null,
+        timestamp: Date.now()
+    };
+
+    localStorage.setItem('teacher_feedback', JSON.stringify(feedback));
+
+    // Update teacher UI
+    document.getElementById('gradingSection').style.display = 'none';
+    document.getElementById('gradedConfirmation').style.display = 'block';
+
+    const gradeLabels = {
+        'perfect': '🌟 Perfect! (Full XP)',
+        'good': '👍 Good (60% XP)',
+        'try-again': '🔄 Try Again (0 XP)'
+    };
+
+    document.getElementById('gradeConfirmText').textContent = `You graded: ${gradeLabels[selectedGrade]}${comment ? ' — "' + comment + '"' : ''}`;
+
+    // Track locally
+    let resultPass = selectedGrade !== 'try-again';
+    let earnedXP = 0;
+    if (selectedGrade === 'perfect') earnedXP = round.xp;
+    else if (selectedGrade === 'good') earnedXP = Math.round(round.xp * 0.6);
+
+    if (resultPass) {
+        studentXP += earnedXP;
+        studentCorrect++;
+        document.getElementById('tdot-' + currentTeacherRound).classList.add('completed');
+    } else {
+        studentWrong++;
+        document.getElementById('tdot-' + currentTeacherRound).classList.add('wrong');
+    }
+
+    roundsCompleted++;
+
+    // Add to history
+    const studentAnswer = document.getElementById('studentAnswerText').textContent;
+    teacherHistory.push({
+        round: currentTeacherRound + 1,
+        title: round.title,
+        type: round.type,
+        studentAnswer: studentAnswer,
+        grade: selectedGrade,
+        comment: comment,
+        correction: correction,
+        xpEarned: earnedXP,
+        pass: resultPass
+    });
+
+    updateTeacherScores();
+    updateHistoryList();
+
+    showToast(`✅ Grade sent: ${gradeLabels[selectedGrade]}`, 'success');
+}
+
+// ================================================================
+// SHOW AUTO-GRADED RESULT
+// ================================================================
+function showAutoGradedResult(roundResult) {
+    document.getElementById('waitingForAnswer').style.display = 'none';
+    document.getElementById('autoGradedSection').style.display = 'block';
+
+    document.getElementById('autoStudentAnswer').textContent = roundResult.answer;
+
+    const resultDisplay = document.getElementById('autoResultDisplay');
+    if (roundResult.pass) {
+        resultDisplay.innerHTML = `
+            <div style="padding:16px; background:rgba(74,222,128,0.1); border:1px solid rgba(74,222,128,0.3); 
+                border-radius:var(--radius-sm); margin-top:12px; text-align:center;">
+                <span style="font-size:2rem;">✅</span>
+                <p style="color:var(--green); font-weight:700; margin-top:8px;">Correct!</p>
+            </div>
+        `;
+        document.getElementById('tdot-' + roundResult.round).classList.add('completed');
+        studentCorrect++;
+    } else {
+        resultDisplay.innerHTML = `
+            <div style="padding:16px; background:rgba(248,113,113,0.1); border:1px solid rgba(248,113,113,0.3); 
+                border-radius:var(--radius-sm); margin-top:12px; text-align:center;">
+                <span style="font-size:2rem;">❌</span>
+                <p style="color:var(--red); font-weight:700; margin-top:8px;">Incorrect</p>
+            </div>
+        `;
+        document.getElementById('tdot-' + roundResult.round).classList.add('wrong');
+        studentWrong++;
+    }
+
+    roundsCompleted++;
+
+    teacherHistory.push({
+        round: roundResult.round + 1,
+        title: rounds[roundResult.round].title,
+        type: rounds[roundResult.round].type,
+        studentAnswer: roundResult.answer,
+        grade: roundResult.pass ? 'auto-correct' : 'auto-wrong',
+        comment: '',
+        correction: '',
+        xpEarned: roundResult.pass ? rounds[roundResult.round].xp : 0,
+        pass: roundResult.pass
+    });
+
+    if (roundResult.pass) {
+        studentXP += rounds[roundResult.round].xp;
+    }
+
+    updateTeacherScores();
+    updateHistoryList();
+}
+
+// ================================================================
+// UPDATE SCORES
+// ================================================================
+function updateTeacherScores() {
+    document.getElementById('scoreXP').textContent = studentXP;
+    document.getElementById('scoreCorrect').textContent = studentCorrect;
+    document.getElementById('scoreWrong').textContent = studentWrong;
+    document.getElementById('scoreRound').textContent = `${roundsCompleted}/${rounds.length}`;
+    document.getElementById('studentXPBadge').textContent = `⭐ Student: ${studentXP} XP`;
+}
+
+// ================================================================
+// UPDATE HISTORY LIST
+// ================================================================
+function updateHistoryList() {
+    const list = document.getElementById('historyList');
+    list.innerHTML = '';
+
+    if (teacherHistory.length === 0) {
+        list.innerHTML = '<p style="color:var(--text-muted); font-size:0.9rem; text-align:center;">No rounds completed yet.</p>';
+        return;
+    }
+
+    teacherHistory.forEach(item => {
+        const div = document.createElement('div');
+        div.className = `round-result ${item.pass ? 'pass' : 'fail'}`;
+        div.innerHTML = `
+            <div class="round-num">${item.round}</div>
+            <div class="round-info">
+                <div class="round-question">${item.title} <span style="color:var(--text-muted); font-size:0.7rem;">(${item.type})</span></div>
+                <div class="round-answer" style="font-size:0.8rem;">${truncate(item.studentAnswer, 50)}</div>
+                ${item.comment ? `<div style="color:var(--cyan); font-size:0.75rem; margin-top:2px;">💬 ${item.comment}</div>` : ''}
+                <div style="color:var(--yellow); font-size:0.75rem; margin-top:2px;">+${item.xpEarned} XP</div>
+            </div>
+            <div class="round-status">${item.pass ? '✅' : '❌'}</div>
+        `;
+        list.appendChild(div);
+    });
+}
+
+// ================================================================
+// SHOW TEACHER FINAL RESULTS
+// ================================================================
+function showTeacherResults(results) {
+    document.getElementById('teacherView').classList.add('hidden');
+    document.getElementById('teacherResults').classList.remove('hidden');
+
+    document.getElementById('finalXP').textContent = results.xp || studentXP;
+    document.getElementById('finalCorrect').textContent = results.correct || studentCorrect;
+    document.getElementById('finalWrong').textContent = results.wrong || studentWrong;
+
+    // Build round history
+    const container = document.getElementById('finalRoundsHistory');
+    const h3 = container.querySelector('h3');
+    container.innerHTML = '';
+    container.appendChild(h3);
+
+    // Merge teacher history and student results
+    const allRounds = teacherHistory.length > 0 ? teacherHistory : (results.rounds || []).map(r => ({
+        round: r.round + 1,
+        title: rounds[r.round]?.title || `Round ${r.round + 1}`,
+        studentAnswer: r.answer,
+        pass: r.pass,
+        grade: r.pass ? 'correct' : 'wrong',
+        xpEarned: r.pass ? (rounds[r.round]?.xp || 0) : 0
+    }));
+
+    allRounds.forEach(item => {
+        const div = document.createElement('div');
+        div.className = `round-result ${item.pass ? 'pass' : 'fail'}`;
+        div.innerHTML = `
+            <div class="round-num">${item.round}</div>
+            <div class="round-info">
+                <div class="round-question">${item.title}</div>
+                <div class="round-answer" style="font-size:0.85rem;">${truncate(item.studentAnswer, 70)}</div>
+                ${item.comment ? `<div style="color:var(--cyan); font-size:0.75rem; margin-top:4px;">💬 ${item.comment}</div>` : ''}
+                ${item.correction ? `<div style="color:var(--green); font-size:0.75rem; margin-top:2px;">✏️ ${truncate(item.correction, 60)}</div>` : ''}
+            </div>
+            <div class="round-status">${item.pass ? '✅' : '❌'}</div>
+        `;
+        container.appendChild(div);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ================================================================
+// RESET
+// ================================================================
+function resetTeacher() {
+    currentTeacherRound = -1;
+    selectedGrade = null;
+    teacherHistory = [];
+    studentXP = 0;
+    studentCorrect = 0;
+    studentWrong = 0;
+    roundsCompleted = 0;
+    isConnected = false;
+    lastStudentTimestamp = 0;
+
+    // Clear localStorage
+    localStorage.removeItem('student_round');
+    localStorage.removeItem('student_answer');
+    localStorage.removeItem('teacher_feedback');
+    localStorage.removeItem('student_results');
+
+    // Reset UI
+    updateTeacherScores();
+    updateConnectionStatus(false);
+    buildRoundNav();
+    updateHistoryList();
+
+    document.getElementById('teacherView').classList.remove('hidden');
+    document.getElementById('teacherResults').classList.add('hidden');
+
+    // Reset round card
+    document.getElementById('roundLabel').textContent = 'Waiting for student...';
+    document.getElementById('scenarioTitle').textContent = 'Waiting for student to start a round...';
+    document.getElementById('teacherScript').style.display = 'none';
+    document.getElementById('nailDisplayContainer').classList.add('hidden');
+    document.getElementById('answerKeySection').style.display = 'none';
+    document.getElementById('waitingForAnswer').style.display = 'none';
+    document.getElementById('gradingSection').style.display = 'none';
+    document.getElementById('autoGradedSection').style.display = 'none';
+    document.getElementById('gradedConfirmation').style.display = 'none';
+    document.getElementById('progressBar').style.width = '0%';
+
+    showToast('🔄 Session reset! Waiting for student...', 'info');
+}
+
+// ================================================================
+// UTILITIES
+// ================================================================
+function truncate(str, max) {
+    if (!str) return '';
+    return str.length > max ? str.substring(0, max) + '...' : str;
+}
+
+function showToast(message, type) {
+    const toast = document.getElementById('toast');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+</script>
+
+</body>
+</html>

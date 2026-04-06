@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student – Lesson 5: Describing Nails</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo">
+        <span class="logo-emoji">💅</span>
+        NailShop TeeTalk English
+    </div>
+    <div class="header-badges">
+        <span class="badge badge-role badge-student">🧑‍🎓 Student</span>
+        <span class="badge badge-xp" id="xpBadge">⭐ 0 XP</span>
+    </div>
+</header>
+
+<div class="game-container">
+
+    <!-- Back Link -->
+    <a href="index.html" class="back-link">← Back to Lesson 5</a>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+    </div>
+
+    <!-- Round Nav -->
+    <div class="round-nav" id="roundNav"></div>
+
+    <!-- Score -->
+    <div class="score-display">
+        <div class="score-item">
+            <div class="score-value xp" id="scoreXP">0</div>
+            <div class="score-label">XP Earned</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value correct" id="scoreCorrect">0</div>
+            <div class="score-label">Correct</div>
+        </div>
+        <div class="score-item">
+            <div class="score-value wrong" id="scoreWrong">0</div>
+            <div class="score-label">Wrong</div>
+        </div>
+    </div>
+
+    <!-- Vocab Panel (collapsible) -->
+    <div class="vocab-panel">
+        <div class="vocab-panel-header" onclick="toggleVocab()">
+            <h3>📖 Vocabulary Helper</h3>
+            <span class="vocab-toggle" id="vocabToggle">▼</span>
+        </div>
+        <div class="vocab-panel-body" id="vocabBody">
+            <div class="vocab-category">
+                <h4>🔷 Shapes</h4>
+                <div class="vocab-words" id="vocabShapes">
+                    <span class="vocab-word" onclick="insertWord(this)">round</span>
+                    <span class="vocab-word" onclick="insertWord(this)">oval</span>
+                    <span class="vocab-word" onclick="insertWord(this)">square</span>
+                    <span class="vocab-word" onclick="insertWord(this)">squoval</span>
+                    <span class="vocab-word" onclick="insertWord(this)">almond</span>
+                    <span class="vocab-word" onclick="insertWord(this)">coffin</span>
+                    <span class="vocab-word" onclick="insertWord(this)">stiletto</span>
+                </div>
+            </div>
+            <div class="vocab-category">
+                <h4>🎨 Colors</h4>
+                <div class="vocab-words" id="vocabColors">
+                    <span class="vocab-word" onclick="insertWord(this)">red</span>
+                    <span class="vocab-word" onclick="insertWord(this)">pink</span>
+                    <span class="vocab-word" onclick="insertWord(this)">nude</span>
+                    <span class="vocab-word" onclick="insertWord(this)">white</span>
+                    <span class="vocab-word" onclick="insertWord(this)">black</span>
+                    <span class="vocab-word" onclick="insertWord(this)">burgundy</span>
+                    <span class="vocab-word" onclick="insertWord(this)">coral</span>
+                    <span class="vocab-word" onclick="insertWord(this)">lavender</span>
+                    <span class="vocab-word" onclick="insertWord(this)">gold</span>
+                    <span class="vocab-word" onclick="insertWord(this)">french tip</span>
+                </div>
+            </div>
+            <div class="vocab-category">
+                <h4>✨ Finishes</h4>
+                <div class="vocab-words" id="vocabFinishes">
+                    <span class="vocab-word" onclick="insertWord(this)">glossy</span>
+                    <span class="vocab-word" onclick="insertWord(this)">matte</span>
+                    <span class="vocab-word" onclick="insertWord(this)">glitter</span>
+                    <span class="vocab-word" onclick="insertWord(this)">chrome</span>
+                    <span class="vocab-word" onclick="insertWord(this)">shimmer</span>
+                </div>
+            </div>
+            <div class="vocab-category">
+                <h4>📏 Length</h4>
+                <div class="vocab-words" id="vocabLength">
+                    <span class="vocab-word" onclick="insertWord(this)">short</span>
+                    <span class="vocab-word" onclick="insertWord(this)">medium</span>
+                    <span class="vocab-word" onclick="insertWord(this)">long</span>
+                    <span class="vocab-word" onclick="insertWord(this)">extra long</span>
+                </div>
+            </div>
+            <div class="vocab-category">
+                <h4>💬 Useful Phrases</h4>
+                <div class="vocab-words">
+                    <span class="vocab-word" onclick="insertWord(this)">The nails are</span>
+                    <span class="vocab-word" onclick="insertWord(this)">They have a</span>
+                    <span class="vocab-word" onclick="insertWord(this)">The color is</span>
+                    <span class="vocab-word" onclick="insertWord(this)">The finish is</span>
+                    <span class="vocab-word" onclick="insertWord(this)">with a</span>
+                    <span class="vocab-word" onclick="insertWord(this)">I recommend</span>
+                    <span class="vocab-word" onclick="insertWord(this)">These are</span>
+                    <span class="vocab-word" onclick="insertWord(this)">shaped nails</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== GAME AREA ==================== -->
+    <div id="gameArea">
+        <div class="scenario-card">
+            <div class="scenario-header">
+                <h3 id="roundLabel">Round 1 of 8</h3>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <div class="timer" id="timerDisplay">⏱️ <span id="timerValue">60</span>s</div>
+                    <span class="points" id="roundPoints">+10 XP</span>
+                </div>
+            </div>
+            <div class="scenario-body">
+
+                <!-- Title -->
+                <div class="scenario-title" id="scenarioTitle">Loading...</div>
+
+                <!-- Student Task Instruction -->
+                <div class="student-instruction">
+                    <div class="label">📋 Your Task</div>
+                    <div class="text" id="studentTask">Wait for the round to load...</div>
+                </div>
+
+                <!-- Nail Display (visual) -->
+                <div id="nailDisplayContainer" class="hidden">
+                    <div class="nail-display" id="nailDisplay"></div>
+                    <div class="nail-label" id="nailLabel"></div>
+                </div>
+
+                <!-- ===== DESCRIBE SECTION ===== -->
+                <div id="describeSection" class="hidden">
+                    <div class="hint-box">
+                        <div class="hint-label">💡 Hint</div>
+                        <div class="hint-text" id="hintText"></div>
+                    </div>
+
+                    <div class="keywords-box">
+                        <div class="keywords-label">🎯 Try to include these words</div>
+                        <div class="keyword-tags" id="keywordTags"></div>
+                    </div>
+
+                    <div class="answer-section">
+                        <h3>✍️ Your Answer</h3>
+                        <textarea class="answer-textarea" id="answerText" 
+                            placeholder="Describe the nails in English... (e.g., These are medium oval nails with a glossy red finish.)"></textarea>
+                        <div class="quick-replies">
+                            <div class="quick-replies-label">⚡ Quick Phrases (tap to add)</div>
+                            <div class="quick-reply-btns" id="quickReplies"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== MULTIPLE CHOICE SECTION ===== -->
+                <div id="mcSection" class="hidden">
+                    <div class="options-grid" id="mcOptions"></div>
+                </div>
+
+                <!-- ===== SENTENCE BUILDER SECTION ===== -->
+                <div id="sentenceSection" class="hidden">
+                    <div class="sentence-builder">
+                        <p style="color:var(--text-muted); font-size:0.8rem; margin-bottom:10px;">
+                            Tap words to build the sentence. Tap placed words to remove them.
+                        </p>
+                        <div class="sentence-slots" id="sentenceSlots">
+                            <span class="sentence-slot empty">Tap words below...</span>
+                        </div>
+                        <div class="word-bank" id="wordBank"></div>
+                    </div>
+                </div>
+
+                <!-- ===== MATCHING SECTION ===== -->
+                <div id="matchSection" class="hidden">
+                    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:12px;">
+                        Match each item on the left with the correct one on the right.
+                    </p>
+                    <div class="match-container" id="matchContainer"></div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons" id="actionButtons">
+                    <button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()">
+                        📤 Submit Answer
+                    </button>
+                </div>
+
+                <!-- Feedback Area -->
+                <div id="feedbackArea" class="hidden"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== RESULTS AREA ==================== -->
+    <div id="resultsArea" class="hidden">
+        <div class="results-page">
+            <div class="results-trophy">🏆</div>
+            <h1 id="resultsTitle">Lesson Complete!</h1>
+            <p class="subtitle" id="resultsSubtitle">Here's how you did on Lesson 5: Describing Nails</p>
+
+            <!-- Star Rating -->
+            <div class="star-rating" id="starRating"></div>
+
+            <div class="results-grid">
+                <div class="result-stat">
+                    <div class="stat-emoji">⭐</div>
+                    <div class="stat-value text-yellow" id="finalXP">0</div>
+                    <div class="stat-label">Total XP</div>
+                </div>
+                <div class="result-stat">
+                    <div class="stat-emoji">✅</div>
+                    <div class="stat-value text-green" id="finalCorrect">0</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="result-stat">
+                    <div class="stat-emoji">❌</div>
+                    <div class="stat-value text-red" id="finalWrong">0</div>
+                    <div class="stat-label">Wrong</div>
+                </div>
+            </div>
+
+            <div class="results-rounds" id="resultsRounds">
+                <h3>📊 Round by Round</h3>
+            </div>
+
+            <div class="action-buttons" style="justify-content:center;">
+                <a href="index.html" class="btn btn-primary">🏠 Back to Lesson</a>
+                <button class="btn btn-next" onclick="restartGame()">🔄 Play Again</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Confetti Container -->
+<div class="confetti-container" id="confettiContainer"></div>
+
+<script>
+// ================================================================
+// GAME DATA – 8 ROUNDS for Lesson 5: Describing Nails
+// ================================================================
+const rounds = [
+    // Round 1 – Describe (Easy)
+    {
+        type: "describe",
+        title: "🔴 Describe these red nails",
+        task: "Look at the nails below. Describe the SHAPE, COLOR, and FINISH in a full English sentence.",
+        nail: { shape: "oval", color: "red", finish: "glossy", length: "medium" },
+        hint: "Think about: What shape? What color? Shiny or dull? How long?",
+        keywords: ["oval", "red", "glossy"],
+        quickPhrases: ["These are", "medium", "oval", "nails", "with a", "glossy", "red", "finish"],
+        example: "These are medium oval nails with a glossy red finish.",
+        xp: 15,
+        timeLimit: 90
+    },
+    // Round 2 – Multiple Choice (Shape)
+    {
+        type: "mc",
+        title: "🔷 What shape is this?",
+        task: "Look at the nail shape below and choose the correct name.",
+        nail: { shape: "coffin", color: "black", finish: "matte", length: "long" },
+        options: [
+            { label: "Round", value: "round", emoji: "⭕" },
+            { label: "Coffin", value: "coffin", emoji: "⚰️" },
+            { label: "Oval", value: "oval", emoji: "🥚" },
+            { label: "Stiletto", value: "stiletto", emoji: "🔪" }
+        ],
+        answer: "coffin",
+        explanation: "Coffin nails are long with a flat, squared-off tip – like a coffin shape!",
+        xp: 10,
+        timeLimit: 30
+    },
+    // Round 3 – Describe (Medium)
+    {
+        type: "describe",
+        title: "💜 Describe the lavender nails",
+        task: "A client shows you their nails. Describe shape, color, finish, AND length in a full sentence.",
+        nail: { shape: "almond", color: "lavender", finish: "chrome", length: "long" },
+        hint: "Use the pattern: 'These are [length] [shape] nails with a [finish] [color] finish.'",
+        keywords: ["almond", "lavender", "chrome", "long"],
+        quickPhrases: ["These are", "long", "almond", "shaped", "nails", "with a", "chrome", "lavender", "finish", "beautiful"],
+        example: "These are long almond-shaped nails with a chrome lavender finish.",
+        xp: 15,
+        timeLimit: 90
+    },
+    // Round 4 – Multiple Choice (Color)
+    {
+        type: "mc",
+        title: "🎨 What color is this?",
+        task: "Identify the nail color shown below.",
+        nail: { shape: "square", color: "burgundy", finish: "glossy", length: "short" },
+        options: [
+            { label: "Red", value: "red", emoji: "🔴" },
+            { label: "Black", value: "black", emoji: "⚫" },
+            { label: "Burgundy", value: "burgundy", emoji: "🍷" },
+            { label: "Coral", value: "coral", emoji: "🪸" }
+        ],
+        answer: "burgundy",
+        explanation: "Burgundy is a deep dark red color, like red wine. Darker than regular red!",
+        xp: 10,
+        timeLimit: 30
+    },
+    // Round 5 – Sentence Builder
+    {
+        type: "sentence",
+        title: "🔨 Build the sentence",
+        task: "Arrange the words in the correct order to describe these nails.",
+        nail: { shape: "stiletto", color: "gold", finish: "glitter", length: "extra long" },
+        words: ["These", "are", "extra long", "stiletto", "nails", "with", "a", "gold", "glitter", "finish"],
+        correctSentence: "These are extra long stiletto nails with a gold glitter finish",
+        xp: 15,
+        timeLimit: 60
+    },
+    // Round 6 – Describe (Recommend)
+    {
+        type: "describe",
+        title: "💅 Recommend a style",
+        task: "Recommend this nail style to a client. Use: 'I recommend...' Include shape, color, finish, and length.",
+        nail: { shape: "squoval", color: "french", finish: "glossy", length: "medium" },
+        hint: "Start with 'I recommend...' and include all four details: shape, color, finish, length.",
+        keywords: ["recommend", "squoval", "french", "glossy", "medium"],
+        quickPhrases: ["I recommend", "medium", "squoval", "nails", "with a", "glossy", "French tip", "finish", "elegant", "classic"],
+        example: "I recommend medium squoval nails with a glossy French tip finish. Very elegant!",
+        xp: 15,
+        timeLimit: 90
+    },
+    // Round 7 – Multiple Choice (Finish)
+    {
+        type: "mc",
+        title: "✨ What finish is this?",
+        task: "Look at the nails and identify the finish type.",
+        nail: { shape: "round", color: "pink", finish: "matte", length: "short" },
+        options: [
+            { label: "Glossy", value: "glossy", emoji: "🪞" },
+            { label: "Chrome", value: "chrome", emoji: "🪩" },
+            { label: "Matte", value: "matte", emoji: "🧱" },
+            { label: "Glitter", value: "glitter", emoji: "✨" }
+        ],
+        answer: "matte",
+        explanation: "Matte finish has NO shine – it looks flat and smooth, like soft fabric.",
+        xp: 10,
+        timeLimit: 30
+    },
+    // Round 8 – Describe (Full Challenge)
+    {
+        type: "describe",
+        title: "🌟 Full Description Challenge!",
+        task: "Give a COMPLETE description: shape, color, finish, length, AND one extra adjective (beautiful, elegant, trendy, bold, etc.)",
+        nail: { shape: "coffin", color: "coral", finish: "chrome", length: "long" },
+        hint: "Try: 'These are [adj] [length] [shape] nails in [color] with a [finish] finish.' Add personality!",
+        keywords: ["coffin", "coral", "chrome", "long"],
+        quickPhrases: ["These are", "beautiful", "elegant", "trendy", "bold", "stunning", "long", "coffin", "shaped", "nails", "in", "coral", "with a", "chrome", "finish"],
+        example: "These are stunning long coffin-shaped nails in coral with a beautiful chrome finish.",
+        xp: 20,
+        timeLimit: 120
+    }
+];
+
+// ================================================================
+// STATE
+// ================================================================
+let currentRound = 0;
+let xp = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let roundResults = [];
+let selectedMC = null;
+let sentenceWords = [];
+let waitingForTeacher = false;
+let timerInterval = null;
+let timerSeconds = 0;
+
+// ================================================================
+// INITIALIZATION
+// ================================================================
+window.addEventListener('DOMContentLoaded', () => {
+    buildRoundNav();
+    loadRound(0);
+    setInterval(checkTeacherFeedback, 500);
+});
+
+// ================================================================
+// VOCABULARY PANEL
+// ================================================================
+function toggleVocab() {
+    const body = document.getElementById('vocabBody');
+    const toggle = document.getElementById('vocabToggle');
+    body.classList.toggle('open');
+    toggle.classList.toggle('open');
+}
+
+function insertWord(el) {
+    const ta = document.getElementById('answerText');
+    if (!ta || ta.offsetParent === null) return; // only if textarea visible
+    const word = el.textContent;
+    ta.value += (ta.value && !ta.value.endsWith(' ') ? ' ' : '') + word;
+    ta.focus();
+    
+    // Visual feedback
+    el.style.transform = 'scale(0.9)';
+    el.style.opacity = '0.5';
+    setTimeout(() => {
+        el.style.transform = '';
+        el.style.opacity = '';
+    }, 200);
+}
+
+// ================================================================
+// ROUND NAVIGATION
+// ================================================================
+function buildRoundNav() {
+    const nav = document.getElementById('roundNav');
+    nav.innerHTML = '';
+    for (let i = 0; i < rounds.length; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'round-dot' + (i === 0 ? ' active' : '');
+        dot.textContent = i + 1;
+        dot.id = 'dot-' + i;
+        nav.appendChild(dot);
+    }
+}
+
+// ================================================================
+// LOAD ROUND
+// ================================================================
+function loadRound(index) {
+    if (index >= rounds.length) {
+        showResults();
+        return;
+    }
+
+    currentRound = index;
+    const round = rounds[index];
+    waitingForTeacher = false;
+    selectedMC = null;
+    sentenceWords = [];
+
+    // Stop previous timer
+    stopTimer();
+
+    // Update round nav dots
+    document.querySelectorAll('.round-dot').forEach((d, i) => {
+        d.classList.remove('active');
+        if (i === index) d.classList.add('active');
+    });
+
+    // Update header info
+    document.getElementById('roundLabel').textContent = `Round ${index + 1} of ${rounds.length}`;
+    document.getElementById('roundPoints').textContent = `+${round.xp} XP`;
+    document.getElementById('progressBar').style.width = `${(index / rounds.length) * 100}%`;
+
+    // Update scenario
+    document.getElementById('scenarioTitle').textContent = round.title;
+    document.getElementById('studentTask').textContent = round.task;
+
+    // Hide all type sections
+    document.getElementById('describeSection').classList.add('hidden');
+    document.getElementById('mcSection').classList.add('hidden');
+    document.getElementById('sentenceSection').classList.add('hidden');
+    document.getElementById('matchSection').classList.add('hidden');
+    document.getElementById('nailDisplayContainer').classList.add('hidden');
+    document.getElementById('feedbackArea').classList.add('hidden');
+
+    // Reset action buttons
+    document.getElementById('actionButtons').innerHTML = `
+        <button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()">📤 Submit Answer</button>
+    `;
+
+    // Show game area, hide results
+    document.getElementById('gameArea').classList.remove('hidden');
+    document.getElementById('resultsArea').classList.add('hidden');
+
+    // Store current round for teacher
+    localStorage.setItem('student_round', JSON.stringify({
+        roundIndex: index,
+        round: round,
+        status: 'active',
+        timestamp: Date.now()
+    }));
+    localStorage.removeItem('teacher_feedback');
+
+    // Build nail display
+    if (round.nail) {
+        buildNailDisplay(round.nail);
+    }
+
+    // Start timer
+    startTimer(round.timeLimit || 60);
+
+    // Load type-specific content
+    switch (round.type) {
+        case 'describe': loadDescribeRound(round); break;
+        case 'mc': loadMCRound(round); break;
+        case 'sentence': loadSentenceRound(round); break;
+        case 'match': loadMatchRound(round); break;
+    }
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ================================================================
+// NAIL DISPLAY BUILDER
+// ================================================================
+function buildNailDisplay(nail) {
+    const container = document.getElementById('nailDisplayContainer');
+    const display = document.getElementById('nailDisplay');
+    const label = document.getElementById('nailLabel');
+
+    container.classList.remove('hidden');
+    display.innerHTML = '';
+
+    // Create 5 fingers
+    for (let i = 0; i < 5; i++) {
+        const finger = document.createElement('div');
+        finger.className = 'nail-finger';
+
+        // Nail sizes vary by finger
+        const sizes = [0.75, 0.9, 1, 0.9, 0.7];
+        const heightMultiplier = nail.length === 'short' ? 0.8 : nail.length === 'long' ? 1.3 : nail.length === 'extra long' ? 1.6 : 1;
+
+        const nailEl = document.createElement('div');
+        nailEl.className = `nail nail-shape-${nail.shape} nail-color-${nail.color} nail-finish-${nail.finish}`;
+        nailEl.style.transform = `scale(${sizes[i]})`;
+        nailEl.style.height = `${48 * heightMultiplier}px`;
+
+        const inner = document.createElement('div');
+        inner.className = 'nail-inner';
+        nailEl.appendChild(inner);
+
+        const fingerBase = document.createElement('div');
+        fingerBase.className = 'finger-base';
+
+        finger.appendChild(nailEl);
+        finger.appendChild(fingerBase);
+        display.appendChild(finger);
+    }
+
+    // Label
+    const colorName = nail.color === 'french' ? 'French Tip' : nail.color.charAt(0).toUpperCase() + nail.color.slice(1);
+    const shapeName = nail.shape.charAt(0).toUpperCase() + nail.shape.slice(1);
+    const finishName = nail.finish.charAt(0).toUpperCase() + nail.finish.slice(1);
+    const lengthName = nail.length.charAt(0).toUpperCase() + nail.length.slice(1);
+    label.textContent = `${lengthName} • ${shapeName} • ${colorName} • ${finishName}`;
+    label.style.opacity = '0'; // Hidden for student (they need to describe!)
+}
+
+// ================================================================
+// TIMER
+// ================================================================
+function startTimer(seconds) {
+    timerSeconds = seconds;
+    updateTimerDisplay();
+    
+    const timerEl = document.getElementById('timerDisplay');
+    timerEl.classList.remove('warning');
+
+    timerInterval = setInterval(() => {
+        timerSeconds--;
+        updateTimerDisplay();
+
+        if (timerSeconds <= 10) {
+            timerEl.classList.add('warning');
+        }
+
+        if (timerSeconds <= 0) {
+            stopTimer();
+            handleTimeUp();
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+function updateTimerDisplay() {
+    document.getElementById('timerValue').textContent = timerSeconds;
+}
+
+function handleTimeUp() {
+    showToast("⏰ Time's up!", 'error');
+    const round = rounds[currentRound];
+    
+    if (round.type === 'describe') {
+        // Auto-submit what they have
+        const answer = document.getElementById('answerText').value.trim();
+        if (answer) {
+            submitAnswer();
+        } else {
+            wrongCount++;
+            roundResults.push({
+                round: currentRound,
+                pass: false,
+                answer: "(No answer - time up)",
+                question: round.title
+            });
+            updateScores();
+            document.getElementById('dot-' + currentRound).classList.add('wrong');
+            showFeedback(false, "⏰ Time's up!", `The answer could be: "${round.example}"`);
+            showNextButton();
+        }
+    } else {
+        // For MC / sentence – mark wrong
+        wrongCount++;
+        roundResults.push({
+            round: currentRound,
+            pass: false,
+            answer: "(No answer - time up)",
+            question: round.title
+        });
+        updateScores();
+        document.getElementById('dot-' + currentRound).classList.add('wrong');
+
+        let correctAns = '';
+        if (round.type === 'mc') correctAns = round.answer;
+        if (round.type === 'sentence') correctAns = round.correctSentence;
+        showFeedback(false, "⏰ Time's up!", `The correct answer is: "${correctAns}"`);
+        showNextButton();
+    }
+}
+
+// ================================================================
+// DESCRIBE ROUND
+// ================================================================
+function loadDescribeRound(round) {
+    const section = document.getElementById('describeSection');
+    section.classList.remove('hidden');
+
+    document.getElementById('hintText').textContent = round.hint;
+    document.getElementById('answerText').value = '';
+
+    // Keywords
+    const tagsEl = document.getElementById('keywordTags');
+    tagsEl.innerHTML = '';
+    round.keywords.forEach(kw => {
+        const tag = document.createElement('span');
+        tag.className = 'keyword-tag';
+        tag.textContent = kw;
+        tagsEl.appendChild(tag);
+    });
+
+    // Quick phrases
+    const qr = document.getElementById('quickReplies');
+    qr.innerHTML = '';
+    round.quickPhrases.forEach(phrase => {
+        const btn = document.createElement('button');
+        btn.className = 'quick-reply-btn';
+        btn.textContent = phrase;
+        btn.onclick = () => {
+            const ta = document.getElementById('answerText');
+            ta.value += (ta.value && !ta.value.endsWith(' ') ? ' ' : '') + phrase;
+            ta.focus();
+        };
+        qr.appendChild(btn);
+    });
+}
+
+// ================================================================
+// MULTIPLE CHOICE ROUND
+// ================================================================
+function loadMCRound(round) {
+    const section = document.getElementById('mcSection');
+    section.classList.remove('hidden');
+
+    const grid = document.getElementById('mcOptions');
+    grid.innerHTML = '';
+
+    round.options.forEach(opt => {
+        const card = document.createElement('div');
+        card.className = 'option-card';
+        card.dataset.value = opt.value;
+        card.innerHTML = `
+            <div style="font-size:2rem; margin-bottom:8px;">${opt.emoji || ''}</div>
+            <div class="option-label">${opt.label}</div>
+        `;
+        card.onclick = () => selectMCOption(card, opt.value);
+        grid.appendChild(card);
+    });
+}
+
+function selectMCOption(card, value) {
+    // Don't allow changes after submit
+    if (document.getElementById('feedbackArea').classList.contains('hidden') === false) return;
+
+    document.querySelectorAll('#mcOptions .option-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedMC = value;
+}
+
+// ================================================================
+// SENTENCE BUILDER ROUND
+// ================================================================
+function loadSentenceRound(round) {
+    const section = document.getElementById('sentenceSection');
+    section.classList.remove('hidden');
+
+    sentenceWords = [];
+    updateSentenceDisplay();
+
+    const bank = document.getElementById('wordBank');
+    bank.innerHTML = '';
+
+    // Shuffle words
+    const shuffled = [...round.words].sort(() => Math.random() - 0.5);
+    shuffled.forEach(word => {
+        const chip = document.createElement('span');
+        chip.className = 'word-chip';
+        chip.textContent = word;
+        chip.dataset.word = word;
+        chip.onclick = () => addWordToSentence(chip);
+        bank.appendChild(chip);
+    });
+}
+
+function addWordToSentence(chip) {
+    if (chip.classList.contains('used')) return;
+    chip.classList.add('used');
+    sentenceWords.push(chip.dataset.word);
+    updateSentenceDisplay();
+}
+
+function removeWordFromSentence(index) {
+    const removed = sentenceWords.splice(index, 1)[0];
+    
+    // Un-use the first matching chip
+    const chips = document.querySelectorAll('#wordBank .word-chip');
+    for (const chip of chips) {
+        if (chip.dataset.word === removed && chip.classList.contains('used')) {
+            chip.classList.remove('used');
+            break;
+        }
+    }
+    updateSentenceDisplay();
+}
+
+function updateSentenceDisplay() {
+    const slots = document.getElementById('sentenceSlots');
+    
+    if (sentenceWords.length === 0) {
+        slots.innerHTML = '<span class="sentence-slot empty">Tap words below to build your sentence...</span>';
+        return;
+    }
+
+    slots.innerHTML = '';
+    sentenceWords.forEach((word, i) => {
+        const slot = document.createElement('span');
+        slot.className = 'sentence-slot filled';
+        slot.textContent = word;
+        slot.onclick = () => removeWordFromSentence(i);
+        slots.appendChild(slot);
+    });
+}
+
+// ================================================================
+// SUBMIT ANSWER
+// ================================================================
+function submitAnswer() {
+    const round = rounds[currentRound];
+    let answer = '';
+
+    // Get answer based on type
+    if (round.type === 'describe') {
+        answer = document.getElementById('answerText').value.trim();
+        if (!answer) {
+            showToast('✏️ Please type your answer first!', 'error');
+            return;
+        }
+    } else if (round.type === 'mc') {
+        if (!selectedMC) {
+            showToast('👆 Please select an option!', 'error');
+            return;
+        }
+        answer = selectedMC;
+    } else if (round.type === 'sentence') {
+        if (sentenceWords.length === 0) {
+            showToast('🔨 Please build a sentence first!', 'error');
+            return;
+        }
+        answer = sentenceWords.join(' ');
+    }
+
+    stopTimer();
+
+    // Handle based on type
+    if (round.type === 'mc') {
+        handleMCResult(answer, round);
+    } else if (round.type === 'sentence') {
+        handleSentenceResult(answer, round);
+    } else if (round.type === 'describe') {
+        handleDescribeSubmit(answer, round);
+    }
+}
+
+// ---- MC Result ----
+function handleMCResult(answer, round) {
+    const isCorrect = answer === round.answer;
+    const cards = document.querySelectorAll('#mcOptions .option-card');
+
+    cards.forEach(card => {
+        card.style.pointerEvents = 'none';
+        if (card.dataset.value === round.answer) {
+            card.classList.add('correct');
+        }
+        if (card.dataset.value === answer && !isCorrect) {
+            card.classList.add('incorrect');
+        }
+    });
+
+    if (isCorrect) {
+        xp += round.xp;
+        correctCount++;
+        roundResults.push({ round: currentRound, pass: true, answer: answer, question: round.title });
+        showFeedback(true, `🎉 Correct! +${round.xp} XP`, round.explanation || '');
+        showToast(`✅ Correct! +${round.xp} XP`, 'success');
+        document.getElementById('dot-' + currentRound).classList.add('completed');
+    } else {
+        wrongCount++;
+        roundResults.push({ round: currentRound, pass: false, answer: answer, question: round.title });
+        showFeedback(false, '😕 Not quite!', `The correct answer is "<strong>${round.answer}</strong>". ${round.explanation || ''}`);
+        showToast('❌ Incorrect!', 'error');
+        document.getElementById('dot-' + currentRound).classList.add('wrong');
+    }
+
+    updateScores();
+    showNextButton();
+}
+
+// ---- Sentence Result ----
+function handleSentenceResult(answer, round) {
+    const isCorrect = answer.toLowerCase().trim() === round.correctSentence.toLowerCase().trim();
+
+    if (isCorrect) {
+        xp += round.xp;
+        correctCount++;
+        roundResults.push({ round: currentRound, pass: true, answer: answer, question: round.title });
+        showFeedback(true, `🎉 Perfect sentence! +${round.xp} XP`, '');
+        showToast(`✅ Correct! +${round.xp} XP`, 'success');
+        document.getElementById('dot-' + currentRound).classList.add('completed');
+    } else {
+        wrongCount++;
+        roundResults.push({ round: currentRound, pass: false, answer: answer, question: round.title });
+        showFeedback(false, '😕 Not quite right!', `The correct sentence is: "<strong>${round.correctSentence}</strong>"`);
+        showToast('❌ Incorrect order!', 'error');
+        document.getElementById('dot-' + currentRound).classList.add('wrong');
+    }
+
+    updateScores();
+    showNextButton();
+}
+
+// ---- Describe Submit (send to teacher) ----
+function handleDescribeSubmit(answer, round) {
+    waitingForTeacher = true;
+
+    // Check locally first for keywords
+    const lowerAnswer = answer.toLowerCase();
+    const foundKeywords = round.keywords.filter(kw => lowerAnswer.includes(kw.toLowerCase()));
+    const keywordScore = foundKeywords.length / round.keywords.length;
+
+    // Send to teacher via localStorage
+    localStorage.setItem('student_answer', JSON.stringify({
+        roundIndex: currentRound,
+        answer: answer,
+        keywords: round.keywords,
+        foundKeywords: foundKeywords,
+        keywordScore: keywordScore,
+        timestamp: Date.now()
+    }));
+
+    // Update UI to waiting state
+    document.getElementById('actionButtons').innerHTML = `
+        <div style="text-align:center; padding:30px 20px;">
+            <div class="waiting-spinner"></div>
+            <h3 style="margin-top:16px;">⏳ Waiting for Teacher...</h3>
+            <p style="color:var(--text-secondary); margin-top:8px;">Your answer has been sent. The teacher will grade it.</p>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin-top:12px;">
+                Keywords found: ${foundKeywords.length}/${round.keywords.length} 
+                (${foundKeywords.length > 0 ? foundKeywords.join(', ') : 'none'})
+            </p>
+            <button class="btn btn-outline btn-sm" style="margin-top:16px;" onclick="autoGrade()">
+                🤖 Auto-Grade (no teacher)
+            </button>
+        </div>
+    `;
+
+    showToast('📤 Answer sent to teacher!', 'info');
+
+    // Highlight found keywords
+    const tags = document.querySelectorAll('#keywordTags .keyword-tag');
+    tags.forEach(tag => {
+        if (foundKeywords.includes(tag.textContent.toLowerCase()) || foundKeywords.includes(tag.textContent)) {
+            tag.style.background = 'rgba(74,222,128,0.3)';
+            tag.style.borderColor = 'var(--green)';
+        }
+    });
+}
+
+// ---- Auto-grade (fallback if no teacher) ----
+function autoGrade() {
+    const round = rounds[currentRound];
+    const answer = document.getElementById('answerText').value.trim();
+    const lowerAnswer = answer.toLowerCase();
+    const foundKeywords = round.keywords.filter(kw => lowerAnswer.includes(kw.toLowerCase()));
+    const score = foundKeywords.length / round.keywords.length;
+
+    waitingForTeacher = false;
+
+    if (score >= 0.75) {
+        // Perfect
+        xp += round.xp;
+        correctCount++;
+        roundResults.push({ round: currentRound, pass: true, answer: answer, question: round.title });
+        showFeedback(true, `🎉 Great job! +${round.xp} XP`, `You used ${foundKeywords.length}/${round.keywords.length} key words!`);
+        showToast(`✅ Great! +${round.xp} XP`, 'success');
+        document.getElementById('dot-' + currentRound).classList.add('completed');
+    } else if (score >= 0.5) {
+        // Good
+        const partialXP = Math.round(round.xp * 0.6);
+        xp += partialXP;
+        correctCount++;
+        roundResults.push({ round: currentRound, pass: true, answer: answer, question: round.title });
+        showFeedback(true, `👍 Good effort! +${partialXP} XP`, `You used ${foundKeywords.length}/${round.keywords.length} key words. Try to include: ${round.keywords.filter(k => !foundKeywords.includes(k)).join(', ')}`);
+        showToast(`👍 Good! +${partialXP} XP`, 'success');
+        document.getElementById('dot-' + currentRound).classList.add('completed');
+    } else {
+        // Try again
+        wrongCount++;
+        roundResults.push({ round: currentRound, pass: false, answer: answer, question: round.title });
+        showFeedback(false, '🔄 Needs more detail!', `Try to include: <strong>${round.keywords.join(', ')}</strong><br>Example: "${round.example}"`);
+        showToast('❌ Try to use more vocabulary!', 'error');
+        document.getElementById('dot-' + currentRound).classList.add('wrong');
+    }
+
+    updateScores();
+    showNextButton();
+}
+
+// ================================================================
+// TEACHER FEEDBACK (via localStorage)
+// ================================================================
+function checkTeacherFeedback() {
+    if (!waitingForTeacher) return;
+
+    const raw = localStorage.getItem('teacher_feedback');
+    if (!raw) return;
+
+    try {
+        const feedback = JSON.parse(raw);
+        if (feedback.roundIndex !== currentRound) return;
+
+        waitingForTeacher = false;
+        localStorage.removeItem('teacher_feedback');
+
+        const round = rounds[currentRound];
+        const answer = document.getElementById('answerText').value.trim();
+
+        if (feedback.grade === 'perfect') {
+            xp += round.xp;
+            correctCount++;
+            roundResults.push({ round: currentRound, pass: true, answer: answer, question: round.title });
+            showFeedback(true, `🎉 Perfect! +${round.xp} XP`, feedback.comment || 'The teacher says: Excellent work!');
+            showToast(`✅ Teacher says: Perfect! +${round.xp} XP`, 'success');
+            document.getElementById('dot-' + currentRound).classList.add('completed');
+        } else if (feedback.grade === 'good') {
+            const partialXP = Math.round(round.xp * 0.6);
+            xp += partialXP;
+            correctCount++;
+            roundResults.push({ round: currentRound, pass: true, answer: answer, question: round.title });
+            showFeedback(true, `👍 Good! +${partialXP} XP`, feedback.comment || 'The teacher says: Good effort, but could be better.');
+            showToast(`👍 Teacher says: Good! +${partialXP} XP`, 'success');
+            document.getElementById('dot-' + currentRound).classList.add('completed');
+        } else {
+            wrongCount++;
+            roundResults.push({ round: currentRound, pass: false, answer: answer, question: round.title });
+            showFeedback(false, '🔄 Try Again', feedback.comment || `The teacher wants you to try harder. Example: "${round.example}"`);
+            showToast('❌ Teacher says: Try again!', 'error');
+            document.getElementById('dot-' + currentRound).classList.add('wrong');
+        }
+
+        if (feedback.correction) {
+            const fb = document.getElementById('feedbackArea');
+            fb.innerHTML += `
+                <div class="example-box" style="margin-top:12px;">
+                    <div class="example-label">👩‍🏫 Teacher's Correction</div>
+                    <div class="example-text">"${feedback.correction}"</div>
+                </div>
+            `;
+        }
+
+        updateScores();
+        showNextButton();
+    } catch (e) {
+        console.error('Error parsing teacher feedback:', e);
+    }
+}
+
+// ================================================================
+// UI HELPERS
+// ================================================================
+function showFeedback(isCorrect, title, detail) {
+    const fb = document.getElementById('feedbackArea');
+    fb.classList.remove('hidden');
+    fb.innerHTML = `
+        <div style="padding:20px; border-radius:var(--radius-sm); margin-top:16px;
+            background:${isCorrect ? 'rgba(74,222,128,0.1)' : 'rgba(248,113,113,0.1)'};
+            border:1px solid ${isCorrect ? 'rgba(74,222,128,0.3)' : 'rgba(248,113,113,0.3)'};">
+            <div style="font-size:2rem; margin-bottom:8px;">${isCorrect ? '🎉' : '😕'}</div>
+            <div style="font-weight:700; font-size:1.1rem; margin-bottom:6px;
+                color:${isCorrect ? 'var(--green)' : 'var(--red)'};">${title}</div>
+            ${detail ? `<div style="color:var(--text-secondary); font-size:0.9rem; line-height:1.5;">${detail}</div>` : ''}
+        </div>
+    `;
+}
+
+function showNextButton() {
+    const actionBtns = document.getElementById('actionButtons');
+    if (currentRound < rounds.length - 1) {
+        actionBtns.innerHTML = `
+            <button class="btn btn-next" onclick="loadRound(${currentRound + 1})">
+                Next Round ➡️
+            </button>
+        `;
+    } else {
+        actionBtns.innerHTML = `
+            <button class="btn btn-success" onclick="showResults()">
+                🏆 See Final Results
+            </button>
+        `;
+    }
+}
+
+function updateScores() {
+    document.getElementById('scoreXP').textContent = xp;
+    document.getElementById('scoreCorrect').textContent = correctCount;
+    document.getElementById('scoreWrong').textContent = wrongCount;
+    document.getElementById('xpBadge').textContent = `⭐ ${xp} XP`;
+}
+
+// ================================================================
+// TOAST NOTIFICATION
+// ================================================================
+function showToast(message, type) {
+    const toast = document.getElementById('toast');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// ================================================================
+// FINAL RESULTS
+// ================================================================
+function showResults() {
+    stopTimer();
+    document.getElementById('gameArea').classList.add('hidden');
+    document.getElementById('resultsArea').classList.remove('hidden');
+    document.getElementById('progressBar').style.width = '100%';
+
+    // Stats
+    document.getElementById('finalXP').textContent = xp;
+    document.getElementById('finalCorrect').textContent = correctCount;
+    document.getElementById('finalWrong').textContent = wrongCount;
+
+    // Star rating
+    const percentage = correctCount / rounds.length;
+    let stars = 0;
+    if (percentage >= 0.9) stars = 5;
+    else if (percentage >= 0.75) stars = 4;
+    else if (percentage >= 0.6) stars = 3;
+    else if (percentage >= 0.4) stars = 2;
+    else if (percentage > 0) stars = 1;
+
+    const starContainer = document.getElementById('starRating');
+    starContainer.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.className = 'star' + (i <= stars ? ' active' : '');
+        star.textContent = '⭐';
+        starContainer.appendChild(star);
+    }
+
+    // Title based on performance
+    const titleEl = document.getElementById('resultsTitle');
+    const subEl = document.getElementById('resultsSubtitle');
+    if (percentage >= 0.9) {
+        titleEl.textContent = '🌟 Amazing!';
+        subEl.textContent = 'You\'re a nail description expert!';
+    } else if (percentage >= 0.7) {
+        titleEl.textContent = '👏 Great Job!';
+        subEl.textContent = 'You know your nail vocabulary well!';
+    } else if (percentage >= 0.5) {
+        titleEl.textContent = '👍 Good Effort!';
+        subEl.textContent = 'Keep practicing to improve!';
+    } else {
+        titleEl.textContent = '💪 Keep Going!';
+        subEl.textContent = 'Practice makes perfect. Try again!';
+    }
+
+    // Round-by-round
+    const roundsContainer = document.getElementById('resultsRounds');
+    // Keep the h3
+    const h3 = roundsContainer.querySelector('h3');
+    roundsContainer.innerHTML = '';
+    roundsContainer.appendChild(h3);
+
+    roundResults.forEach((result, i) => {
+        const div = document.createElement('div');
+        div.className = `round-result ${result.pass ? 'pass' : 'fail'}`;
+        div.innerHTML = `
+            <div class="round-num">${result.round + 1}</div>
+            <div class="round-info">
+                <div class="round-question">${result.question}</div>
+                <div class="round-answer">${truncate(result.answer, 60)}</div>
+            </div>
+            <div class="round-status">${result.pass ? '✅' : '❌'}</div>
+        `;
+        roundsContainer.appendChild(div);
+    });
+
+    // Store final results for teacher
+    localStorage.setItem('student_results', JSON.stringify({
+        xp: xp,
+        correct: correctCount,
+        wrong: wrongCount,
+        rounds: roundResults,
+        stars: stars,
+        timestamp: Date.now()
+    }));
+
+    // Confetti if good performance
+    if (percentage >= 0.6) {
+        launchConfetti();
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function truncate(str, max) {
+    if (!str) return '';
+    return str.length > max ? str.substring(0, max) + '...' : str;
+}
+
+// ================================================================
+// CONFETTI
+// ================================================================
+function launchConfetti() {
+    const container = document.getElementById('confettiContainer');
+    const colors = ['#ff4b8b', '#7c3aed', '#3b82f6', '#22d3ee', '#4ade80', '#fbbf24', '#fb923c'];
+
+    for (let i = 0; i < 80; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 2 + 's';
+        piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+        piece.style.width = (6 + Math.random() * 8) + 'px';
+        piece.style.height = (6 + Math.random() * 8) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        container.appendChild(piece);
+    }
+
+    setTimeout(() => {
+        container.innerHTML = '';
+    }, 5000);
+}
+
+// ================================================================
+// RESTART
+// ================================================================
+function restartGame() {
+    currentRound = 0;
+    xp = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    roundResults = [];
+    selectedMC = null;
+    sentenceWords = [];
+    waitingForTeacher = false;
+
+    updateScores();
+    buildRoundNav();
+    
+    document.getElementById('resultsArea').classList.add('hidden');
+    document.getElementById('gameArea').classList.remove('hidden');
+    
+    loadRound(0);
+}
+
+</script>
+
+</body>
+</html>
