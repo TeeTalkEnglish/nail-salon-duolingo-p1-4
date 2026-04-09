@@ -1,453 +1,734 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lesson 4 Game 2 - Nail Tech Practice</title>
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #fff0f8, #eef7ff);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .app {
-      width: 100%;
-      max-width: 760px;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
-      overflow: hidden;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #20c997, #0ea5e9);
-      color: white;
-      padding: 24px 20px;
-      text-align: center;
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
-
-    .header p {
-      margin: 8px 0 0;
-      font-size: 1rem;
-      opacity: 0.95;
-    }
-
-    .content {
-      padding: 28px 22px 24px;
-    }
-
-    .progress-wrap {
-      margin-bottom: 22px;
-    }
-
-    .progress-text {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.92rem;
-      color: #666;
-      margin-bottom: 8px;
-    }
-
-    .progress-bar {
-      height: 12px;
-      background: #f1f1f1;
-      border-radius: 30px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(135deg, #20c997, #0ea5e9);
-      border-radius: 30px;
-      transition: width 0.3s ease;
-    }
-
-    .card {
-      background: #fcfcfc;
-      border: 2px solid #f1f1f1;
-      border-radius: 18px;
-      padding: 24px 18px;
-      margin-bottom: 20px;
-    }
-
-    .speaker-label {
-      display: inline-block;
-      background: #6f42c1;
-      color: white;
-      font-size: 0.8rem;
-      font-weight: bold;
-      padding: 5px 12px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-    }
-
-    .question {
-      font-size: 1.35rem;
-      color: #333;
-      line-height: 1.45;
-      margin-bottom: 18px;
-    }
-
-    .choices {
-      display: grid;
-      gap: 12px;
-    }
-
-    .choice-btn {
-      width: 100%;
-      border: none;
-      border-radius: 14px;
-      padding: 15px 16px;
-      text-align: left;
-      font-size: 1rem;
-      background: #f7f7f9;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: 2px solid transparent;
-    }
-
-    .choice-btn:hover {
-      background: #eefcf8;
-      border-color: #20c997;
-    }
-
-    .choice-btn.correct {
-      background: #d1fae5;
-      border-color: #20c997;
-      color: #065f46;
-      font-weight: 600;
-    }
-
-    .choice-btn.wrong {
-      background: #ffe1e1;
-      border-color: #dc3545;
-      color: #842029;
-      font-weight: 600;
-    }
-
-    .feedback {
-      margin-top: 18px;
-      font-size: 1rem;
-      font-weight: 700;
-      min-height: 24px;
-    }
-
-    .feedback.correct { color: #198754; }
-    .feedback.wrong { color: #dc3545; }
-
-    .controls {
-      margin-top: 22px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 999px;
-      padding: 13px 22px;
-      font-size: 0.96rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: 0.2s ease;
-      text-align: center;
-    }
-
-    .btn-next {
-      background: linear-gradient(135deg, #20c997, #0ea5e9);
-      color: white;
-    }
-
-    .btn-back {
-      background: #6c757d;
-      color: white;
-    }
-
-    .btn-home {
-      background: #d63384;
-      color: white;
-    }
-
-    .hidden { display: none; }
-
-    .score-screen {
-      text-align: center;
-      padding: 10px 0 6px;
-    }
-
-    .score-screen h2 {
-      color: #198754;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-
-    .score-screen p {
-      color: #555;
-      font-size: 1.05rem;
-      margin-bottom: 20px;
-    }
-
-    .final-score {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 22px;
-    }
-
-    @media (max-width: 600px) {
-      .question { font-size: 1.15rem; }
-      .choice-btn { font-size: 0.96rem; }
-      .controls { flex-direction: column; }
-      .btn { width: 100%; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeeTalkEnglish - Small Talk & Family</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app">
-    <div class="header">
-      <h1>💅 Nail Tech Practice</h1>
-      <p>Lesson 4 Game 2 — Direct the customer to the right place.</p>
+    <div class="container">
+        <!-- Game Header -->
+        <div class="game-header">
+            <a href="../index.html" class="back-btn">← Lesson 3</a>
+            <h1>💬 Small Talk & Family</h1>
+<div class="score-display">⭐ <span id="score">0</span> / <span id="total">13</span></div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <span class="progress-text" id="progress-text">Step 1 of 10</span>
+        </div>
+
+        <!-- Scene -->
+        <div class="salon-scene" id="salon-scene">
+            <div class="salon-items">
+                <span class="salon-item">💅</span>
+                <span class="salon-item">💬</span>
+                <span class="salon-item">👨‍👩‍👧‍👦</span>
+            </div>
+        </div>
+
+        <!-- Chat Window -->
+        <div class="chat-window" id="chat-window">
+            <div class="chat-placeholder">
+                <p>💬 Your conversation will build here as you play...</p>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area" id="game-area"></div>
+
+        <!-- Feedback -->
+        <div class="feedback" id="feedback" style="display:none;">
+            <div class="feedback-content" id="feedback-content"></div>
+        </div>
+
+        <!-- Word Help (hidden until hint or answer) -->
+        <div class="word-help" id="word-help" style="display:none;"></div>
+
+        <!-- Completion -->
+        <div class="completion-screen" id="completion-screen" style="display:none;">
+            <div class="completion-content">
+                <div class="trophy">🏆</div>
+                <h2>Great Job!</h2>
+                <p class="final-score" id="final-score"></p>
+                <div class="stars" id="stars"></div>
+                <p class="completion-message" id="completion-message"></p>
+                <div class="completion-buttons">
+                    <button class="btn btn-primary" onclick="restartGame()">🔄 Play Again</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='../index.html'">🏠 Lesson 3</button>
+                </div>
+                <div class="dialog-review">
+                    <h3>📖 Full Conversation</h3>
+                    <div class="review-dialog" id="review-dialog"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="content">
-      <div class="progress-wrap">
-        <div class="progress-text">
-          <span id="progressText">Question 1 of 10</span>
-          <span id="scoreText">Score: 0</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-      </div>
+    <footer>
+        <p>TeeTalkEnglish © 2024 | Pensauken, New Jersey</p>
+    </footer>
 
-      <div id="quizScreen">
-        <div class="card">
-          <div class="speaker-label">CUSTOMER</div>
-          <div class="question" id="questionText"></div>
-          <div class="choices" id="choicesBox"></div>
-          <div id="feedback" class="feedback"></div>
+<script>
+// ==============================================
+//  GAME DATA - 10 ROUNDS
+// ==============================================
+var rounds = [
+    {
+        type: "fill",
+        title: "✏️ Fill in the Blank",
+        instruction: "A customer walks in. How do you greet them?",
+        saySentence: "Hi! Welcome to the salon.",
+        pre: "Hi! ",
+        post: " to the salon.",
+        answer: "Welcome",
+        choices: ["Welcome", "Goodbye", "Sorry", "Thanks"],
+        chatAfter: [
+            { speaker: "tech", text: "Hi! Welcome to the salon." }
+        ],
+        helpWord: "Welcome",
+        helpVn: "Chào mừng",
+        helpEx: "Say 'Welcome' when someone comes into your salon."
+    },
+    {
+        type: "fill",
+        title: "✏️ Fill in the Blank",
+        instruction: "Now introduce yourself.",
+        saySentence: "My name is Tee. Nice to meet you!",
+        pre: "My name is Tee. Nice to ",
+        post: " you!",
+        answer: "meet",
+        choices: ["meet", "see", "have", "know"],
+        chatAfter: [
+            { speaker: "tech", text: "My name is Tee. Nice to meet you!" }
+        ],
+        helpWord: "Nice to meet you",
+        helpVn: "Rất vui được gặp bạn",
+        helpEx: "Say this the FIRST time you meet someone. Very polite!"
+    },
+    {
+        type: "fill",
+        title: "✏️ Fill in the Blank",
+        instruction: "Now ask if this is their first visit.",
+        saySentence: "Is this your first time here?",
+        pre: "Is this your ",
+        post: " time here?",
+        answer: "first",
+        choices: ["first", "last", "next", "best"],
+        chatAfter: [
+            { speaker: "tech", text: "Is this your first time here?" }
+        ],
+        helpWord: "first time",
+        helpVn: "lần đầu tiên",
+        helpEx: "'First time' = the first visit ever. Ask new customers this!"
+    },
+    {
+        type: "choice",
+        title: "💬 Scenario A: Customer says YES",
+        instruction: "🟢 What do you say?",
+        saySentence: "Welcome! We're happy to have you!",
+        answer: "Welcome! We're happy to have you!",
+        choices: [
+            "Welcome! We're happy to have you!",
+            "Welcome back!",
+            "Goodbye!",
+            "I don't know."
+        ],
+        chatAfter: [
+            { speaker: "tech", text: "Welcome! We're happy to have you!" }
+        ],
+        helpWord: "happy to have you",
+        helpVn: "vui khi có bạn ở đây",
+        helpEx: "Say this to a NEW customer (first time). It makes them feel welcome!"
+    },
+        // Separator between YES and NO
+    {
+        type: "info",
+        title: "🔄 Same Question, Different Answer!",
+        instruction: "You just asked: 'Is this your first time here?'<br><br>The customer said YES and you said 'Welcome!'<br><br>But what if the customer says <strong>NO</strong>?<br>Let's practice that answer too!",
+        chatAfter: [],
+        helpWord: "",
+        helpVn: "",
+        helpEx: ""
+    },
+    {
+        type: "choice",
+        title: "💬 Scenario B: Customer says NO",
+        instruction: "🔴 The customer says: 'No, I came here before.' — What do you say?",
+        saySentence: "Welcome back! Nice to see you again!",
+        answer: "Welcome back! Nice to see you again!",
+        choices: [
+            "Welcome back! Nice to see you again!",
+            "Welcome! We're happy to have you!",
+            "Nice to meet you!",
+            "Sorry, we are closed."
+        ],
+        chatAfter: [
+            { speaker: "tech", text: "Welcome back! Nice to see you again!" }
+        ],
+        helpWord: "Welcome back",
+        helpVn: "Chào mừng trở lại",
+        helpEx: "Say 'Welcome back' when a customer comes AGAIN (not first time). Different from 'Welcome'!"
+    },
+    {
+        type: "fill",
+        title: "✏️ Fill in the Blank",
+        instruction: "Now ask the customer about their appointment.",
+        saySentence: "Do you have an appointment?",
+        pre: "Do you have an ",
+        post: "?",
+        answer: "appointment",
+        choices: ["appointment", "service", "pedicure", "problem"],
+        chatAfter: [
+            { speaker: "tech", text: "Do you have an appointment?" }
+        ],
+        helpWord: "appointment",
+        helpVn: "lịch hẹn",
+        helpEx: "An appointment = a time they called to book before coming in."
+    },
+    {
+        type: "choice",
+        title: "💬 What Do You Ask?",
+        instruction: "You want to make small talk. You want to ask if the customer is married. What do you say?",
+        saySentence: "Are you married?",
+        answer: "Are you married?",
+        choices: [
+            "Are you married?",
+            "Do you married?",
+            "Is you married?",
+            "You married?"
+        ],
+        chatAfter: [
+            { speaker: "tech", text: "Are you married?" }
+        ],
+        helpWord: "married",
+        helpVn: "kết hôn / có gia đình",
+        helpEx: "Married = has a husband or wife. 'Are you married?' is the correct question."
+    },
+    {
+        type: "fill",
+        title: "✏️ Fill in the Blank",
+        instruction: "Now you want to show a picture 🖼️ of 'em gái của tôi'. What do you say?",
+        saySentence: "This is my sister in the picture.",
+        pre: "This is my ",
+        post: " in the picture.",
+        answer: "sister",
+        choices: ["sister", "brother", "mother", "customer"],
+        chatAfter: [
+            { speaker: "tech", text: "This is my sister in the picture." }
+        ],
+        helpWord: "sister",
+        helpVn: "chị/em gái",
+        helpEx: "Sister = female sibling. Sharing family photos is great small talk!"
+    },
+    {
+        type: "fill",
+        title: "✏️ Fill in the Blank",
+        instruction: "Now ask about 'con cái'.",
+        saySentence: "Do you have kids?",
+        pre: "Do you have ",
+        post: "?",
+        answer: "kids",
+        choices: ["kids", "money", "nails", "color"],
+        chatAfter: [
+            { speaker: "tech", text: "Do you have kids?" }
+        ],
+        helpWord: "kids",
+        helpVn: "con cái",
+        helpEx: "'Kids' = children. 'Do you have kids?' is very common small talk."
+    },
+    {
+        type: "fill",
+        title: "✏️ Fill in the Blank",
+        instruction: "Now ask their ages.",
+        saySentence: "How old are your kids?",
+        pre: "How ",
+        post: " are your kids?",
+        answer: "old",
+        choices: ["old", "big", "many", "much"],
+        chatAfter: [
+            { speaker: "tech", text: "How old are your kids?" }
+        ],
+        helpWord: "How old",
+        helpVn: "Bao nhiêu tuổi",
+        helpEx: "'How old are you?' = asking age. Works for anyone!"
+    },
+    {
+        type: "fill",
+        title: "✏️ Fill in the Blank",
+        instruction: "Now ask about school.",
+        saySentence: "Are they going to school?",
+        pre: "Are they going to ",
+        post: "?",
+        answer: "school",
+        choices: ["school", "work", "salon", "home"],
+        chatAfter: [
+            { speaker: "tech", text: "Are they going to school?" }
+        ],
+        helpWord: "going to school",
+        helpVn: "đi học",
+        helpEx: "'Are they going to school?' = asking if the kids are students."
+    },
+    {
+        type: "choice",
+        title: "💬 What Do You Say?",
+        instruction: "The customer sneezes: 'Ah-choo!' 🤧 What do you say?",
+        saySentence: "Bless you!",
+        answer: "Bless you!",
+        choices: [
+            "Bless you!",
+            "Thank you!",
+            "Goodbye!",
+            "Welcome back!"
+        ],
+        chatAfter: [
+            { speaker: "tech", text: "Bless you!" }
+        ],
+        helpWord: "Bless you",
+        helpVn: "Chúc sức khỏe (khi ai đó hắt xì)",
+        helpEx: "In America, when someone sneezes, you say 'Bless you!' It's very polite."
+    }
+];
 
-          <div class="controls">
-            <button id="nextBtn" class="btn btn-next hidden">Next</button>
-            <a href="index.html" class="btn btn-back">← Back to Game 2</a>
-            <a href="../../index.html" class="btn btn-home">🏠 All Lessons</a>
-          </div>
-        </div>
-      </div>
+var fullDialog = [
+    { speaker: "tech", text: "Hi! Welcome to the salon." },
+    { speaker: "client", text: "Thank you." },
+    { speaker: "tech", text: "My name is Tee. Nice to meet you!" },
+    { speaker: "client", text: "Nice to meet you too. My name is Lisa." },
+    { speaker: "tech", text: "Is this your first time here?" },
+    { speaker: "client", text: "✅ YES: 'Yes, it is my first time.'" },
+    { speaker: "tech", text: "→ Welcome! We're happy to have you!" },
+    { speaker: "client", text: "❌ NO: 'No, I came here before.'" },
+    { speaker: "tech", text: "→ Welcome back! Nice to see you again!" },
+    { speaker: "tech", text: "Do you have an appointment?" },
+    { speaker: "client", text: "Yes, I do." },
+    { speaker: "tech", text: "Are you married?" },
+    { speaker: "client", text: "Yes, I am." },
+    { speaker: "tech", text: "This is my sister in the picture." },
+    { speaker: "client", text: "Oh, she is very cute!" },
+    { speaker: "tech", text: "Do you have kids?" },
+    { speaker: "client", text: "Yes, I have two kids." },
+    { speaker: "tech", text: "How old are your kids?" },
+    { speaker: "client", text: "My son is 10 and my daughter is 7." },
+    { speaker: "tech", text: "Are they going to school?" },
+    { speaker: "client", text: "Yes, both of them are in school." },
+    { speaker: "client", text: "It was nice talking to you!" },
+    { speaker: "tech", text: "It was nice talking to you too!" },
+    { speaker: "client", text: "Ah-choo! 🤧" },
+    { speaker: "tech", text: "Bless you!" },
+    { speaker: "client", text: "Thank you!" }
+];
+// ==============================================
+//  STATE
+// ==============================================
+var currentRound = 0;
+var score = 0;
+var totalRounds = rounds.length;
 
-      <div id="resultScreen" class="score-screen hidden">
-        <h2>Great job! 🎉</h2>
-        <p>You finished Lesson 4 Game 2 role-play practice.</p>
-        <div class="final-score" id="finalScore"></div>
-        <div class="controls" style="justify-content:center;">
-          <button class="btn btn-next" onclick="restartGame()">Play Again</button>
-          <a href="index.html" class="btn btn-back">← Back to Game 2</a>
-          <a href="../../index.html" class="btn btn-home">🏠 All Lessons</a>
-        </div>
-      </div>
-    </div>
-  </div>
+// Count only scoring rounds
+var scoringRounds = 0;
+for (var i = 0; i < rounds.length; i++) {
+    if (rounds[i].type !== "info") scoringRounds++;
+}
+var chatHistory = [];
 
-  <script>
-    const questions = [
-      {
-        question: "Hi, where should I sit?",
-        choices: [
-          "Please have a seat here.",
-          "I am married.",
-          "Nice to meet you."
-        ],
-        answer: "Please have a seat here."
-      },
-      {
-        question: "Is this chair for me?",
-        choices: [
-          "Yes, this chair is for you.",
-          "Yes, I have two kids.",
-          "No, I am fine."
-        ],
-        answer: "Yes, this chair is for you."
-      },
-      {
-        question: "Where can I wash my hands?",
-        choices: [
-          "Please wash your hands over there.",
-          "This is my daughter.",
-          "I like pink nails."
-        ],
-        answer: "Please wash your hands over there."
-      },
-      {
-        question: "Can I sit here?",
-        choices: [
-          "Yes, please sit here.",
-          "Yes, I do.",
-          "She is 10 years old."
-        ],
-        answer: "Yes, please sit here."
-      },
-      {
-        question: "Where is the pedicure chair?",
-        choices: [
-          "The pedicure chair is over there.",
-          "My appointment is at 2:00.",
-          "I have one son."
-        ],
-        answer: "The pedicure chair is over there."
-      },
-      {
-        question: "Should I wait here?",
-        choices: [
-          "Yes, please wait here for a moment.",
-          "No, I don’t have kids.",
-          "Nice to meet you too."
-        ],
-        answer: "Yes, please wait here for a moment."
-      },
-      {
-        question: "Can you show me the color wall?",
-        choices: [
-          "Yes, the color wall is over here.",
-          "I am 35 years old.",
-          "Bless you!"
-        ],
-        answer: "Yes, the color wall is over here."
-      },
-      {
-        question: "Where do I put my bag?",
-        choices: [
-          "You can put your bag here.",
-          "I have an appointment.",
-          "This is my first time."
-        ],
-        answer: "You can put your bag here."
-      },
-      {
-        question: "Do I go to that table?",
-        choices: [
-          "Yes, please go to that table.",
-          "My son is 10.",
-          "No, she is not."
-        ],
-        answer: "Yes, please go to that table."
-      },
-      {
-        question: "Can you take me to my chair?",
-        choices: [
-          "Yes, please come with me.",
-          "I don’t go to school.",
-          "Welcome back!"
-        ],
-        answer: "Yes, please come with me."
-      }
-    ];
+// ==============================================
+//  INIT
+// ==============================================
+window.onload = function() {
+    updateScore();
+    loadRound();
+};
 
-    let currentQuestion = 0;
-    let score = 0;
-    let answeredCorrectly = false;
+function restartGame() {
+    currentRound = 0;
+    score = 0;
+    chatHistory = [];
+    document.getElementById("completion-screen").style.display = "none";
+    document.getElementById("game-area").style.display = "block";
+    document.getElementById("salon-scene").style.display = "block";
+    document.getElementById("chat-window").style.display = "block";
+    document.querySelector(".progress-container").style.display = "block";
+    updateScore();
+    loadRound();
+}
 
-    const questionText = document.getElementById("questionText");
-    const choicesBox = document.getElementById("choicesBox");
-    const feedback = document.getElementById("feedback");
-    const nextBtn = document.getElementById("nextBtn");
-    const progressText = document.getElementById("progressText");
-    const scoreText = document.getElementById("scoreText");
-    const progressFill = document.getElementById("progressFill");
-    const quizScreen = document.getElementById("quizScreen");
-    const resultScreen = document.getElementById("resultScreen");
-    const finalScore = document.getElementById("finalScore");
+// ==============================================
+//  SCORE & PROGRESS
+// ==============================================
+function updateScore() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("total").textContent = scoringRounds;
+}
 
-    function renderQuestion() {
-      answeredCorrectly = false;
-      const q = questions[currentQuestion];
-      questionText.textContent = q.question;
-      choicesBox.innerHTML = "";
-      feedback.textContent = "";
-      feedback.className = "feedback";
-      nextBtn.classList.add("hidden");
+function updateProgress() {
+    var pct = (currentRound / totalRounds) * 100;
+    document.getElementById("progress-bar").style.width = pct + "%";
+    document.getElementById("progress-text").textContent = "Step " + (currentRound + 1) + " of " + totalRounds;
+}
 
-      progressText.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-      scoreText.textContent = `Score: ${score}`;
-      progressFill.style.width = `${(currentQuestion / questions.length) * 100}%`;
+// ==============================================
+//  CHAT
+// ==============================================
+function renderChat() {
+    var chatDiv = document.getElementById("chat-window");
 
-      q.choices.forEach(choice => {
-        const btn = document.createElement("button");
-        btn.className = "choice-btn";
-        btn.textContent = choice;
-        btn.onclick = () => checkAnswer(btn, choice, q.answer);
-        choicesBox.appendChild(btn);
-      });
+    if (chatHistory.length === 0) {
+        chatDiv.innerHTML = '<div class="chat-placeholder"><p>💬 Your conversation will build here as you play...</p></div>';
+        return;
     }
 
-    function checkAnswer(button, selected, correct) {
-      if (answeredCorrectly) return;
+    var html = "";
+    for (var i = 0; i < chatHistory.length; i++) {
+        var msg = chatHistory[i];
+        // Only show nail tech lines
+        if (msg.speaker === "client") continue;
+        var label = "💅 Nail Tech";
+        html += '<div class="chat-bubble tech">';
+        html += '<span class="chat-label">' + label + '</span>';
+        html += '<div class="chat-text">' + msg.text + '</div>';
+        html += '</div>';
+    }
 
-      const allButtons = document.querySelectorAll(".choice-btn");
+    if (html === "") {
+        chatDiv.innerHTML = '<div class="chat-placeholder"><p>💬 Your conversation will build here as you play...</p></div>';
+        return;
+    }
 
-      if (selected === correct) {
-        answeredCorrectly = true;
+    chatDiv.innerHTML = html;
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+}
+
+function addChatMessages(messages) {
+    for (var i = 0; i < messages.length; i++) {
+        var msg = messages[i];
+        var exists = false;
+        for (var j = 0; j < chatHistory.length; j++) {
+            if (chatHistory[j].text === msg.text && chatHistory[j].speaker === msg.speaker) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            chatHistory.push(msg);
+        }
+    }
+    renderChat();
+}
+
+// ==============================================
+//  FEEDBACK
+// ==============================================
+function showFeedback(isCorrect, message) {
+    var fb = document.getElementById("feedback");
+    var content = document.getElementById("feedback-content");
+    fb.style.display = "block";
+    fb.className = "feedback " + (isCorrect ? "correct" : "wrong");
+
+    if (isCorrect) {
+        content.innerHTML = '<span class="result-icon">✅</span> <strong>Correct!</strong> Great job!';
+    } else {
+        content.innerHTML = '<span class="result-icon">❌</span> <strong>Not quite.</strong><br>' + message;
+    }
+}
+
+function hideFeedback() {
+    document.getElementById("feedback").style.display = "none";
+}
+
+// ==============================================
+//  WORD HELP (HINT SYSTEM)
+// ==============================================
+function setupHint(round) {
+    var helpDiv = document.getElementById("word-help");
+    if (!round.helpWord) {
+        helpDiv.style.display = "none";
+        return;
+    }
+
+    helpDiv.style.display = "block";
+    helpDiv.innerHTML = '<div id="hint-btn" onclick="openHint()" style="cursor:pointer; font-weight:700; color:#f57f17; font-size:0.95em; padding:6px 0;">' +
+        '💡 Need a Hint? <span style="font-size:0.8em; color:#999;">(tap to see)</span>' +
+        '</div>' +
+        '<div id="hint-content" style="display:none; margin-top:8px; padding-top:8px; border-top:1px dashed #fbc02d;">' +
+        '<span style="display:inline-block; background:white; padding:2px 10px; border-radius:6px; font-weight:700; color:#880e4f; margin-right:5px;">' + round.helpWord + '</span> ' +
+        '<span style="color:#888; font-style:italic; font-size:0.88em;">' + round.helpVn + '</span><br>' +
+        '<span style="color:#666; font-size:0.88em;">' + round.helpEx + '</span>' +
+        '</div>';
+}
+
+function openHint() {
+    var content = document.getElementById("hint-content");
+    var btn = document.getElementById("hint-btn");
+    if (content) content.style.display = "block";
+    if (btn) { btn.innerHTML = "💡 Word Help"; btn.style.cursor = "default"; btn.onclick = null; }
+}
+
+function revealHint() {
+    var content = document.getElementById("hint-content");
+    var btn = document.getElementById("hint-btn");
+    if (content) content.style.display = "block";
+    if (btn) { btn.innerHTML = "💡 Word Help"; btn.style.cursor = "default"; btn.onclick = null; }
+}
+
+function hideHint() {
+    document.getElementById("word-help").style.display = "none";
+}
+
+// ==============================================
+//  SAY SENTENCE BOX
+// ==============================================
+    function getSayBox(round) {
+        return "";
+    }
+
+    function showSayBox(round) {
+        if (!round.saySentence) return;
+        var area = document.getElementById("game-area");
+        var existing = document.getElementById("say-box");
+        if (existing) return;
+
+        var div = document.createElement("div");
+        div.id = "say-box";
+        div.style.cssText = "background:linear-gradient(135deg,#e8f5e9,#c8e6c9); border:2px solid #81c784; border-radius:12px; padding:14px 20px; margin-top:15px; text-align:center; animation:bubbleIn 0.4s ease;";
+        div.innerHTML = '<span style="font-weight:700; color:#2e7d32; font-size:0.9em;">🗣️ Now say it out loud:</span> ' +
+            '<span style="color:#1b5e20; font-size:1.05em; font-style:italic;">"' + round.saySentence + '"</span>';
+        area.appendChild(div);
+    }
+
+// ==============================================
+//  LOAD ROUND
+// ==============================================
+       function loadRound() {
+        if (currentRound >= rounds.length) {
+            showCompletion();
+            return;
+        }
+
+        var round = rounds[currentRound];
+        updateProgress();
+        hideFeedback();
+        hideHint();
+        renderChat();
+
+        var area = document.getElementById("game-area");
+        area.style.display = "block";
+
+        // Hide the next button for fresh round
+        var nextArea = document.getElementById("next-btn-area");
+        if (nextArea) nextArea.style.display = "none";
+
+        if (round.type === "fill") {
+            setupHint(round);
+            renderFill(round, area);
+        } else if (round.type === "choice") {
+            setupHint(round);
+            renderChoice(round, area);
+        } else if (round.type === "info") {
+            renderInfo(round, area);
+        }
+    }
+   
+    function goNext() {
+        currentRound++;
+        // Skip info rounds automatically if they somehow get stuck
+        if (currentRound < rounds.length && rounds[currentRound].type === "info") {
+            // Don't skip — loadRound will render the info screen
+        }
+        loadRound();
+    }
+
+   // ==============================================
+//  SHUFFLE
+// ==============================================
+function shuffleArray(arr) {
+    var shuffled = arr.slice();
+    for (var i = shuffled.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = temp;
+    }
+    return shuffled;
+}
+
+// ==============================================
+//  FILL IN THE BLANK
+// ==============================================
+function renderFill(round, container) {
+    var shuffledWords = shuffleArray(round.choices);
+    var html = '';
+    html += '<div class="round-title">' + round.title + '</div>';
+    html += '<div class="round-instruction">' + round.instruction + '</div>';
+    html += '<div class="blank-sentence">';
+    html += round.pre;
+    html += '<span class="blank" id="blank-slot">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+    html += round.post;
+    html += '</div>';
+    html += '<div class="word-choices">';
+    for (var i = 0; i < shuffledWords.length; i++) {
+        html += '<div class="word-choice" data-word="' + shuffledWords[i] + '" onclick="clickFill(this)">' + shuffledWords[i] + '</div>';
+    }
+    html += '</div>';
+    html += '<div class="next-btn-area" id="next-btn-area" style="display:none;">';
+    html += '<button class="btn btn-primary" onclick="goNext()">Next →</button>';
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function clickFill(el) {
+    var round = rounds[currentRound];
+    var selected = el.getAttribute("data-word");
+    var answer = round.answer;
+    var isCorrect = (selected.toLowerCase() === answer.toLowerCase());
+
+    var choices = document.querySelectorAll(".word-choice");
+    for (var i = 0; i < choices.length; i++) {
+        choices[i].style.pointerEvents = "none";
+        choices[i].classList.add("disabled");
+        if (choices[i].getAttribute("data-word").toLowerCase() === answer.toLowerCase()) {
+            choices[i].classList.add("correct");
+        }
+        if (choices[i].getAttribute("data-word") === selected && !isCorrect) {
+            choices[i].classList.add("wrong");
+        }
+    }
+
+    var blank = document.getElementById("blank-slot");
+    blank.textContent = answer;
+    blank.style.borderBottomStyle = "solid";
+    blank.style.borderBottomColor = isCorrect ? "#4caf50" : "#ef5350";
+
+    if (isCorrect) {
         score++;
-
-        allButtons.forEach(btn => {
-          btn.disabled = true;
-          if (btn.textContent === correct) {
-            btn.classList.add("correct");
-          }
-        });
-
-        feedback.textContent = "Correct!";
-        feedback.className = "feedback correct";
-        scoreText.textContent = `Score: ${score}`;
-        nextBtn.classList.remove("hidden");
-      } else {
-        button.classList.add("wrong");
-        button.disabled = true;
-        feedback.textContent = "Can you repeat it again?";
-        feedback.className = "feedback wrong";
-      }
+        updateScore();
+        showFeedback(true, "");
+    } else {
+        showFeedback(false, "The correct word is: <strong>" + answer + "</strong>");
     }
 
-    nextBtn.addEventListener("click", () => {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        renderQuestion();
-      } else {
-        showResults();
-      }
-    });
+    addChatMessages(round.chatAfter);
+    revealHint();
+    showSayBox(round);
+    document.getElementById("next-btn-area").style.display = "block";
+}
 
-    function showResults() {
-      quizScreen.classList.add("hidden");
-      resultScreen.classList.remove("hidden");
-      progressFill.style.width = "100%";
-      finalScore.textContent = `Your score: ${score} / ${questions.length}`;
+// ==============================================
+//  MULTIPLE CHOICE
+// ==============================================
+function renderChoice(round, container) {
+    var shuffled = shuffleArray(round.choices);
+    var html = '';
+    html += '<div class="round-title">' + round.title + '</div>';
+    html += '<div class="round-instruction">' + round.instruction + '</div>';
+    html += '<div class="choice-options">';
+    for (var i = 0; i < shuffled.length; i++) {
+        html += '<div class="choice-option" onclick="clickChoice(this)">' + shuffled[i] + '</div>';
+    }
+    html += '</div>';
+    html += '<div class="next-btn-area" id="next-btn-area" style="display:none;">';
+    html += '<button class="btn btn-primary" onclick="goNext()">Next →</button>';
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function clickChoice(el) {
+    var round = rounds[currentRound];
+    var selected = el.textContent;
+    var answer = round.answer;
+    var isCorrect = (selected === answer);
+
+    var opts = document.querySelectorAll(".choice-option");
+    for (var i = 0; i < opts.length; i++) {
+        opts[i].style.pointerEvents = "none";
+        opts[i].classList.add("disabled");
+        if (opts[i].textContent === answer) {
+            opts[i].classList.add("correct");
+        }
+    }
+    if (!isCorrect) {
+        el.classList.add("wrong");
     }
 
-    function restartGame() {
-      currentQuestion = 0;
-      score = 0;
-      quizScreen.classList.remove("hidden");
-      resultScreen.classList.add("hidden");
-      renderQuestion();
+    if (isCorrect) {
+        score++;
+        updateScore();
+        showFeedback(true, "");
+    } else {
+        showFeedback(false, 'The best answer is:<br><strong>"' + answer + '"</strong>');
     }
 
-    renderQuestion();
-  </script>
+    addChatMessages(round.chatAfter);
+    revealHint();
+    showSayBox(round);
+    document.getElementById("next-btn-area").style.display = "block";
+}
+
+// ==============================================
+//  INFO SCREEN (no scoring)
+// ==============================================
+function renderInfo(round, container) {
+    var html = '';
+    html += '<div style="text-align:center; padding:20px 10px;">';
+    html += '<div style="font-size:3em; margin-bottom:15px;">🔄</div>';
+    html += '<div class="round-title" style="font-size:1.3em; margin-bottom:15px;">' + round.title + '</div>';
+    html += '<div style="font-size:1em; color:#555; line-height:1.8; max-width:500px; margin:0 auto 20px;">' + round.instruction + '</div>';
+    html += '<button class="btn btn-primary" onclick="goNext()">Got it! Next →</button>';
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+// ==============================================
+//  COMPLETION
+// ==============================================
+function showCompletion() {
+    document.getElementById("game-area").style.display = "none";
+    document.getElementById("salon-scene").style.display = "none";
+    document.getElementById("word-help").style.display = "none";
+    document.getElementById("chat-window").style.display = "none";
+    document.querySelector(".progress-container").style.display = "none";
+    hideFeedback();
+
+    var screen = document.getElementById("completion-screen");
+    screen.style.display = "block";
+
+    document.getElementById("final-score").textContent = "You got " + score + " out of " + scoringRounds + " correct!";
+
+    var pct = score / scoringRounds;
+    var starCount = 0;
+    if (pct === 1) starCount = 5;
+    else if (pct >= 0.8) starCount = 4;
+    else if (pct >= 0.6) starCount = 3;
+    else if (pct >= 0.4) starCount = 2;
+    else if (pct > 0) starCount = 1;
+
+    var starHTML = "";
+    for (var i = 0; i < starCount; i++) starHTML += "⭐";
+    for (var i = starCount; i < 5; i++) starHTML += "☆";
+    document.getElementById("stars").innerHTML = starHTML;
+
+    var msg = "";
+    if (pct === 1) msg = "Perfect! You can make great small talk! 🎉";
+    else if (pct >= 0.8) msg = "Excellent! You're almost a pro! 💪";
+    else if (pct >= 0.5) msg = "Good work! Practice more to get better! 📚";
+    else msg = "Keep practicing! You'll get it! 🌱";
+    document.getElementById("completion-message").textContent = msg;
+
+    var reviewHTML = "";
+    for (var i = 0; i < fullDialog.length; i++) {
+        var line = fullDialog[i];
+        var label = (line.speaker === "tech") ? "💅 Nail Tech:" : "👩 Customer:";
+        reviewHTML += '<div class="review-line ' + line.speaker + '">';
+        reviewHTML += '<span class="review-speaker">' + label + '</span> ';
+        reviewHTML += line.text;
+        reviewHTML += '</div>';
+    }
+    document.getElementById("review-dialog").innerHTML = reviewHTML;
+}
+</script>
+</script>
 </body>
 </html>

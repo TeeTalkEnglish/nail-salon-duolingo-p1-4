@@ -1,0 +1,366 @@
+/* ========================================
+   TeeTalkEnglish - Game 2 Small Talk
+   ======================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 16px;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.game-header h1 { color: #880e4f; font-size: 1.4em; }
+
+.back-btn {
+    text-decoration: none;
+    color: #ad1457;
+    font-weight: 600;
+    font-size: 0.95em;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #fce4ec;
+    transition: all 0.2s;
+}
+
+.back-btn:hover { background: #f8bbd0; }
+
+.score-display {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #880e4f;
+    background: #fce4ec;
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+/* Progress */
+.progress-container {
+    background: white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.progress-bar {
+    height: 12px;
+    background: linear-gradient(90deg, #f48fb1, #ec407a, #880e4f);
+    border-radius: 6px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: #888;
+}
+
+/* Salon Scene */
+.salon-scene {
+    background: linear-gradient(180deg, #fff9c4, #fff3e0);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.salon-items {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-size: 40px;
+}
+
+.salon-item {
+    animation: float 3s ease-in-out infinite;
+}
+
+.salon-item:nth-child(2) { animation-delay: 0.5s; }
+.salon-item:nth-child(3) { animation-delay: 1s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Chat Window */
+.chat-window {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-height: 80px;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.chat-placeholder { color: #999; text-align: center; padding: 10px; }
+
+.chat-bubble {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    animation: bubbleIn 0.4s ease;
+}
+
+@keyframes bubbleIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-bubble.tech { align-items: flex-end; }
+
+.chat-label {
+    font-size: 0.72em;
+    font-weight: 600;
+    margin-bottom: 3px;
+    padding: 0 10px;
+    color: #880e4f;
+}
+
+.chat-text {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 16px;
+    max-width: 85%;
+    font-size: 0.95em;
+    line-height: 1.5;
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    color: #880e4f;
+    border-bottom-right-radius: 4px;
+}
+
+/* Game Area */
+.game-area {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    min-height: 180px;
+}
+
+.round-title {
+    font-size: 1.1em;
+    color: #880e4f;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.round-instruction {
+    font-size: 0.93em;
+    color: #666;
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+/* Sentence */
+.blank-sentence {
+    font-size: 1.25em;
+    color: #333;
+    margin-bottom: 18px;
+    line-height: 1.8;
+    text-align: center;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 10px;
+}
+
+.blank {
+    display: inline-block;
+    min-width: 130px;
+    border-bottom: 3px dashed #f48fb1;
+    padding: 2px 5px;
+    margin: 0 4px;
+    color: #880e4f;
+    font-weight: 700;
+}
+
+/* Word Choices (fill blank) */
+.word-choices {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.word-choice {
+    padding: 11px 24px;
+    background: #fce4ec;
+    border: 2px solid #f48fb1;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    color: #880e4f;
+    transition: all 0.2s;
+}
+
+.word-choice:hover { background: #f48fb1; color: white; transform: scale(1.05); }
+.word-choice.correct { background: #4caf50; color: white; border-color: #4caf50; }
+.word-choice.wrong { background: #ef5350; color: white; border-color: #ef5350; }
+.word-choice.disabled { pointer-events: none; opacity: 0.6; }
+
+/* Choice Options (multiple choice) */
+.choice-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choice-option {
+    padding: 14px 18px;
+    background: #fce4ec;
+    border: 2px solid #f48fb1;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.95em;
+    color: #880e4f;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.choice-option:hover { background: #f8bbd0; border-color: #ec407a; }
+.choice-option.correct { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+.choice-option.wrong { background: #ffebee; border-color: #ef5350; color: #c62828; }
+.choice-option.disabled { pointer-events: none; }
+
+/* Feedback */
+.feedback {
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.feedback.correct { background: #e8f5e9; border: 2px solid #4caf50; }
+.feedback.wrong { background: #ffebee; border: 2px solid #ef5350; }
+.result-icon { font-size: 1.8em; display: block; margin-bottom: 5px; }
+
+/* Word Help */
+.word-help {
+    background: #fff9c4;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    border-left: 4px solid #fbc02d;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ec407a, #880e4f);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(136,14,79,0.3);
+}
+
+.btn-secondary {
+    background: white;
+    color: #880e4f;
+    border: 2px solid #f48fb1;
+}
+
+.btn-secondary:hover { background: #fce4ec; }
+
+.next-btn-area { text-align: center; margin-top: 15px; }
+
+/* Completion */
+.completion-screen {
+    background: white;
+    border-radius: 20px;
+    padding: 35px 28px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.trophy { font-size: 70px; }
+.completion-screen h2 { font-size: 1.8em; color: #880e4f; margin: 12px 0; }
+.final-score { font-size: 1.15em; color: #555; margin-bottom: 8px; }
+.stars { font-size: 2.2em; margin: 12px 0; }
+.completion-message { font-size: 1em; color: #777; margin-bottom: 22px; }
+
+.completion-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.dialog-review {
+    margin-top: 25px;
+    text-align: left;
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 22px;
+}
+
+.dialog-review h3 { text-align: center; color: #880e4f; margin-bottom: 16px; }
+
+.review-line {
+    margin-bottom: 8px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 0.92em;
+}
+
+.review-line.tech { background: #fce4ec; }
+.review-line.client { background: #e3f2fd; }
+.review-speaker { font-weight: 700; margin-right: 6px; }
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 25px 20px;
+    color: #fff;
+    font-size: 0.82em;
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container { padding: 10px; }
+    .game-header { flex-direction: column; text-align: center; }
+    .game-header h1 { font-size: 1.2em; }
+    .game-area { padding: 18px 14px; }
+    .blank-sentence { font-size: 1.05em; }
+}

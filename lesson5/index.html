@@ -3,252 +3,706 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nail Salon English – Lesson 5: Describing Nails</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Lesson 5 - Describing Nails | TeeTalkEnglish</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e2a;
+            min-height: 100vh;
+            color: #e0e0e0;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #111540;
+            padding: 14px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #1a1f4e;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .navbar .logo-icon { font-size: 28px; }
+
+        .navbar .logo-text {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #ff4d94;
+        }
+
+        .navbar .back-link {
+            text-decoration: none;
+            color: #ff4d94;
+            font-weight: 600;
+            font-size: 0.95em;
+            padding: 8px 18px;
+            border: 2px solid #ff4d94;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .navbar .back-link:hover {
+            background: #ff4d94;
+            color: white;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #7b1fa2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .hero-emoji { font-size: 70px; margin-bottom: 15px; display: block; }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            color: #ff80ab;
+            padding: 5px 18px;
+            border-radius: 18px;
+            font-size: 0.78em;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-size: 2.3em;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .hero .sub {
+            font-size: 1.1em;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 5px;
+        }
+
+        .hero .desc {
+            font-size: 0.95em;
+            color: rgba(255,255,255,0.5);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .hero-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 22px;
+            font-size: 2em;
+        }
+
+        .hero-icons span {
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .hero-icons span:nth-child(1) { animation-delay: 0s; }
+        .hero-icons span:nth-child(2) { animation-delay: 0.3s; }
+        .hero-icons span:nth-child(3) { animation-delay: 0.6s; }
+        .hero-icons span:nth-child(4) { animation-delay: 0.9s; }
+        .hero-icons span:nth-child(5) { animation-delay: 1.2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* CONTENT */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 35px 20px 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.3em;
+            color: #ff4d94;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .section-sub {
+            text-align: center;
+            font-size: 0.92em;
+            color: #666688;
+            margin-bottom: 30px;
+        }
+
+        /* GAME CARDS */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 22px;
+        }
+
+        .game-card {
+            background: #111540;
+            border: 2px solid #1e2460;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            border-color: #ff4d94;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 35px rgba(255, 77, 148, 0.12);
+        }
+
+        .card-banner {
+            padding: 22px 22px 18px;
+            position: relative;
+        }
+
+        .game-card:nth-child(1) .card-banner {
+            background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+        }
+
+        .game-card:nth-child(2) .card-banner {
+            background: linear-gradient(135deg, #ad1457, #d81b60);
+        }
+
+        .card-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .game-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.9);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .card-banner .card-emoji {
+            font-size: 42px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .card-banner h3 {
+            color: white;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .card-banner .card-tagline {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85em;
+        }
+
+        .card-body {
+            padding: 20px 22px 22px;
+        }
+
+        /* Skill Chips */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 15px;
+        }
+
+        .skill {
+            background: #1a1f4e;
+            color: #8888cc;
+            padding: 4px 11px;
+            border-radius: 8px;
+            font-size: 0.75em;
+            font-weight: 600;
+            border: 1px solid #252a6a;
+        }
+
+        /* Details */
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-bottom: 16px;
+        }
+
+        .detail {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.85em;
+            color: #8888aa;
+        }
+
+        .detail-icon { font-size: 1em; width: 20px; text-align: center; }
+
+        /* Buttons */
+        .card-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cbtn {
+            flex: 1;
+            padding: 11px 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.92em;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .cbtn-play {
+            background: linear-gradient(135deg, #ff4d94, #ff1a6c);
+            color: white;
+        }
+
+        .cbtn-play:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 18px rgba(255, 77, 148, 0.3);
+        }
+
+        .cbtn-teacher {
+            background: #1a1f4e;
+            color: #8888cc;
+            border: 1px solid #2a2f6e;
+        }
+
+        .cbtn-teacher:hover {
+            background: #222870;
+            color: #aaaaee;
+        }
+
+        /* VOCAB PREVIEW */
+        .vocab-section {
+            margin-top: 35px;
+        }
+
+        .vocab-box {
+            background: #111540;
+            border: 2px solid #1e2460;
+            border-radius: 18px;
+            padding: 28px;
+        }
+
+        .vocab-box h3 {
+            color: #ff4d94;
+            font-size: 1.1em;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .vocab-item {
+            background: #1a1f4e;
+            border-radius: 10px;
+            padding: 14px;
+            border-left: 3px solid #7b1fa2;
+        }
+
+        .vocab-eng {
+            font-weight: 700;
+            color: #ce93d8;
+            font-size: 0.95em;
+            margin-bottom: 3px;
+        }
+
+        .vocab-vn {
+            color: #777799;
+            font-size: 0.82em;
+            font-style: italic;
+        }
+
+        .vocab-ex {
+            color: #8888aa;
+            font-size: 0.82em;
+            margin-top: 4px;
+        }
+
+        /* DIALOG PREVIEW */
+        .dialog-section {
+            margin-top: 30px;
+        }
+
+        .dialog-box {
+            background: #111540;
+            border: 2px solid #1e2460;
+            border-radius: 18px;
+            padding: 28px;
+        }
+
+        .dialog-box h3 {
+            color: #ff4d94;
+            font-size: 1.1em;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .dialog-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .d-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .d-line.tech { justify-content: flex-end; }
+        .d-line.client { justify-content: flex-start; }
+
+        .d-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .d-line.tech .d-avatar { background: #6a1b9a; order: 2; }
+        .d-line.client .d-avatar { background: #1a237e; }
+
+        .d-bubble {
+            max-width: 75%;
+            padding: 10px 15px;
+            border-radius: 14px;
+            font-size: 0.88em;
+            line-height: 1.5;
+        }
+
+        .d-line.tech .d-bubble {
+            background: #2a1535;
+            color: #ce93d8;
+            border-bottom-right-radius: 4px;
+        }
+
+        .d-line.client .d-bubble {
+            background: #152040;
+            color: #90caf9;
+            border-bottom-left-radius: 4px;
+        }
+
+        .d-speaker {
+            font-size: 0.65em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+            display: block;
+            opacity: 0.6;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 28px 20px;
+            color: #444466;
+            font-size: 0.82em;
+            border-top: 1px solid #1a1f4e;
+        }
+
+        footer a { color: #ff4d94; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.7em; }
+            .games-grid { grid-template-columns: 1fr; }
+            .card-btns { flex-direction: column; }
+            .hero-icons { font-size: 1.6em; gap: 15px; }
+            .d-bubble { max-width: 85%; }
+            .vocab-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-    <div class="logo">
-        <span class="logo-emoji">💅</span>
-        NailShop TeeTalk English
-    </div>
-    <div class="header-badges">
-        <span class="badge badge-fire">🔥 0</span>
-        <span class="badge badge-xp">⭐ 0 XP</span>
-    </div>
-</header>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="../index.html" class="logo">
+            <span class="logo-icon">💅</span>
+            <span class="logo-text">NailShop TeeTalk English</span>
+        </a>
+        <a href="../index.html" class="back-link">← All Lessons</a>
+    </nav>
 
-<!-- MAIN -->
-<main class="index-main">
+    <!-- HERO -->
+    <section class="hero">
+        <span class="hero-emoji">💅</span>
+        <div class="hero-badge">Lesson 5</div>
+        <h1>Describing Nails</h1>
+        <p class="sub">Shapes, Colors, Finishes & Adjectives</p>
+        <p class="desc">Learn how to describe nail shapes, colors, and styles to your clients in English!</p>
+        <div class="hero-icons">
+            <span>💅</span>
+            <span>🎨</span>
+            <span>✨</span>
+            <span>💎</span>
+            <span>🌸</span>
+        </div>
+    </section>
 
-    <!-- Hero -->
-    <div class="lesson-hero">
-        <div class="icon">💅</div>
-        <h1>Lesson 5</h1>
-        <h2>Describing Nails</h2>
-        <p>Shapes, colors &amp; adjectives</p>
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- GAMES -->
+        <div class="section-title">🎮 Choose a Game</div>
+        <p class="section-sub">Play both games to master describing nails!</p>
+
+        <div class="games-grid">
+
+            <!-- GAME 1 -->
+            <div class="game-card">
+                <div class="card-banner">
+                    <span class="game-tag">Game 1</span>
+                    <span class="card-emoji">🎨</span>
+                    <h3>Nail Shapes & Colors</h3>
+                    <p class="card-tagline">Learn to describe shapes and colors</p>
+                </div>
+                <div class="card-body">
+                    <div class="skills">
+                        <span class="skill">Shapes</span>
+                        <span class="skill">Colors</span>
+                        <span class="skill">Vocabulary</span>
+                        <span class="skill">Fill-in-blank</span>
+                    </div>
+                    <div class="details">
+                        <div class="detail">
+                            <span class="detail-icon">📝</span>
+                            <span>Fill-in-the-blank, matching & more</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-icon">⏱️</span>
+                            <span>About 5-10 minutes</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-icon">📊</span>
+                            <span>Beginner (A1-A2)</span>
+                        </div>
+                    </div>
+                    <div class="card-btns">
+                        <a href="game1/student.html" class="cbtn cbtn-play">▶ Play Game</a>
+                        <a href="game1/teacher.html" class="cbtn cbtn-teacher">👩‍🏫 Teacher</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAME 2 -->
+            <div class="game-card">
+                <div class="card-banner">
+                    <span class="game-tag">Game 2</span>
+                    <span class="card-emoji">✨</span>
+                    <h3>Finishes & Adjectives</h3>
+                    <p class="card-tagline">Describe styles, finishes & looks</p>
+                </div>
+                <div class="card-body">
+                    <div class="skills">
+                        <span class="skill">Finishes</span>
+                        <span class="skill">Adjectives</span>
+                        <span class="skill">Describing</span>
+                        <span class="skill">Conversation</span>
+                    </div>
+                    <div class="details">
+                        <div class="detail">
+                            <span class="detail-icon">📝</span>
+                            <span>Multiple choice, unscramble & matching</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-icon">⏱️</span>
+                            <span>About 5-10 minutes</span>
+                        </div>
+                        <div class="detail">
+                            <span class="detail-icon">📊</span>
+                            <span>Beginner (A1-A2)</span>
+                        </div>
+                    </div>
+                    <div class="card-btns">
+                        <a href="game2/student.html" class="cbtn cbtn-play">▶ Play Game</a>
+                        <a href="game2/teacher.html" class="cbtn cbtn-teacher">👩‍🏫 Teacher</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- KEY VOCABULARY -->
+        <div class="vocab-section">
+            <div class="section-title">📖 Key Vocabulary</div>
+            <p class="section-sub">Words you'll learn in this lesson</p>
+
+            <div class="vocab-box">
+                <h3>💅 Nail Words to Know</h3>
+                <div class="vocab-grid">
+                    <div class="vocab-item">
+                        <div class="vocab-eng">Round / Oval / Square</div>
+                        <div class="vocab-vn">Hình dạng móng</div>
+                        <div class="vocab-ex">"What shape do you want?"</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-eng">Almond / Coffin / Stiletto</div>
+                        <div class="vocab-vn">Dạng móng đặc biệt</div>
+                        <div class="vocab-ex">"I want almond shape."</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-eng">Squoval</div>
+                        <div class="vocab-vn">Vuông + Oval kết hợp</div>
+                        <div class="vocab-ex">"Squoval is square + oval."</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-eng">Red / Pink / Nude / White</div>
+                        <div class="vocab-vn">Màu sắc</div>
+                        <div class="vocab-ex">"I like the pink color."</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-eng">Glossy / Matte</div>
+                        <div class="vocab-vn">Bóng / Mờ</div>
+                        <div class="vocab-ex">"Do you want glossy or matte?"</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-eng">Glitter / Chrome / Ombre</div>
+                        <div class="vocab-vn">Kim tuyến / Gương / Chuyển màu</div>
+                        <div class="vocab-ex">"Chrome nails are shiny."</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-eng">Short / Medium / Long</div>
+                        <div class="vocab-vn">Ngắn / Vừa / Dài</div>
+                        <div class="vocab-ex">"How long do you want?"</div>
+                    </div>
+                    <div class="vocab-item">
+                        <div class="vocab-eng">Pretty / Beautiful / Elegant</div>
+                        <div class="vocab-vn">Đẹp / Xinh / Sang trọng</div>
+                        <div class="vocab-ex">"Your nails look beautiful!"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAMPLE DIALOG -->
+        <div class="dialog-section">
+            <div class="section-title">💬 Sample Conversation</div>
+            <p class="section-sub">This is the kind of conversation you'll practice</p>
+
+            <div class="dialog-box">
+                <h3>At the Nail Salon</h3>
+                <div class="dialog-lines">
+                    <div class="d-line tech">
+                        <div class="d-avatar">💅</div>
+                        <div class="d-bubble">
+                            <span class="d-speaker">Nail Tech</span>
+                            What shape would you like?
+                        </div>
+                    </div>
+                    <div class="d-line client">
+                        <div class="d-avatar">👩</div>
+                        <div class="d-bubble">
+                            <span class="d-speaker">Client</span>
+                            I want almond shape, please.
+                        </div>
+                    </div>
+                    <div class="d-line tech">
+                        <div class="d-avatar">💅</div>
+                        <div class="d-bubble">
+                            <span class="d-speaker">Nail Tech</span>
+                            Great! What color do you like?
+                        </div>
+                    </div>
+                    <div class="d-line client">
+                        <div class="d-avatar">👩</div>
+                        <div class="d-bubble">
+                            <span class="d-speaker">Client</span>
+                            I like light pink.
+                        </div>
+                    </div>
+                    <div class="d-line tech">
+                        <div class="d-avatar">💅</div>
+                        <div class="d-bubble">
+                            <span class="d-speaker">Nail Tech</span>
+                            Do you want glossy or matte finish?
+                        </div>
+                    </div>
+                    <div class="d-line client">
+                        <div class="d-avatar">👩</div>
+                        <div class="d-bubble">
+                            <span class="d-speaker">Client</span>
+                            Glossy, please!
+                        </div>
+                    </div>
+                    <div class="d-line tech">
+                        <div class="d-avatar">💅</div>
+                        <div class="d-bubble">
+                            <span class="d-speaker">Nail Tech</span>
+                            Perfect! That will look beautiful!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Vocab Preview -->
-    <div class="vocab-preview">
-        <div class="section-title">📚 What You'll Learn</div>
-        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:12px;">
-            Practice describing nail shapes, colors, finishes, and lengths to clients in English.
+    <!-- FOOTER -->
+    <footer>
+        <p>TeeTalkEnglish © 2024 | Pensauken, New Jersey | 
+            <a href="../index.html">Back to All Lessons</a>
         </p>
-        <div class="vocab-tags">
-            <span class="tag">Nail Shapes</span>
-            <span class="tag">Colors</span>
-            <span class="tag">Finishes</span>
-            <span class="tag">Adjectives</span>
-        </div>
-    </div>
-
-    <!-- Key Vocabulary -->
-    <div class="vocab-preview">
-        <div class="section-title">🔑 Key Vocabulary</div>
-        <ul class="nail-feature-list">
-            <li>
-                <span class="feature-icon">🔷</span>
-                <span class="feature-en">Round, Oval, Square, Squoval, Almond, Coffin, Stiletto</span>
-                <span class="feature-viet">Hình dạng móng</span>
-            </li>
-            <li>
-                <span class="feature-icon">🎨</span>
-                <span class="feature-en">Red, Pink, Nude, White, Black, Burgundy, Coral, Lavender, Gold</span>
-                <span class="feature-viet">Màu sắc</span>
-            </li>
-            <li>
-                <span class="feature-icon">✨</span>
-                <span class="feature-en">Glossy, Matte, Glitter, Chrome, Shimmer</span>
-                <span class="feature-viet">Kiểu bóng</span>
-            </li>
-            <li>
-                <span class="feature-icon">📏</span>
-                <span class="feature-en">Short, Medium, Long, Extra Long</span>
-                <span class="feature-viet">Độ dài</span>
-            </li>
-        </ul>
-    </div>
-
-    <!-- Nail Shape Chart -->
-    <div class="vocab-preview">
-        <div class="section-title">🔷 Nail Shapes</div>
-        <div class="shape-chart">
-            <div class="shape-item">
-                <div class="nail nail-shape-round nail-color-pink nail-finish-glossy">
-                    <div class="nail-inner"></div>
-                </div>
-                <span>Round</span>
-            </div>
-            <div class="shape-item">
-                <div class="nail nail-shape-oval nail-color-red nail-finish-glossy">
-                    <div class="nail-inner"></div>
-                </div>
-                <span>Oval</span>
-            </div>
-            <div class="shape-item">
-                <div class="nail nail-shape-square nail-color-black nail-finish-matte">
-                    <div class="nail-inner"></div>
-                </div>
-                <span>Square</span>
-            </div>
-            <div class="shape-item">
-                <div class="nail nail-shape-squoval nail-color-nude nail-finish-glossy">
-                    <div class="nail-inner"></div>
-                </div>
-                <span>Squoval</span>
-            </div>
-            <div class="shape-item">
-                <div class="nail nail-shape-almond nail-color-lavender nail-finish-chrome">
-                    <div class="nail-inner"></div>
-                </div>
-                <span>Almond</span>
-            </div>
-            <div class="shape-item">
-                <div class="nail nail-shape-coffin nail-color-coral nail-finish-glossy">
-                    <div class="nail-inner"></div>
-                </div>
-                <span>Coffin</span>
-            </div>
-            <div class="shape-item">
-                <div class="nail nail-shape-stiletto nail-color-gold nail-finish-glitter">
-                    <div class="nail-inner"></div>
-                </div>
-                <span>Stiletto</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Color Palette -->
-    <div class="vocab-preview">
-        <div class="section-title">🎨 Nail Colors</div>
-        <div class="color-palette">
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-red"></div>
-                <span>Red</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-pink"></div>
-                <span>Pink</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-nude"></div>
-                <span>Nude</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-white"></div>
-                <span>White</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-black"></div>
-                <span>Black</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-burgundy"></div>
-                <span>Burgundy</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-coral"></div>
-                <span>Coral</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-lavender"></div>
-                <span>Lavender</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-gold"></div>
-                <span>Gold</span>
-            </div>
-            <div class="color-swatch">
-                <div class="swatch-circle swatch-french"></div>
-                <span>French</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Example Sentences -->
-    <div class="vocab-preview">
-        <div class="section-title">💬 Example Sentences</div>
-        <div class="example-box">
-            <div class="example-label">Example 1 – Describing</div>
-            <div class="example-text">"These are <strong>medium oval-shaped</strong> nails with a <strong>glossy red</strong> finish."</div>
-        </div>
-        <div class="example-box" style="margin-top:12px;">
-            <div class="example-label">Example 2 – Recommending</div>
-            <div class="example-text">"I recommend <strong>long almond</strong> nails in <strong>lavender</strong> with a <strong>chrome</strong> finish. Very trendy!"</div>
-        </div>
-        <div class="example-box" style="margin-top:12px;">
-            <div class="example-label">Example 3 – Asking</div>
-            <div class="example-text">"Would you like <strong>short square</strong> nails or <strong>medium coffin</strong> nails?"</div>
-        </div>
-    </div>
-
-    <!-- Role Selection -->
-    <div class="role-selection">
-        <div class="section-title">🎮 Choose Your Role to Play</div>
-        <div class="role-cards">
-            <a href="student.html" class="role-card student-role">
-                <div class="role-emoji">🧑‍🎓</div>
-                <h4>Student</h4>
-                <p>Practice describing nails. Answer questions about shapes, colors, and finishes.</p>
-                <span class="role-badge">LEARNER</span>
-            </a>
-            <a href="teacher.html" class="role-card teacher-role">
-                <div class="role-emoji">👩‍🏫</div>
-                <h4>Teacher</h4>
-                <p>Guide the student. Show nail designs and evaluate their descriptions.</p>
-                <span class="role-badge">GUIDE</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- How to Play -->
-    <div class="how-to-play">
-        <div class="section-title">📖 How to Play</div>
-        <ol>
-            <li>Open <strong>Teacher</strong> page on one device (or browser tab).</li>
-            <li>Open <strong>Student</strong> page on another device (or browser tab).</li>
-            <li>Teacher shows a nail design and reads the prompt out loud.</li>
-            <li>Student describes the nails using English vocabulary.</li>
-            <li>Teacher grades the response: <strong>Perfect ✅</strong>, <strong>Good 👍</strong>, or <strong>Try Again 🔄</strong>.</li>
-            <li>Play through all <strong>8 rounds</strong> and see your final score!</li>
-        </ol>
-    </div>
-
-    <!-- Sentence Pattern Reference -->
-    <div class="vocab-preview mt-30">
-        <div class="section-title">📝 Sentence Patterns</div>
-        <div style="background:rgba(0,0,0,0.2); border-radius:var(--radius-sm); padding:20px; margin-top:8px;">
-            <div style="margin-bottom:16px;">
-                <div style="color:var(--pink); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Pattern 1 – Describe</div>
-                <div style="color:var(--text-primary); font-size:0.95rem;">
-                    "These are <span style="color:var(--cyan)">[length]</span> <span style="color:var(--purple)">[shape]</span> nails with a <span style="color:var(--green)">[finish]</span> <span style="color:var(--yellow)">[color]</span> finish."
-                </div>
-            </div>
-            <div style="margin-bottom:16px;">
-                <div style="color:var(--pink); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Pattern 2 – Recommend</div>
-                <div style="color:var(--text-primary); font-size:0.95rem;">
-                    "I recommend <span style="color:var(--cyan)">[length]</span> <span style="color:var(--purple)">[shape]</span> nails in <span style="color:var(--yellow)">[color]</span> with a <span style="color:var(--green)">[finish]</span> finish."
-                </div>
-            </div>
-            <div>
-                <div style="color:var(--pink); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Pattern 3 – Ask</div>
-                <div style="color:var(--text-primary); font-size:0.95rem;">
-                    "Would you like <span style="color:var(--purple)">[shape]</span> nails in <span style="color:var(--yellow)">[color]</span>? <span style="color:var(--green)">[finish]</span> or <span style="color:var(--green)">[finish]</span>?"
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div style="text-align:center; padding:40px 0 20px; color:var(--text-muted); font-size:0.8rem;">
-        <p>💅 NailShop TeeTalk English – Lesson 5</p>
-        <p style="margin-top:4px;">Learn nail salon English through role-play games!</p>
-    </div>
-
-</main>
+    </footer>
 
 </body>
 </html>
